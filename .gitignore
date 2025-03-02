@@ -1,0 +1,8 @@
+Library/
+Logs/
+Temp/
+obj/
+Build/
+Packages/
+UserSettings/
+ProjectSettings/EditorBuildSettings.asset
