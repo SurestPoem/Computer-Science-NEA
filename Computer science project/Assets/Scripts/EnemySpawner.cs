@@ -6,7 +6,7 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField]
     private GameObject enemyPrefab;
-    private float spawnRate = 2f;  // Spawn every 2 seconds
+    public float spawnRate = 2f;  // Spawn every 2 seconds
     private float nextSpawnTime = 0f;
 
     // Start is called before the first frame update

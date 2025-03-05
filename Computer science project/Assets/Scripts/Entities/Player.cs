@@ -11,6 +11,7 @@ public class Player : Entity
     private Animator animator;
     private PlayerControls controls;
     public SpriteRenderer playerSpriteRenderer;
+    public CrosshairController crosshair;
 
     public int killCount = 0;
     [Header("Level + Currency")]
@@ -21,17 +22,9 @@ public class Player : Entity
 
     [Header("Weapon handling")]
     public Gun currentGun;
-    public Transform gunHolder;
-    public List<Gun> avalibleWeapons;
+    public List<GameObject> avalibleWeapons;
+    [SerializeField] private int currentGunIndex = 0;
 
-    // Start is called before the first frame update
-    protected void Start()
-    {
-        base.Start();
-        animator = GetComponent<Animator>();
-        controls = new PlayerControls();
-        controls.Player.Enable(); // Enable the controls
-    }
 
     // Update is called once per frame
     protected void Update()
@@ -41,6 +34,7 @@ public class Player : Entity
         HandleShooting();
         HandleAiming();
         HandleHealthRegen();
+        HandleWeaponSwitching();
     }
 
     private void PlayerMovement()
@@ -67,22 +61,92 @@ public class Player : Entity
     }
 
 
-        private void HandleShooting()
+    private void HandleWeaponSwitching()
     {
-        if (currentGun != null && controls.Player.Shoot.triggered)
+        if (controls.Player.WeaponLeft.triggered)
         {
-            currentGun.Shoot();
+            currentGunIndex--;
+
+            // Wrap around if out of bounds
+            if (currentGunIndex < 0)
+            {
+                currentGunIndex = avalibleWeapons.Count - 1; // Go to last weapon
+            }
+
+            SwitchGun();
+        }
+
+        if (controls.Player.WeaponRight.triggered)
+        {
+            currentGunIndex++;
+
+            // Wrap around if out of bounds
+            if (currentGunIndex >= avalibleWeapons.Count)
+            {
+                currentGunIndex = 0; // Go to first weapon
+            }
+
+            SwitchGun();
+        }
+    }
+
+    public void SwitchGun()
+    {
+        if (currentGun != null)
+        {
+            Destroy(currentGun.gameObject);
+        }
+
+        // Instantiate the new gun from the list
+        GameObject newGunObject = Instantiate(avalibleWeapons[currentGunIndex], transform.position, Quaternion.identity, transform);
+        currentGun = newGunObject.GetComponent<Gun>();
+
+        // Make sure to assign the crosshairTransform (and any other properties you need to assign)
+        if (currentGun != null)
+        {
+            GameObject crosshair = GameObject.FindGameObjectWithTag("Crosshair");
+            if (crosshair != null)
+            {
+                currentGun.crosshairTransform = crosshair.transform;
+            }
+            else
+            {
+                Debug.LogError("Crosshair not found!");
+            }
+        }
+
+        Debug.Log("Switched to new gun: " + avalibleWeapons[currentGunIndex]);
+    }
+
+    public void AddGun(GameObject gun)
+    {
+        if (gun != null)
+        {
+            avalibleWeapons.Add(gun.gameObject); // Add the GameObject of the Gun to the list
+            Debug.Log("Added new gun: " + gun.name); 
+        }
+        else
+        {
+            Debug.LogError("Attempted to add a null gun.");
         }
     }
 
     private void HandleAiming()
     {
-        Vector2 aimDirection = controls.Player.Aim.ReadValue<Vector2>();  // Get aim input (mouse or controller right stick)
+        // Get the crosshair's position in world space
+        Vector3 crosshairWorldPosition = crosshair.transform.position;
 
-        // Convert to world space
-        Vector3 shootPosition = (aimDirection != Vector2.zero) ? (Vector3)aimDirection : Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        // Pass the crosshair position to the gun's aiming function
+        currentGun.RotateAndPositionGun(crosshairWorldPosition);
+    }
 
-        currentGun.RotateAndPositionGun();
+
+    private void HandleShooting()
+    {
+        if (currentGun != null && controls.Player.Shoot.triggered)
+        {
+            currentGun.Shoot();
+        }
     }
 
     private void HandleHealthRegen()
@@ -116,11 +180,6 @@ public class Player : Entity
         }
     }
 
-    public void SwitchGun(Gun newGun)
-    {
-        currentGun = newGun;
-        Debug.Log("Switched to new gun: " + newGun.name);
-    }
 
     public override void Die()
     {
@@ -156,5 +215,19 @@ public class Player : Entity
     public void EarnCurrency(int currencyGained)
     {
         currentCurrency += currencyGained;
+    }
+
+    public void UseCurrency(int currencyLost)
+    {
+        currentCurrency -= currencyLost;
+    }
+
+
+    protected override void Initialise() //called in the Entitys Start() method
+    {
+        base.Initialise();
+        animator = GetComponent<Animator>();
+        controls = new PlayerControls();
+        controls.Player.Enable(); // Enable the controls
     }
 }

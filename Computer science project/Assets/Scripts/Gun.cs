@@ -45,21 +45,19 @@ public class Gun : MonoBehaviour
     void Update()
     {
         timeSinceLastShot += Time.deltaTime;
-        RotateAndPositionGun();
+        RotateAndPositionGun(crosshairTransform.position);
 
     }
 
-    public void RotateAndPositionGun()
+    public void RotateAndPositionGun(Vector3 crosshairPosition)
     {
-        // Convert UI crosshair position to world space (ONLY IF it's in UI space)
-        Vector3 crosshairPosition = Camera.main.ScreenToWorldPoint(crosshairTransform.position);
         crosshairPosition.z = 0; // Keep it on the correct plane
 
-        // Calculate the direction from the player to the crosshair
+        // Calculate direction from player to the crosshair
         Vector3 direction = crosshairPosition - playerTransform.position;
         direction.Normalize(); // Normalize to get direction only
 
-        // Set the position of the gun based on distance from the player
+        // Set the gun's position based on distance from the player
         transform.position = playerTransform.position + direction * distanceFromPlayer;
 
         // Calculate the angle between the gun and the crosshair
@@ -72,17 +70,22 @@ public class Gun : MonoBehaviour
         gunSpriteRenderer.flipY = direction.x < 0;
     }
 
+
     public void Shoot()
     {
         if (timeSinceLastShot < cooldownTime)
             return;
 
         timeSinceLastShot = 0f;
-        // Get shoot direction based on the current aiming position
-        Vector2 shootDirection = (Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()) - muzzlePoint.position).normalized;
+
+        // Get shoot direction based on crosshair world position
+        Vector2 shootDirection = (crosshairTransform.position - muzzlePoint.position).normalized;
+
+        // Create and initialize the bullet
         GameObject bullet = Instantiate(bulletPrefab, muzzlePoint.position, Quaternion.identity);
         bullet.GetComponent<Bullet>().SetSpeed(bulletSpeed);
         bullet.GetComponent<Bullet>().SetDirection(shootDirection);
-        bullet.GetComponent<Bullet>().SetGun(this);
+        bullet.GetComponent<Bullet>().SetGun(this); // Pass reference to the gun
     }
+
 }

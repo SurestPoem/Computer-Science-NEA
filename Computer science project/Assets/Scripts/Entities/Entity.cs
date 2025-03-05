@@ -25,10 +25,9 @@ public class Entity : MonoBehaviour
 
 
     // Start is called before the first frame update
-    protected virtual void Start()
+    void Start()
     {
-        player = FindObjectOfType<Player>();
-        health = maxHealth; //Sets the health as max health
+        Initialise();
     }
 
     protected virtual void Update()
@@ -66,5 +65,9 @@ public class Entity : MonoBehaviour
         player.IncreaseKills();
     }
 
-
+    protected virtual void Initialise()
+    {
+        player = FindObjectOfType<Player>();
+        health = maxHealth; //Sets the health as max health
+    }
 }

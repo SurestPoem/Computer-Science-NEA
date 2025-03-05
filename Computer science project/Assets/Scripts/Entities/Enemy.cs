@@ -12,11 +12,6 @@ public class Enemy : Entity
     public SpriteRenderer EnemySpriteRenderer;
     public List<LootItem> lootTable = new List<LootItem>();
 
-    void Start()
-    {
-        base.Start();
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform; // Update to use playerTransform
-    }
     void Update()
     {
         base.Update();
@@ -97,4 +92,9 @@ public class Enemy : Entity
         base.Die();   // Call base class's Die() method
     }
 
+    protected override void Initialise()
+    {
+        base.Initialise();
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform; // Update to use playerTransform
+    }
 }

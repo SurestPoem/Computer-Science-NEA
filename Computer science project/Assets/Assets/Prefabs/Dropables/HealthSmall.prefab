@@ -102,7 +102,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -987988315, guid: 98dc581fdb4c6e6409e4f7b706030b88, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
   player: {fileID: 0}
-  healthValue: 60
+  healthValue: 10
 --- !u!70 &8693712776777030655
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -33,7 +33,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "SwitchWeaponLeft",
+                    "name": "WeaponLeft",
                     "type": "Button",
                     "id": "4e5d900c-7e01-4e99-91d3-9ae6e126804a",
                     "expectedControlType": "Button",
@@ -42,7 +42,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "SwitchWeaponRight",
+                    "name": "WeaponRight",
                     "type": "Button",
                     "id": "61be5b2f-9201-4966-b332-433c0428eca3",
                     "expectedControlType": "Button",
@@ -202,7 +202,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SwitchWeaponLeft",
+                    "action": "WeaponLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -213,7 +213,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SwitchWeaponLeft",
+                    "action": "WeaponLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -224,7 +224,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SwitchWeaponRight",
+                    "action": "WeaponRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -235,7 +235,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SwitchWeaponRight",
+                    "action": "WeaponRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

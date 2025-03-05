@@ -1,79 +1,89 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 public class CrosshairController : MonoBehaviour
 {
-    public Image crosshair; // The crosshair UI element
-    public float moveSpeed = 10f; // Speed of the crosshair when using controller
-    private Vector2 crosshairPosition;
+    public SpriteRenderer crosshairSprite; // Crosshair as a world-space GameObject
+    public float moveSpeed = 10f; // Speed of the crosshair when using a controller
 
-    private Vector2 mouseInput;
-    private Vector2 joystickInput;
+    private Vector2 crosshairPosition;  // Crosshair's position in world space
+    private Vector2 mouseInput;         // Stores mouse position
+    private Vector2 joystickInput;      // Stores joystick movement
+    private Vector2 lastMousePosition;  // Stores last known mouse position
 
-    private bool useJoystick; // Flag to determine whether to use the joystick
+    private bool useJoystick = false;  // Start with mouse mode enabled
+    private bool useMouse = true;
 
-    // Reference to the input action system
-    private CrosshairControls inputActions; // This should match the generated class name
+    private CrosshairControls inputActions;  // Reference to the input system
     private InputAction mouseMoveAction;
     private InputAction joystickMoveAction;
 
+    private Camera mainCamera;  // Reference to the main camera
 
     void Start()
     {
-        crosshairPosition = crosshair.transform.position; // Set initial position
+        mainCamera = Camera.main; // Cache the main camera
+        crosshairPosition = transform.position; // Set initial position
+        lastMousePosition = Mouse.current.position.ReadValue(); // Store initial mouse position
     }
 
     private void Awake()
     {
-        inputActions = new CrosshairControls(); // Instantiate the generated Input Actions class
+        inputActions = new CrosshairControls();  // Instantiate input actions
 
-        // Get the mouse and joystick input actions from the Input Action Asset
-        mouseMoveAction = inputActions.Player.MouseMovement; // Reference MouseMovement action
-        joystickMoveAction = inputActions.Player.JoystickMovement; // Reference JoystickMovement action
+        mouseMoveAction = inputActions.Player.MouseMovement;   // Get mouse movement
+        joystickMoveAction = inputActions.Player.JoystickMovement; // Get joystick movement
 
-        // Enable the actions
         mouseMoveAction.Enable();
         joystickMoveAction.Enable();
     }
 
     private void Update()
-{
-    // Read mouse and joystick inputs
-    mouseInput = mouseMoveAction.ReadValue<Vector2>();
-    joystickInput = joystickMoveAction.ReadValue<Vector2>();
-
-    // Switch control mode based on recent input
-    if (joystickInput.magnitude > 0.1f)
     {
-        useJoystick = true;
-    }
-    else if (mouseInput != crosshairPosition) // If mouse moves, switch to mouse control
-    {
-        useJoystick = false;
-    }
+        // Read inputs
+        mouseInput = mouseMoveAction.ReadValue<Vector2>();
+        joystickInput = joystickMoveAction.ReadValue<Vector2>();
 
-    // Move the crosshair based on the active input method
-    if (useJoystick)
-    {
-        crosshairPosition += joystickInput * moveSpeed * Time.deltaTime;
+        // Detect joystick movement
+        if (joystickInput.magnitude > 0.1f)
+        {
+            useJoystick = true;
+            useMouse = false;
+            Cursor.visible = false; // Hide cursor when using joystick
+        }
+        else
+        {
+            // Only switch to mouse if the mouse has actually moved
+            if ((mouseInput - lastMousePosition).sqrMagnitude > 1f)  // Check if mouse moved
+            {
+                useJoystick = false;
+                useMouse = true;
+                Cursor.visible = true; // Show cursor when using mouse
+            }
+        }
 
-        // Clamp to screen boundaries
-        crosshairPosition.x = Mathf.Clamp(crosshairPosition.x, 0, Screen.width);
-        crosshairPosition.y = Mathf.Clamp(crosshairPosition.y, 0, Screen.height);
-    }
-    else
-    {
-        crosshairPosition = mouseInput;
-    }
+        // Move the crosshair based on the active input method
+        if (useJoystick)
+        {
+            crosshairPosition += joystickInput * moveSpeed * Time.deltaTime;
+        }
+        else if (useMouse)
+        {
+            // Convert screen position to world position
+            Vector3 worldMousePos = mainCamera.ScreenToWorldPoint(new Vector3(mouseInput.x, mouseInput.y, mainCamera.nearClipPlane));
+            crosshairPosition = new Vector2(worldMousePos.x, worldMousePos.y);
+        }
 
-    // Apply position to UI element
-    crosshair.transform.position = crosshairPosition;
-}
+        // Apply world-space position
+        transform.position = crosshairPosition;
+
+        // Store last known mouse position for movement detection
+        lastMousePosition = mouseInput;
+    }
 
     private void OnDestroy()
     {
-        // Clean up the actions
+        // Clean up actions
         mouseMoveAction.Disable();
         joystickMoveAction.Disable();
     }
