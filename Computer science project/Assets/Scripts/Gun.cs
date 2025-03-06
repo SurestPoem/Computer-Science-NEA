@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class Gun : MonoBehaviour
 {
     [Header("Gun stats")]
+    public string gunName;
     public float damageStat;
     public float cooldownTime = 0.5f;
     public float bulletSpeed = 1f;

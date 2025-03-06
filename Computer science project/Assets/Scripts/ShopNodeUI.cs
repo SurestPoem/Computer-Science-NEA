@@ -10,6 +10,7 @@ public class ShopNodeUI : MonoBehaviour
     public Image gunShopImage;
     public Sprite noGunImageLol;
     public TextMeshProUGUI shopNodeName;
+    public TextMeshProUGUI shopNodeStats;
     public ShopNode shopNode;
 
     void Update()
@@ -38,6 +39,13 @@ public class ShopNodeUI : MonoBehaviour
 
     public void HandleText()
     {
-        costText.text = (shopNode.ShopStock[shopNode.stockPointerThingy].gunCost.ToString() + "   BUY");
+        costText.text = (shopNode.ShopStock[shopNode.stockPointerThingy].gunCost.ToString() + " BUY");
+        shopNodeStats.text =
+            "Damage: " + shopNode.ShopStock[shopNode.stockPointerThingy].gunPrefab.GetComponent<Gun>().damageStat + "\n" +
+            "Cooldown: " + shopNode.ShopStock[shopNode.stockPointerThingy].gunPrefab.GetComponent<Gun>().cooldownTime + "\n" +
+            "Bullet Speed: " + shopNode.ShopStock[shopNode.stockPointerThingy].gunPrefab.GetComponent<Gun>().bulletSpeed;
+        shopNodeName.text = (shopNode.ShopStock[shopNode.stockPointerThingy].gunPrefab.GetComponent<Gun>().gunName);
+
     }
+
 }

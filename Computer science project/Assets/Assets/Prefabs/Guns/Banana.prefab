@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3de16d2c29effb9429a72d1f12a1c596, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gunName: An Ordinary Banana
   damageStat: 100
   cooldownTime: 0.5
   bulletSpeed: 40
