@@ -4,16 +4,40 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public static GameManager Instance;
+    public GameObject shopScreen;
+    public bool ShopOnDevThing;  // True to show shop, false to hide
+
     void Start()
     {
-        
+        // Disable shop at the start
+        DisableShop();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        // Enable or disable shop based on ShopOnDevThing value
+        if (ShopOnDevThing)
+        {
+            EnableShop();
+        }
+        else
+        {
+            DisableShop();
+        }
     }
 
+    // Method to enable the shop
+    public void EnableShop()
+    {
+        shopScreen.SetActive(true);
+        Time.timeScale = 0f; // Freeze time
+    }
+
+    // Method to disable the shop
+    public void DisableShop()
+    {
+        shopScreen.SetActive(false);
+        Time.timeScale = 1f; // Resume time
+    }
 }

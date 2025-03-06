@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5368549753642310950
+--- !u!1 &1934724514967759387
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,7 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1262958199354753317}
+  - component: {fileID: 1670264507268960006}
   m_Layer: 0
   m_Name: MuzzlePoint
   m_TagString: Untagged
@@ -16,22 +16,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1262958199354753317
+--- !u!4 &1670264507268960006
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5368549753642310950}
+  m_GameObject: {fileID: 1934724514967759387}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.166, y: -0.019, z: 0}
+  m_LocalPosition: {x: 0.1964, y: 0.0575, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7826665339786951293}
+  m_Father: {fileID: 3614323493974214939}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8281085056928925149
+--- !u!1 &2411999366630212562
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -39,39 +39,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7826665339786951293}
-  - component: {fileID: 2969873504083480929}
-  - component: {fileID: 402667238672798309}
+  - component: {fileID: 3614323493974214939}
+  - component: {fileID: 1232533324015353829}
+  - component: {fileID: 5826377177313103485}
   m_Layer: 0
-  m_Name: Gun_Banana
+  m_Name: AlienPistol
   m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7826665339786951293
+--- !u!4 &3614323493974214939
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8281085056928925149}
+  m_GameObject: {fileID: 2411999366630212562}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -15.550374, y: -0.8115023, z: -0.01484375}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.0625}
+  m_LocalPosition: {x: -0.1494, y: -0.009, z: -0.01484375}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.0625}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1262958199354753317}
+  - {fileID: 1670264507268960006}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &2969873504083480929
+--- !u!212 &1232533324015353829
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8281085056928925149}
+  m_GameObject: {fileID: 2411999366630212562}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -106,36 +106,36 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 21300000, guid: 7007a8359a4b49d4790f58b50d2f13d1, type: 3}
+  m_Sprite: {fileID: 2013404093, guid: 080b2f62b8ab26e40b6907cb748b5d94, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.44, y: 0.29}
+  m_Size: {x: 0.35, y: 0.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &402667238672798309
+--- !u!114 &5826377177313103485
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8281085056928925149}
+  m_GameObject: {fileID: 2411999366630212562}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3de16d2c29effb9429a72d1f12a1c596, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageStat: 100
-  cooldownTime: 0.5
-  bulletSpeed: 40
-  distanceFromPlayer: 0.9
-  gunSpriteRenderer: {fileID: 2969873504083480929}
-  muzzlePoint: {fileID: 1262958199354753317}
-  bulletPrefab: {fileID: 5838070477860344463, guid: b70a5f348273ebc439b33cd082354732, type: 3}
+  damageStat: 25
+  cooldownTime: 1.5
+  bulletSpeed: 30
+  distanceFromPlayer: 0.7
+  gunSpriteRenderer: {fileID: 1232533324015353829}
+  muzzlePoint: {fileID: 1670264507268960006}
+  bulletPrefab: {fileID: 3391852011919646789, guid: 27eafb300dfda214680eba5945811f9d, type: 3}
   playerTransform: {fileID: 0}
   crosshairTransform: {fileID: 0}
-  gunIcon: {fileID: 21300000, guid: 7007a8359a4b49d4790f58b50d2f13d1, type: 3}
+  gunIcon: {fileID: 2013404093, guid: 080b2f62b8ab26e40b6907cb748b5d94, type: 3}

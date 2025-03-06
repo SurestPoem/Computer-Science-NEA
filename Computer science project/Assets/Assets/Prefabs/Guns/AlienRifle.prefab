@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 5534337439345577069}
   - component: {fileID: 83107433355026356}
   m_Layer: 0
-  m_Name: Gun_AlienRifle
+  m_Name: AlienRifle
   m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
