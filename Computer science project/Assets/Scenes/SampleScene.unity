@@ -4653,6 +4653,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb2fbb93a7d7bed4faccc811197b3524, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShopStock:
+  - gunPrefab: {fileID: 8071540375318704547, guid: 16f4d56aefd2e5247a6cf7f4ccde82ed, type: 3}
+    gunCost: 30
+  - gunPrefab: {fileID: 1713014761418437074, guid: 19755ab4b7d6d5546b201cb78e5f2f8a, type: 3}
+    gunCost: 45
+  - gunPrefab: {fileID: 6560186579227709239, guid: 6aa967061189b264896fc6ed0b93274a, type: 3}
+    gunCost: 60
+  - gunPrefab: {fileID: 2411999366630212562, guid: 2e308d20eb962b444941d84f7d75f5ce, type: 3}
+    gunCost: 50
+  - gunPrefab: {fileID: 3683310747538838024, guid: 01ff73d03478be343803c9e7ba0ae274, type: 3}
+    gunCost: 65
+  - gunPrefab: {fileID: 5382643019497250915, guid: d43f6c6a29369d34bb960bf4aabaae70, type: 3}
+    gunCost: 100
+  - gunPrefab: {fileID: 3311915046366774433, guid: 5a3cfc95b0336ea41addfb9d1f345ac6, type: 3}
+    gunCost: 125
+  - gunPrefab: {fileID: 6853719506003411835, guid: 345161e248bb6a24891004213491a20b, type: 3}
+    gunCost: 175
+  - gunPrefab: {fileID: 8281085056928925149, guid: f47c8826bb49c8049934db4541df9a19, type: 3}
+    gunCost: 250
+  UpgradeStock:
+  - upgradeAmount: 1
+    upgradeCost: 40
+    upgradeType: 0
+  - upgradeAmount: 1
+    upgradeCost: 55
+    upgradeType: 1
+  - upgradeAmount: 1
+    upgradeCost: 80
+    upgradeType: 2
 --- !u!1 &1218757776
 GameObject:
   m_ObjectHideFlags: 0
@@ -7135,28 +7164,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 158078893}
-  upgradeCost: 0
-  upgradeAmount: 0
-  ShopStock:
-  - gunPrefab: {fileID: 8071540375318704547, guid: 16f4d56aefd2e5247a6cf7f4ccde82ed, type: 3}
-    gunCost: 50
-  - gunPrefab: {fileID: 1713014761418437074, guid: 19755ab4b7d6d5546b201cb78e5f2f8a, type: 3}
-    gunCost: 70
-  - gunPrefab: {fileID: 3683310747538838024, guid: 01ff73d03478be343803c9e7ba0ae274, type: 3}
-    gunCost: 95
-  - gunPrefab: {fileID: 6560186579227709239, guid: 6aa967061189b264896fc6ed0b93274a, type: 3}
-    gunCost: 90
-  - gunPrefab: {fileID: 2411999366630212562, guid: 2e308d20eb962b444941d84f7d75f5ce, type: 3}
-    gunCost: 140
-  - gunPrefab: {fileID: 5382643019497250915, guid: d43f6c6a29369d34bb960bf4aabaae70, type: 3}
-    gunCost: 150
-  - gunPrefab: {fileID: 3311915046366774433, guid: 5a3cfc95b0336ea41addfb9d1f345ac6, type: 3}
-    gunCost: 230
-  - gunPrefab: {fileID: 6853719506003411835, guid: 345161e248bb6a24891004213491a20b, type: 3}
-    gunCost: 250
-  - gunPrefab: {fileID: 8281085056928925149, guid: f47c8826bb49c8049934db4541df9a19, type: 3}
-    gunCost: 400
-  stockPointerThingy: 0
+  currentSellableType: 0
+  generalCost: 0
+  gunPointerThingy: 0
+  upgradePointerThingy: 0
+  shopManager: {fileID: 1039851419}
 --- !u!224 &194008940080042063
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7333,9 +7345,11 @@ MonoBehaviour:
   costText: {fileID: 1373248264656004928}
   gunShopImage: {fileID: 3950484354548152561}
   noGunImageLol: {fileID: 21300000, guid: 679ad87ae786b144d83d102ac5b42ecc, type: 3}
+  nullIconImage: {fileID: 0}
   shopNodeName: {fileID: 6284129696785286505}
   shopNodeStats: {fileID: 8954402650331259243}
   shopNode: {fileID: 57449922982735196}
+  shopManager: {fileID: 0}
 --- !u!224 &541910669085297342
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9138,9 +9152,11 @@ MonoBehaviour:
   costText: {fileID: 9195348281093261889}
   gunShopImage: {fileID: 6503270535726274032}
   noGunImageLol: {fileID: 21300000, guid: 679ad87ae786b144d83d102ac5b42ecc, type: 3}
+  nullIconImage: {fileID: 0}
   shopNodeName: {fileID: 4298408929143089256}
   shopNodeStats: {fileID: 1213402663633390698}
   shopNode: {fileID: 7808864523534483549}
+  shopManager: {fileID: 0}
 --- !u!114 &7762598015386895924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9156,9 +9172,11 @@ MonoBehaviour:
   costText: {fileID: 9195348281099158521}
   gunShopImage: {fileID: 6503270535726668872}
   noGunImageLol: {fileID: 21300000, guid: 679ad87ae786b144d83d102ac5b42ecc, type: 3}
+  nullIconImage: {fileID: 0}
   shopNodeName: {fileID: 4298408929136402896}
   shopNodeStats: {fileID: 1213402663628801490}
   shopNode: {fileID: 7808864523528849893}
+  shopManager: {fileID: 0}
 --- !u!114 &7808864523528849893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9172,28 +9190,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 158078893}
-  upgradeCost: 0
-  upgradeAmount: 0
-  ShopStock:
-  - gunPrefab: {fileID: 8071540375318704547, guid: 16f4d56aefd2e5247a6cf7f4ccde82ed, type: 3}
-    gunCost: 50
-  - gunPrefab: {fileID: 1713014761418437074, guid: 19755ab4b7d6d5546b201cb78e5f2f8a, type: 3}
-    gunCost: 70
-  - gunPrefab: {fileID: 3683310747538838024, guid: 01ff73d03478be343803c9e7ba0ae274, type: 3}
-    gunCost: 95
-  - gunPrefab: {fileID: 6560186579227709239, guid: 6aa967061189b264896fc6ed0b93274a, type: 3}
-    gunCost: 90
-  - gunPrefab: {fileID: 2411999366630212562, guid: 2e308d20eb962b444941d84f7d75f5ce, type: 3}
-    gunCost: 140
-  - gunPrefab: {fileID: 5382643019497250915, guid: d43f6c6a29369d34bb960bf4aabaae70, type: 3}
-    gunCost: 150
-  - gunPrefab: {fileID: 3311915046366774433, guid: 5a3cfc95b0336ea41addfb9d1f345ac6, type: 3}
-    gunCost: 230
-  - gunPrefab: {fileID: 6853719506003411835, guid: 345161e248bb6a24891004213491a20b, type: 3}
-    gunCost: 250
-  - gunPrefab: {fileID: 8281085056928925149, guid: f47c8826bb49c8049934db4541df9a19, type: 3}
-    gunCost: 400
-  stockPointerThingy: 0
+  currentSellableType: 0
+  generalCost: 0
+  gunPointerThingy: 0
+  upgradePointerThingy: 0
+  shopManager: {fileID: 0}
 --- !u!114 &7808864523534483549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9207,28 +9208,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 158078893}
-  upgradeCost: 0
-  upgradeAmount: 0
-  ShopStock:
-  - gunPrefab: {fileID: 8071540375318704547, guid: 16f4d56aefd2e5247a6cf7f4ccde82ed, type: 3}
-    gunCost: 50
-  - gunPrefab: {fileID: 1713014761418437074, guid: 19755ab4b7d6d5546b201cb78e5f2f8a, type: 3}
-    gunCost: 70
-  - gunPrefab: {fileID: 3683310747538838024, guid: 01ff73d03478be343803c9e7ba0ae274, type: 3}
-    gunCost: 95
-  - gunPrefab: {fileID: 6560186579227709239, guid: 6aa967061189b264896fc6ed0b93274a, type: 3}
-    gunCost: 90
-  - gunPrefab: {fileID: 2411999366630212562, guid: 2e308d20eb962b444941d84f7d75f5ce, type: 3}
-    gunCost: 140
-  - gunPrefab: {fileID: 5382643019497250915, guid: d43f6c6a29369d34bb960bf4aabaae70, type: 3}
-    gunCost: 150
-  - gunPrefab: {fileID: 3311915046366774433, guid: 5a3cfc95b0336ea41addfb9d1f345ac6, type: 3}
-    gunCost: 230
-  - gunPrefab: {fileID: 6853719506003411835, guid: 345161e248bb6a24891004213491a20b, type: 3}
-    gunCost: 250
-  - gunPrefab: {fileID: 8281085056928925149, guid: f47c8826bb49c8049934db4541df9a19, type: 3}
-    gunCost: 400
-  stockPointerThingy: 0
+  currentSellableType: 0
+  generalCost: 0
+  gunPointerThingy: 0
+  upgradePointerThingy: 0
+  shopManager: {fileID: 0}
 --- !u!224 &7936451494711964918
 RectTransform:
   m_ObjectHideFlags: 0

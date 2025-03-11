@@ -39,23 +39,22 @@ public class ShopNode : MonoBehaviour
         }
     }
 
-
     public void BuyUpgrade()
     {
         if (player.currentCurrency >= generalCost)
         {
-            // Correct way to access the upgradeType field of ShopUpgradeItem
-            ShopUpgradeItem.upgradeType upgradeType = shopManager.UpgradeStock[upgradePointerThingy].upgradeType;
+            // Correct way to access the enum value from ShopUpgradeItem
+            ShopUpgradeItem.UpgradeType upgradeType = shopManager.UpgradeStock[upgradePointerThingy].upgradeType;
 
             switch (upgradeType)
             {
-                case ShopUpgradeItem.upgradeType.MaxHealth:
+                case ShopUpgradeItem.UpgradeType.MaxHealth:
                     player.IncreaseStats("maxHealth", shopManager.UpgradeStock[upgradePointerThingy].upgradeAmount);
                     break;
-                case ShopUpgradeItem.upgradeType.MoveSpeed:
+                case ShopUpgradeItem.UpgradeType.MoveSpeed:
                     player.IncreaseStats("moveSpeed", shopManager.UpgradeStock[upgradePointerThingy].upgradeAmount);
                     break;
-                case ShopUpgradeItem.upgradeType.RegenRate:
+                case ShopUpgradeItem.UpgradeType.RegenRate:
                     player.IncreaseStats("regenRate", shopManager.UpgradeStock[upgradePointerThingy].upgradeAmount);
                     break;
                 default:
@@ -74,21 +73,21 @@ public class ShopNode : MonoBehaviour
     public void RandomiseUpgradeValues()
     {
         // Correctly access the upgradeType field of the selected ShopUpgradeItem
-        ShopUpgradeItem.upgradeType upgradeType = shopManager.UpgradeStock[upgradePointerThingy].upgradeType;
+        ShopUpgradeItem.UpgradeType upgradeType = shopManager.UpgradeStock[upgradePointerThingy].upgradeType;
 
         switch (upgradeType)
         {
-            case ShopUpgradeItem.upgradeType.MaxHealth:
+            case ShopUpgradeItem.UpgradeType.MaxHealth:
                 // Randomize the amount of max health the player can buy (between 1 and 5, for example)
                 shopManager.UpgradeStock[upgradePointerThingy].upgradeAmount = Random.Range(1, 7);
                 break;
 
-            case ShopUpgradeItem.upgradeType.MoveSpeed:
+            case ShopUpgradeItem.UpgradeType.MoveSpeed:
                 // Randomize move speed upgrade (between 1 and 3, for example)
                 shopManager.UpgradeStock[upgradePointerThingy].upgradeAmount = Random.Range(1, 4);
                 break;
 
-            case ShopUpgradeItem.upgradeType.RegenRate:
+            case ShopUpgradeItem.UpgradeType.RegenRate:
                 // Randomize regen rate upgrade (between 1 and 2, for example)
                 shopManager.UpgradeStock[upgradePointerThingy].upgradeAmount = Random.Range(1, 4);
                 break;
@@ -98,6 +97,7 @@ public class ShopNode : MonoBehaviour
                 break;
         }
     }
+
 
 
     public void PickSellableType()
