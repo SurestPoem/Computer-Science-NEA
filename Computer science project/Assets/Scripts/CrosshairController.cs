@@ -17,6 +17,7 @@ public class CrosshairController : MonoBehaviour
     private CrosshairControls inputActions;  // Reference to the input system
     private InputAction mouseMoveAction;
     private InputAction joystickMoveAction;
+    private Player player;
 
     private Camera mainCamera;  // Reference to the main camera
 
@@ -31,8 +32,8 @@ public class CrosshairController : MonoBehaviour
     {
         inputActions = new CrosshairControls();  // Instantiate input actions
 
-        mouseMoveAction = inputActions.Player.MouseMovement;   // Get mouse movement
-        joystickMoveAction = inputActions.Player.JoystickMovement; // Get joystick movement
+        mouseMoveAction = inputActions.CrosshairMovement.MouseMovement;   // Get mouse movement
+        joystickMoveAction = inputActions.CrosshairMovement.JoystickMovement; // Get joystick movement
 
         mouseMoveAction.Enable();
         joystickMoveAction.Enable();

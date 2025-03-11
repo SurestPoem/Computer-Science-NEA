@@ -2,7 +2,7 @@
     "name": "CrosshairControls",
     "maps": [
         {
-            "name": "CrosshairControls",
+            "name": "CrosshairMovement",
             "id": "e3014ab5-a370-4362-8563-c9f48d2666d1",
             "actions": [
                 {

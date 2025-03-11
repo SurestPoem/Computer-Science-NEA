@@ -9,9 +9,11 @@ public class ShopNodeUI : MonoBehaviour
     public TextMeshProUGUI costText;
     public Image gunShopImage;
     public Sprite noGunImageLol;
+    public Sprite nullIconImage;
     public TextMeshProUGUI shopNodeName;
     public TextMeshProUGUI shopNodeStats;
     public ShopNode shopNode;
+    public ShopManager shopManager;
 
     void Update()
     {
@@ -19,33 +21,60 @@ public class ShopNodeUI : MonoBehaviour
         HandleText();
     }
 
-    public void GunIconHandling()
+    public void OnBuyButtonPressed()
     {
-        // Access the current gun prefab from the ShopNode class
-        if (shopNode.ShopStock.Count > 0)  // Ensure there's at least one item in the shop stock
+        if (shopNode.currentSellableType == ShopNode.SellableType.Gun)
         {
-            // Access the current gunPrefab and set its icon
-            gunShopImage.sprite = shopNode.ShopStock[shopNode.stockPointerThingy].gunPrefab.GetComponent<Gun>().gunIcon;
+            shopNode.BuyGun();
         }
-        else
+        else if (shopNode.currentSellableType == ShopNode.SellableType.Upgrade)
         {
-            // Handle case where there is no item to display
-            gunShopImage.sprite = noGunImageLol;
+            shopNode.BuyUpgrade();
+        }
+        else if (shopNode.currentSellableType == ShopNode.SellableType.Null)
+        {
+            // No code here
         }
     }
 
-
-
+    public void GunIconHandling()
+    {
+        if (shopNode.currentSellableType == ShopNode.SellableType.Gun)
+        {
+            gunShopImage.sprite = shopNode.shopManager.ShopStock[shopNode.gunPointerThingy].gunPrefab.GetComponent<Gun>().gunIcon;
+        }
+        else if (shopNode.currentSellableType == ShopNode.SellableType.Upgrade)
+        {
+            gunShopImage.sprite = noGunImageLol;
+        }
+        else if (shopNode.currentSellableType == ShopNode.SellableType.Null)
+        {
+            gunShopImage.sprite = nullIconImage;
+        }
+    }
 
     public void HandleText()
     {
-        costText.text = (shopNode.ShopStock[shopNode.stockPointerThingy].gunCost.ToString() + " BUY");
-        shopNodeStats.text =
-            "Damage: " + shopNode.ShopStock[shopNode.stockPointerThingy].gunPrefab.GetComponent<Gun>().damageStat + "\n" +
-            "Cooldown: " + shopNode.ShopStock[shopNode.stockPointerThingy].gunPrefab.GetComponent<Gun>().cooldownTime + "\n" +
-            "Bullet Speed: " + shopNode.ShopStock[shopNode.stockPointerThingy].gunPrefab.GetComponent<Gun>().bulletSpeed;
-        shopNodeName.text = (shopNode.ShopStock[shopNode.stockPointerThingy].gunPrefab.GetComponent<Gun>().gunName);
-
+        if (shopNode.currentSellableType == ShopNode.SellableType.Gun)
+        {
+            costText.text = (shopNode.generalCost.ToString() + " Buy");
+            shopNodeStats.text =
+                "Damage: " + shopNode.shopManager.ShopStock[shopNode.gunPointerThingy].gunPrefab.GetComponent<Gun>().damageStat + "\n" +
+                "Cooldown: " + shopNode.shopManager.ShopStock[shopNode.gunPointerThingy].gunPrefab.GetComponent<Gun>().cooldownTime + "\n" +
+                "Bullet Speed: " + shopNode.shopManager.ShopStock[shopNode.gunPointerThingy].gunPrefab.GetComponent<Gun>().bulletSpeed;
+            shopNodeName.text = (shopNode.shopManager.ShopStock[shopNode.gunPointerThingy].gunPrefab.GetComponent<Gun>().gunName);
+        }
+        else if (shopNode.currentSellableType == ShopNode.SellableType.Upgrade)
+        {
+            costText.text = (shopNode.generalCost.ToString() + " Upgrade");
+            shopNodeStats.text = ("Amount:" + "\n" + shopNode.shopManager.UpgradeStock[shopNode.upgradePointerThingy].upgradeAmount.ToString());
+            shopNodeName.text = shopNode.shopManager.UpgradeStock[shopNode.upgradePointerThingy].upgradeType.ToString();
+        }
+        else if (shopNode.currentSellableType == ShopNode.SellableType.Null)
+        {
+            costText.text = ("Item purchased");
+            shopNodeStats.text = ("Purchased");
+            shopNodeName.text = ("Item purchased");
+        }
     }
-
 }
