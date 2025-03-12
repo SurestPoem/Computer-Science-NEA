@@ -6,18 +6,21 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public GameObject shopScreen;
-    public bool ShopOnDevThing;  // True to show shop, false to hide
+    public GameObject DeathScreen;
+    public bool ShopOnDev;
+    public bool DeathScreenOnDev;
 
     void Start()
     {
-        // Disable shop at the start
+        // Disable screens at the start
         DisableShop();
+        DisableDeathScreen();
     }
 
     void Update()
     {
         // Enable or disable shop based on ShopOnDevThing value
-        if (ShopOnDevThing)
+        if (ShopOnDev == true)
         {
             EnableShop();
         }
@@ -38,6 +41,18 @@ public class GameManager : MonoBehaviour
     public void DisableShop()
     {
         shopScreen.SetActive(false);
+        Time.timeScale = 1f; // Resume time
+    }
+
+    public void EnableDeathScreen()
+    {
+        DeathScreen.SetActive(true);
+        Time.timeScale = 0f; // Freeze time
+    }
+
+    public void DisableDeathScreen()
+    {
+        DeathScreen.SetActive(false);
         Time.timeScale = 1f; // Resume time
     }
 }

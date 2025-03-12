@@ -156,7 +156,7 @@ public class Player : Entity
         if (regenTimer >= 1f) // Run every 1 second
         {
             regenTimer = 0f;
-            Heal(regenRate); // 1 regen = 0.2 HP per sec
+            Heal(regenRate); 
         }
     }
 
@@ -184,7 +184,7 @@ public class Player : Entity
     public override void Die()
     {
         Debug.Log("Player has Died");
-        //Add specfic player death code
+        GameManager.Instance.EnableDeathScreen();
     }
 
     public void IncreaseKills()
