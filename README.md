@@ -3,7 +3,7 @@ This is my A level OCR Computer Science NEA project — a 2D top-down shooter wi
 Features:
   Inputing with both Keyboard and mouse, and Gamepad
   Shop to buy guns and upgrades to stats
-  Simplistic level system that has no use right now
+  Simplistic level system that has no use right now, you can level up, dont mean anything though
   Majority of assets taken from online or half assed on Piskel
 
 This is a work in progress, so things might be a bit rough
