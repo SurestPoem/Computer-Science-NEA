@@ -28,6 +28,15 @@ public class GameManager : MonoBehaviour
         {
             DisableShop();
         }
+
+        if (DeathScreenOnDev == true)
+        {
+            EnableDeathScreen();
+        }
+        else
+        {
+            DisableDeathScreen();
+        }
     }
 
     // Method to enable the shop
