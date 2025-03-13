@@ -86,7 +86,6 @@ public class UIManager : MonoBehaviour
 
         if (gunIconImage == null)
         {
-            Debug.LogError("UIManager: Gun Icon Image is not assigned in the Inspector!");
             return;
         }
 

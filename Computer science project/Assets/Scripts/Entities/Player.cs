@@ -35,6 +35,7 @@ public class Player : Entity
         HandleAiming();
         HandleHealthRegen();
         HandleWeaponSwitching();
+        PlayerOpenShop();
     }
 
     private void PlayerMovement()
@@ -87,6 +88,38 @@ public class Player : Entity
             }
 
             SwitchGun();
+        }
+    }
+
+    public void PlayerOpenShop()
+    {
+        if (controls.Player.OpenShop.triggered)
+        {
+            Debug.Log("Shop button pressed");
+            if (GameManager.Instance.shopEnabled == true)
+            {
+                GameManager.Instance.DisableShop();
+            }
+            else
+            {
+                GameManager.Instance.EnableShop();
+            }
+        }
+    }
+
+    public void PlayerOpenPauseScreen()
+    {
+        if (controls.Player.Pause.triggered)
+        {
+            Debug.Log("Pause button pressed");
+            if (GameManager.Instance.pauseScreenEnabled == true)
+            {
+                GameManager.Instance.DisablePauseScreen();
+            }
+            else
+            {
+                GameManager.Instance.EnablePauseScreen();
+            }
         }
     }
 
@@ -184,7 +217,14 @@ public class Player : Entity
     public override void Die()
     {
         Debug.Log("Player has Died");
-        GameManager.Instance.EnableDeathScreen();
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.EnableDeathScreen();
+        }
+        else
+        {
+            Debug.LogError("GameManager instance is not initialized!");
+        }
     }
 
     public void IncreaseKills()
