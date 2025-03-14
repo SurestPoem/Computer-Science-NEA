@@ -46,15 +46,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Aim"",
-                    ""type"": ""Value"",
-                    ""id"": ""a0850edc-8078-4fad-a473-33fdbd219d08"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
                     ""name"": ""WeaponLeft"",
                     ""type"": ""Button"",
                     ""id"": ""4e5d900c-7e01-4e99-91d3-9ae6e126804a"",
@@ -226,17 +217,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""1ae625fc-f320-4786-a469-3e31980d8e74"",
-                    ""path"": ""<Mouse>/position"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Aim"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""56e878f0-dcc1-49d8-92df-2c5c9355c125"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
@@ -282,7 +262,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""ca4310ee-d5f5-48ae-ba2a-c51491755386"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Keyboard>/z"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -304,7 +284,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""eb14ec3e-617e-48a0-8a01-0821b7cebf0c"",
-                    ""path"": ""<Keyboard>/escape"",
+                    ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -324,6 +304,54 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""CrosshairMovement"",
+            ""id"": ""28f341d9-2534-4c09-b0c7-f31f1ea77657"",
+            ""actions"": [
+                {
+                    ""name"": ""MouseMovement"",
+                    ""type"": ""Value"",
+                    ""id"": ""735a95e6-8385-4896-a3cc-8b2e3b3a94df"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""JoystickMovement"",
+                    ""type"": ""Value"",
+                    ""id"": ""8d60f055-c2aa-4fc1-be7e-d6047d19b5b6"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""9d57cd47-bc74-4d4e-aa68-4cd9c55be665"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0686b8fd-911b-496a-bb1d-6b2e71faabf0"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""JoystickMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -332,11 +360,14 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
-        m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
         m_Player_WeaponLeft = m_Player.FindAction("WeaponLeft", throwIfNotFound: true);
         m_Player_WeaponRight = m_Player.FindAction("WeaponRight", throwIfNotFound: true);
         m_Player_OpenShop = m_Player.FindAction("OpenShop", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+        // CrosshairMovement
+        m_CrosshairMovement = asset.FindActionMap("CrosshairMovement", throwIfNotFound: true);
+        m_CrosshairMovement_MouseMovement = m_CrosshairMovement.FindAction("MouseMovement", throwIfNotFound: true);
+        m_CrosshairMovement_JoystickMovement = m_CrosshairMovement.FindAction("JoystickMovement", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -400,7 +431,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Shoot;
-    private readonly InputAction m_Player_Aim;
     private readonly InputAction m_Player_WeaponLeft;
     private readonly InputAction m_Player_WeaponRight;
     private readonly InputAction m_Player_OpenShop;
@@ -411,7 +441,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public PlayerActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
-        public InputAction @Aim => m_Wrapper.m_Player_Aim;
         public InputAction @WeaponLeft => m_Wrapper.m_Player_WeaponLeft;
         public InputAction @WeaponRight => m_Wrapper.m_Player_WeaponRight;
         public InputAction @OpenShop => m_Wrapper.m_Player_OpenShop;
@@ -431,9 +460,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Shoot.started += instance.OnShoot;
             @Shoot.performed += instance.OnShoot;
             @Shoot.canceled += instance.OnShoot;
-            @Aim.started += instance.OnAim;
-            @Aim.performed += instance.OnAim;
-            @Aim.canceled += instance.OnAim;
             @WeaponLeft.started += instance.OnWeaponLeft;
             @WeaponLeft.performed += instance.OnWeaponLeft;
             @WeaponLeft.canceled += instance.OnWeaponLeft;
@@ -456,9 +482,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Shoot.started -= instance.OnShoot;
             @Shoot.performed -= instance.OnShoot;
             @Shoot.canceled -= instance.OnShoot;
-            @Aim.started -= instance.OnAim;
-            @Aim.performed -= instance.OnAim;
-            @Aim.canceled -= instance.OnAim;
             @WeaponLeft.started -= instance.OnWeaponLeft;
             @WeaponLeft.performed -= instance.OnWeaponLeft;
             @WeaponLeft.canceled -= instance.OnWeaponLeft;
@@ -488,14 +511,72 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // CrosshairMovement
+    private readonly InputActionMap m_CrosshairMovement;
+    private List<ICrosshairMovementActions> m_CrosshairMovementActionsCallbackInterfaces = new List<ICrosshairMovementActions>();
+    private readonly InputAction m_CrosshairMovement_MouseMovement;
+    private readonly InputAction m_CrosshairMovement_JoystickMovement;
+    public struct CrosshairMovementActions
+    {
+        private @PlayerControls m_Wrapper;
+        public CrosshairMovementActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MouseMovement => m_Wrapper.m_CrosshairMovement_MouseMovement;
+        public InputAction @JoystickMovement => m_Wrapper.m_CrosshairMovement_JoystickMovement;
+        public InputActionMap Get() { return m_Wrapper.m_CrosshairMovement; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CrosshairMovementActions set) { return set.Get(); }
+        public void AddCallbacks(ICrosshairMovementActions instance)
+        {
+            if (instance == null || m_Wrapper.m_CrosshairMovementActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_CrosshairMovementActionsCallbackInterfaces.Add(instance);
+            @MouseMovement.started += instance.OnMouseMovement;
+            @MouseMovement.performed += instance.OnMouseMovement;
+            @MouseMovement.canceled += instance.OnMouseMovement;
+            @JoystickMovement.started += instance.OnJoystickMovement;
+            @JoystickMovement.performed += instance.OnJoystickMovement;
+            @JoystickMovement.canceled += instance.OnJoystickMovement;
+        }
+
+        private void UnregisterCallbacks(ICrosshairMovementActions instance)
+        {
+            @MouseMovement.started -= instance.OnMouseMovement;
+            @MouseMovement.performed -= instance.OnMouseMovement;
+            @MouseMovement.canceled -= instance.OnMouseMovement;
+            @JoystickMovement.started -= instance.OnJoystickMovement;
+            @JoystickMovement.performed -= instance.OnJoystickMovement;
+            @JoystickMovement.canceled -= instance.OnJoystickMovement;
+        }
+
+        public void RemoveCallbacks(ICrosshairMovementActions instance)
+        {
+            if (m_Wrapper.m_CrosshairMovementActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ICrosshairMovementActions instance)
+        {
+            foreach (var item in m_Wrapper.m_CrosshairMovementActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_CrosshairMovementActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public CrosshairMovementActions @CrosshairMovement => new CrosshairMovementActions(this);
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
-        void OnAim(InputAction.CallbackContext context);
         void OnWeaponLeft(InputAction.CallbackContext context);
         void OnWeaponRight(InputAction.CallbackContext context);
         void OnOpenShop(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+    }
+    public interface ICrosshairMovementActions
+    {
+        void OnMouseMovement(InputAction.CallbackContext context);
+        void OnJoystickMovement(InputAction.CallbackContext context);
     }
 }

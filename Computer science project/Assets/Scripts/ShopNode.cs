@@ -32,6 +32,7 @@ public class ShopNode : MonoBehaviour
             player.AddGun(shopManager.ShopStock[gunPointerThingy].gunPrefab);
             RemoveSellable();
             player.UseCurrency(generalCost);
+            currentSellableType = SellableType.Null;
         }
         else
         {
@@ -62,6 +63,7 @@ public class ShopNode : MonoBehaviour
                     return;
             }
             player.UseCurrency(generalCost);
+            currentSellableType = SellableType.Null;
         }
         else
         {

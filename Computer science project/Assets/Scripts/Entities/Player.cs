@@ -36,6 +36,7 @@ public class Player : Entity
         HandleHealthRegen();
         HandleWeaponSwitching();
         PlayerOpenShop();
+        PlayerOpenPauseScreen();
     }
 
     private void PlayerMovement()
@@ -64,29 +65,17 @@ public class Player : Entity
 
     private void HandleWeaponSwitching()
     {
+        if (avalibleWeapons.Count <= 1) return; // Prevent errors if no weapons exist
+
         if (controls.Player.WeaponLeft.triggered)
         {
-            currentGunIndex--;
-
-            // Wrap around if out of bounds
-            if (currentGunIndex < 0)
-            {
-                currentGunIndex = avalibleWeapons.Count - 1; // Go to last weapon
-            }
-
+            currentGunIndex = (currentGunIndex - 1 + avalibleWeapons.Count) % avalibleWeapons.Count;
             SwitchGun();
         }
 
         if (controls.Player.WeaponRight.triggered)
         {
-            currentGunIndex++;
-
-            // Wrap around if out of bounds
-            if (currentGunIndex >= avalibleWeapons.Count)
-            {
-                currentGunIndex = 0; // Go to first weapon
-            }
-
+            currentGunIndex = (currentGunIndex + 1) % avalibleWeapons.Count;
             SwitchGun();
         }
     }
@@ -271,3 +260,34 @@ public class Player : Entity
         controls.Player.Enable(); // Enable the controls
     }
 }
+
+
+/*   private void HandleWeaponSwitching()
+    {
+        if (controls.Player.WeaponLeft.triggered)
+        {
+            currentGunIndex--;
+
+            // Wrap around if out of bounds
+            if (currentGunIndex < 0)
+            {
+                currentGunIndex = avalibleWeapons.Count - 1; // Go to last weapon
+            }
+
+            SwitchGun();
+        }
+
+        if (controls.Player.WeaponRight.triggered)
+        {
+            currentGunIndex++;
+
+            // Wrap around if out of bounds
+            if (currentGunIndex >= avalibleWeapons.Count)
+            {
+                currentGunIndex = 0; // Go to first weapon
+            }
+
+            SwitchGun();
+        }
+    }
+*/

@@ -559,7 +559,7 @@ MonoBehaviour:
   costText: {fileID: 1696592973082800303}
   gunShopImage: {fileID: 3295491620463665750}
   noGunImageLol: {fileID: 21300000, guid: 679ad87ae786b144d83d102ac5b42ecc, type: 3}
-  nullIconImage: {fileID: 0}
+  nullIconImage: {fileID: 21300000, guid: 2744796d6a1cbf3439b068458d3a8c3c, type: 3}
   shopNodeName: {fileID: 3410077720370885390}
   shopNodeStats: {fileID: 2877928492218137747}
   shopNode: {fileID: 4916109650572644478}

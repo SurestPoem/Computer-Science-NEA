@@ -14,7 +14,7 @@ public class CrosshairController : MonoBehaviour
     private bool useJoystick = false;  // Start with mouse mode enabled
     private bool useMouse = true;
 
-    private CrosshairControls inputActions;  // Reference to the input system
+    private PlayerControls inputActions;  // Reference to the input system
     private InputAction mouseMoveAction;
     private InputAction joystickMoveAction;
     private Player player;
@@ -30,7 +30,7 @@ public class CrosshairController : MonoBehaviour
 
     private void Awake()
     {
-        inputActions = new CrosshairControls();  // Instantiate input actions
+        inputActions = new PlayerControls();  // Instantiate input actions
 
         mouseMoveAction = inputActions.CrosshairMovement.MouseMovement;   // Get mouse movement
         joystickMoveAction = inputActions.CrosshairMovement.JoystickMovement; // Get joystick movement

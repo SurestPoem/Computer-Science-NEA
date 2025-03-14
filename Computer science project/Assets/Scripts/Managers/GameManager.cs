@@ -22,7 +22,6 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);  // Optional if you want to keep it across scenes
         }
         else
         {
@@ -48,14 +47,24 @@ public class GameManager : MonoBehaviour
         //code here idk
     }
 
-    // Method to enable the shop
     public void EnableShop()
     {
         if (shopScreen != null)
         {
-            shopScreen.SetActive(true);
+            shopScreen.SetActive(true); // Activate the shop screen
             shopEnabled = true;
-            Time.timeScale = 0f; // Freeze time
+
+            // Freeze time
+            Time.timeScale = 0f;
+
+            // Find all ShopNode components that are children of the shopScreen
+            ShopNode[] shopNodes = shopScreen.GetComponentsInChildren<ShopNode>();
+
+            // Loop through each ShopNode and call PickSellableType()
+            foreach (ShopNode shopNode in shopNodes)
+            {
+                shopNode.PickSellableType(); // Call the method for each ShopNode
+            }
         }
         else
         {

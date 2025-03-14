@@ -24,15 +24,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Aim",
-                    "type": "Value",
-                    "id": "a0850edc-8078-4fad-a473-33fdbd219d08",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "WeaponLeft",
                     "type": "Button",
                     "id": "4e5d900c-7e01-4e99-91d3-9ae6e126804a",
@@ -204,17 +195,6 @@
                 },
                 {
                     "name": "",
-                    "id": "1ae625fc-f320-4786-a469-3e31980d8e74",
-                    "path": "<Mouse>/position",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Aim",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "56e878f0-dcc1-49d8-92df-2c5c9355c125",
                     "path": "<Keyboard>/e",
                     "interactions": "",
@@ -260,7 +240,7 @@
                 {
                     "name": "",
                     "id": "ca4310ee-d5f5-48ae-ba2a-c51491755386",
-                    "path": "<Keyboard>/q",
+                    "path": "<Keyboard>/z",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -282,7 +262,7 @@
                 {
                     "name": "",
                     "id": "eb14ec3e-617e-48a0-8a01-0821b7cebf0c",
-                    "path": "<Keyboard>/escape",
+                    "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -298,6 +278,54 @@
                     "processors": "",
                     "groups": "",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "CrosshairMovement",
+            "id": "28f341d9-2534-4c09-b0c7-f31f1ea77657",
+            "actions": [
+                {
+                    "name": "MouseMovement",
+                    "type": "Value",
+                    "id": "735a95e6-8385-4896-a3cc-8b2e3b3a94df",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "JoystickMovement",
+                    "type": "Value",
+                    "id": "8d60f055-c2aa-4fc1-be7e-d6047d19b5b6",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "9d57cd47-bc74-4d4e-aa68-4cd9c55be665",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0686b8fd-911b-496a-bb1d-6b2e71faabf0",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "JoystickMovement",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
