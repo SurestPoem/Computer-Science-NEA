@@ -37,6 +37,7 @@ public class Player : Entity
         HandleWeaponSwitching();
         PlayerOpenShop();
         PlayerOpenPauseScreen();
+        DevButton();
     }
 
     private void PlayerMovement()
@@ -259,6 +260,17 @@ public class Player : Entity
         controls = new PlayerControls();
         controls.Player.Enable(); // Enable the controls
     }
+
+    public void DevButton()
+    {
+        if (controls.Player.Dev.triggered)
+        {
+            currentCurrency += 10000000;
+            maxHealth =+ 100000;
+            health = maxHealth;
+        }
+    }
+
 }
 
 

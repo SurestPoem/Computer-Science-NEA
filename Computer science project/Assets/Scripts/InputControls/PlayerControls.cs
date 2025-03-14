@@ -80,6 +80,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dev"",
+                    ""type"": ""Button"",
+                    ""id"": ""1e083281-c368-4590-aae3-989f63db89b8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -302,6 +311,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""879327b0-1fd0-4617-9d12-6daef7639a89"",
+                    ""path"": ""<Keyboard>/alt"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dev"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""deaf81e4-927d-48a2-b4b0-5f459c3bc60e"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dev"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -364,6 +395,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_WeaponRight = m_Player.FindAction("WeaponRight", throwIfNotFound: true);
         m_Player_OpenShop = m_Player.FindAction("OpenShop", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+        m_Player_Dev = m_Player.FindAction("Dev", throwIfNotFound: true);
         // CrosshairMovement
         m_CrosshairMovement = asset.FindActionMap("CrosshairMovement", throwIfNotFound: true);
         m_CrosshairMovement_MouseMovement = m_CrosshairMovement.FindAction("MouseMovement", throwIfNotFound: true);
@@ -435,6 +467,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_WeaponRight;
     private readonly InputAction m_Player_OpenShop;
     private readonly InputAction m_Player_Pause;
+    private readonly InputAction m_Player_Dev;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -445,6 +478,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @WeaponRight => m_Wrapper.m_Player_WeaponRight;
         public InputAction @OpenShop => m_Wrapper.m_Player_OpenShop;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
+        public InputAction @Dev => m_Wrapper.m_Player_Dev;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -472,6 +506,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @Dev.started += instance.OnDev;
+            @Dev.performed += instance.OnDev;
+            @Dev.canceled += instance.OnDev;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -494,6 +531,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @Dev.started -= instance.OnDev;
+            @Dev.performed -= instance.OnDev;
+            @Dev.canceled -= instance.OnDev;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -573,6 +613,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnWeaponRight(InputAction.CallbackContext context);
         void OnOpenShop(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnDev(InputAction.CallbackContext context);
     }
     public interface ICrosshairMovementActions
     {
