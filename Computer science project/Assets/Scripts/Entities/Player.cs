@@ -66,17 +66,25 @@ public class Player : Entity
 
     private void HandleWeaponSwitching()
     {
-        if (avalibleWeapons.Count <= 1) return; // Prevent errors if no weapons exist
+        if (avalibleWeapons.Count <= 1) return; // If only one weapon, do nothing
 
         if (controls.Player.WeaponLeft.triggered)
         {
-            currentGunIndex = (currentGunIndex - 1 + avalibleWeapons.Count) % avalibleWeapons.Count;
+            if (currentGunIndex == 0)
+                currentGunIndex = avalibleWeapons.Count - 1; // Jump to last weapon
+            else
+                currentGunIndex--; // Move left normally
+
             SwitchGun();
         }
 
         if (controls.Player.WeaponRight.triggered)
         {
-            currentGunIndex = (currentGunIndex + 1) % avalibleWeapons.Count;
+            if (currentGunIndex == avalibleWeapons.Count - 1)
+                currentGunIndex = 0; // Jump to first weapon
+            else
+                currentGunIndex++; // Move right normally
+
             SwitchGun();
         }
     }
