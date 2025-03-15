@@ -7,7 +7,7 @@ public class Entity : MonoBehaviour
     [Header("Health Settings")]
     public float health;
     public float maxHealth;
-    public float baseMaxhealth;
+    public float baseMaxHealth;
     [Header("Movement speed settings")]
     public float moveSpeed;
     public float baseMoveSpeed;

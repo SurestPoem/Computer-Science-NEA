@@ -50,17 +50,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  maxHealth: 40
-  baseMaxhealth: 0
-  moveSpeed: 2
-  baseMoveSpeed: 0
+  maxHealth: 0
+  baseMaxHealth: 40
+  moveSpeed: 0
+  baseMoveSpeed: 3
   healAmount: 0
   damageAmount: 0
   regenRate: 0
   player: {fileID: 0}
   IsFreeze: 0
   detectionDistance: 1
-  collideDamage: 3
+  collideDamage: 0
+  baseCollideDamage: 5
   damageCooldown: 1
   EnemySpriteRenderer: {fileID: 6260687641150642613}
   lootTable:
@@ -136,7 +137,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1526697435
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_Sprite: {fileID: 512139545, guid: 491ca3535a26a4b48a893498ad8e012e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

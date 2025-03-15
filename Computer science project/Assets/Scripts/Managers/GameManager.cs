@@ -11,9 +11,12 @@ public class GameManager : MonoBehaviour
     public GameObject pauseScreen;
     public bool ShopOnDev;
     public bool DeathScreenOnDev;
-    public bool shopEnabled = false;
-    public bool deathScreenEnabled = false;
-    public bool pauseScreenEnabled = false;
+    [HideInInspector] public bool shopEnabled = false;
+    [HideInInspector] public bool deathScreenEnabled = false;
+    [HideInInspector] public bool pauseScreenEnabled = false;
+    public enum Difficulty {Easy, Normal, Hard}
+    public Difficulty currentDifficulty;
+    public float difficultyMultiplier;
 
 
     private void Awake()
@@ -31,20 +34,34 @@ public class GameManager : MonoBehaviour
         DisableShop();
         DisableDeathScreen();
         DisablePauseScreen();
+        SetDifficultyMultiplier();
     }
 
 
 
     void Start()
-    {
-
-        // Disable screens at the start
-          
+    {          
     }
 
     void Update()
     {
         //code here idk
+    }
+
+    void SetDifficultyMultiplier()
+    {
+        switch (currentDifficulty)
+        {
+            case Difficulty.Easy:
+                difficultyMultiplier = 0.65f;
+                break;
+            case Difficulty.Normal:
+                difficultyMultiplier = 1f;
+                break;
+            case Difficulty.Hard:
+                difficultyMultiplier = 1.25f;
+                break;
+        }
     }
 
     public void EnableShop()

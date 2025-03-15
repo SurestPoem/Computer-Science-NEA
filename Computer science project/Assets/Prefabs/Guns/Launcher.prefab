@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunName: Launcher
   damageStat: 20
-  cooldownTime: 1
+  cooldownTime: 0.8
   bulletSpeed: 20
   distanceFromPlayer: 0.7
   gunSpriteRenderer: {fileID: 6850716407483261084}

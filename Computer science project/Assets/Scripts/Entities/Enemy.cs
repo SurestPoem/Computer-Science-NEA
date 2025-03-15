@@ -6,6 +6,7 @@ public class Enemy : Entity
 {
     public float detectionDistance;
     public float collideDamage;
+    public float baseCollideDamage;
     protected Transform playerTransform;
     public float damageCooldown = 1f; // Cooldown time
     private float lastDamageTime = -1f;
@@ -94,6 +95,9 @@ public class Enemy : Entity
 
     protected override void Initialise()
     {
+        maxHealth = Mathf.RoundToInt(baseMaxHealth * GameManager.Instance.difficultyMultiplier);
+        collideDamage = Mathf.RoundToInt(baseCollideDamage * GameManager.Instance.difficultyMultiplier);
+        moveSpeed = baseMoveSpeed * GameManager.Instance.difficultyMultiplier;
         base.Initialise();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform; // Update to use playerTransform
     }

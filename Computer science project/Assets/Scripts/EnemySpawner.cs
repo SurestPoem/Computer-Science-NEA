@@ -8,9 +8,13 @@ public class EnemySpawner : MonoBehaviour
     private GameObject enemyPrefab;
     public float spawnRate = 2f;  // Spawn every 2 seconds
     private float nextSpawnTime = 0f;
-
     public int enemiesPerSpawn = 3; // Number of enemies to spawn each time
 
+    void Start()
+    {
+        spawnRate = spawnRate / GameManager.Instance.difficultyMultiplier;
+        enemiesPerSpawn = Mathf.RoundToInt(enemiesPerSpawn * GameManager.Instance.difficultyMultiplier);
+    }
     void Update()
     {
         if (Time.time >= nextSpawnTime)

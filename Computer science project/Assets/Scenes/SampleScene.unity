@@ -230,6 +230,8 @@ MonoBehaviour:
   shopEnabled: 0
   deathScreenEnabled: 0
   pauseScreenEnabled: 0
+  currentDifficulty: 0
+  difficultyMultiplier: 0
 --- !u!4 &112064214
 Transform:
   m_ObjectHideFlags: 0
@@ -482,7 +484,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   maxHealth: 100
-  baseMaxhealth: 0
+  baseMaxHealth: 0
   moveSpeed: 4
   baseMoveSpeed: 0
   healAmount: 0
@@ -1696,8 +1698,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 7131957743748288424, guid: 65a824c5e249e3d41a7c5babc8802933, type: 3}
-  spawnRate: 10
-  enemiesPerSpawn: 3
+  spawnRate: 8
+  enemiesPerSpawn: 4
 --- !u!4 &736478163
 Transform:
   m_ObjectHideFlags: 0
