@@ -12,6 +12,7 @@ public class Enemy : Entity
     private float lastDamageTime = -1f;
     public SpriteRenderer EnemySpriteRenderer;
     public List<LootItem> lootTable = new List<LootItem>();
+    public GameObject deadBodyPrefab;
 
     void Update()
     {
@@ -90,6 +91,11 @@ public class Enemy : Entity
     public override void Die()
     {
         DropItems();  // Call DropItems method
+        if (deadBodyPrefab != null)
+        {
+            GameObject deadBody = Instantiate(deadBodyPrefab, transform.position, Quaternion.identity);
+            Destroy(deadBody, 3f); // Destroy after a few seconds
+        }
         base.Die();   // Call base class's Die() method
     }
 

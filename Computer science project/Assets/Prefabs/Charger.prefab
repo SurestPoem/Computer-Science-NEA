@@ -77,6 +77,7 @@ MonoBehaviour:
     dropChance: 5
   - itemPrefab: {fileID: 5093429702563864004, guid: 70ba677663d281144966b9e9382cbeaa, type: 3}
     dropChance: 25
+  deadBodyPrefab: {fileID: 2938666789275465980, guid: 52902021547e4ac44bc88590e5ce0ec0, type: 3}
 --- !u!95 &6948329416515531148
 Animator:
   serializedVersion: 5

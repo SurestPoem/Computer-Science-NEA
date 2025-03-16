@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 8991553602897671295}
   - component: {fileID: 5337510480574399975}
   m_Layer: 0
-  m_Name: Tile Palette
+  m_Name: Dungeon Tileset
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
