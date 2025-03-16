@@ -15,7 +15,7 @@ public class WalkerGenerator : MonoBehaviour
     public Grid[,] gridHandler;
     public List<WalkerObject> Walkers;
     public Tilemap tileMap; // Single Tilemap for both floor and wall tiles
-    public Tile Floor;
+    public RuleTile Floor;
     public Tile Wall;
     public int MapWidth = 30;
     public int MapHeight = 30;
@@ -27,6 +27,8 @@ public class WalkerGenerator : MonoBehaviour
 
     // Add a public variable for the start position
     public Vector2 StartPosition = new Vector2(15, 15);
+    public Vector2 spawnAreaMin = new Vector2(5, 5);  // Minimum bounds (bottom-left corner)
+    public Vector2 spawnAreaMax = new Vector2(10, 10); // Maximum bounds (top-right corner)
 
     // Start is called before the first frame update
     void Start()
@@ -236,3 +238,11 @@ public class WalkerGenerator : MonoBehaviour
         }
     }
 }
+
+/*
+ if ((float)TileCount / (float)gridHandler.Length >= FillPercent)
+            {
+                FillEmptyTilesWithWalls(); // This can be placed here if the floor generation is done.
+                yield break; // Exit after floors are completed
+            }
+*/
