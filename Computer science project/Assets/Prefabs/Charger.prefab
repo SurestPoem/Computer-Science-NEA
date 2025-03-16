@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.07, y: 1.8095, z: -1.8954325}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -53,7 +53,7 @@ MonoBehaviour:
   maxHealth: 0
   baseMaxHealth: 40
   moveSpeed: 0
-  baseMoveSpeed: 3
+  baseMoveSpeed: 2
   healAmount: 0
   damageAmount: 0
   regenRate: 0

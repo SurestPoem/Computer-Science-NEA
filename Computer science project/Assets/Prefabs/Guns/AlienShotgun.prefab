@@ -133,7 +133,7 @@ MonoBehaviour:
   damageStat: 40
   cooldownTime: 2.5
   bulletSpeed: 25
-  distanceFromPlayer: 0.7
+  distanceFromPlayer: 0.5
   gunSpriteRenderer: {fileID: 6720162663414087205}
   muzzlePoint: {fileID: 2673196801429801097}
   bulletPrefab: {fileID: 3391852011919646789, guid: 27eafb300dfda214680eba5945811f9d, type: 3}
