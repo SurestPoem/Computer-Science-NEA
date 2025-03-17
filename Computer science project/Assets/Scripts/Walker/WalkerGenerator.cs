@@ -16,7 +16,7 @@ public class WalkerGenerator : MonoBehaviour
     public List<WalkerObject> Walkers;
     public Tilemap tileMap; // Single Tilemap for both floor and wall tiles
     public RuleTile Floor;
-    public Tile Wall;
+    public RuleTile Wall;
     public int MapWidth = 30;
     public int MapHeight = 30;
 
@@ -39,7 +39,6 @@ public class WalkerGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
     }
 
     void InitialiseGrid()
@@ -67,11 +66,16 @@ public class WalkerGenerator : MonoBehaviour
 
         TileCount++;
 
+        // Add the wall border before floor generation
+        AddWallBorder();
+
         StartCoroutine(CreateFloors());
     }
 
     IEnumerator CreateFloors()
     {
+        // The floor generation should be limited to `Grid.EMPTY` cells, 
+        // ensuring that walls and the wall border are not overwritten.
         while ((float)TileCount / (float)gridHandler.Length < FillPercent)
         {
             bool hasCreatedFloor = false;
@@ -79,9 +83,9 @@ public class WalkerGenerator : MonoBehaviour
             {
                 Vector3Int curPos = new Vector3Int((int)curWalker.Position.x, (int)curWalker.Position.y, 0);
 
-                if (gridHandler[curPos.x, curPos.y] != Grid.FLOOR)
+                if (gridHandler[curPos.x, curPos.y] == Grid.EMPTY) // Only place floors on empty tiles
                 {
-                    tileMap.SetTile(curPos, Floor); // Set the floor tile on the single tilemap
+                    tileMap.SetTile(curPos, Floor); // Set the floor tile on the tilemap
                     TileCount++;
                     gridHandler[curPos.x, curPos.y] = Grid.FLOOR;
                     hasCreatedFloor = true;
@@ -100,8 +104,47 @@ public class WalkerGenerator : MonoBehaviour
 
             if ((float)TileCount / (float)gridHandler.Length >= FillPercent)
             {
-                FillEmptyTilesWithWalls(); // This can be placed here if the floor generation is done.
+                FillEmptyTilesWithWalls(); // Fill any remaining empty tiles with walls
                 yield break; // Exit after floors are completed
+            }
+        }
+    }
+
+    void AddWallBorder()
+    {
+        // Add a wall border around the map (2-tile thick border)
+        for (int x = 0; x < gridHandler.GetLength(0); x++)
+        {
+            for (int y = 0; y < gridHandler.GetLength(1); y++)
+            {
+                // Check if it's at the outer boundary (1-tile and 2-tile thick from edges)
+                if (x == 0 || x == MapWidth - 1 || y == 0 || y == MapHeight - 1 ||
+                    x == 1 || x == MapWidth - 2 || y == 1 || y == MapHeight - 2)
+                {
+                    // Only place a wall if the tile is empty
+                    if (gridHandler[x, y] == Grid.EMPTY)
+                    {
+                        gridHandler[x, y] = Grid.WALL; // Update the grid state to WALL
+                        tileMap.SetTile(new Vector3Int(x, y, 0), Wall); // Set the wall tile on the tilemap
+                    }
+                }
+            }
+        }
+    }
+
+    void FillEmptyTilesWithWalls()
+    {
+        // Loop through the entire grid and place walls on empty tiles
+        for (int x = 0; x < gridHandler.GetLength(0); x++)
+        {
+            for (int y = 0; y < gridHandler.GetLength(1); y++)
+            {
+                if (gridHandler[x, y] == Grid.EMPTY)
+                {
+                    Vector3Int tilePosition = new Vector3Int(x, y, 0);
+                    tileMap.SetTile(tilePosition, Wall); // Set the wall tile on the tilemap
+                    gridHandler[x, y] = Grid.WALL; // Update the grid state to WALL
+                }
             }
         }
     }
@@ -218,26 +261,9 @@ public class WalkerGenerator : MonoBehaviour
         // Pick a random direction
         return directions[Random.Range(0, directions.Count)];
     }
-
-    void FillEmptyTilesWithWalls()
-    {
-        // Loop through the entire grid
-        for (int x = 0; x < gridHandler.GetLength(0); x++)
-        {
-            for (int y = 0; y < gridHandler.GetLength(1); y++)
-            {
-                // Check if the current tile is empty
-                if (gridHandler[x, y] == Grid.EMPTY)
-                {
-                    // Set the tile to a wall
-                    Vector3Int tilePosition = new Vector3Int(x, y, 0);
-                    tileMap.SetTile(tilePosition, Wall); // Set the wall tile on the single tilemap
-                    gridHandler[x, y] = Grid.WALL; // Update the grid state
-                }
-            }
-        }
-    }
 }
+
+
 
 /*
  if ((float)TileCount / (float)gridHandler.Length >= FillPercent)
