@@ -7,4 +7,5 @@ public class ShopItem
 {
     public GameObject gunPrefab;
     public int gunCost;
+    public int levelRequired;
 }

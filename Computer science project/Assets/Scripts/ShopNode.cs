@@ -27,7 +27,7 @@ public class ShopNode : MonoBehaviour
 
     public void BuyGun()
     {
-        if (player.currentCurrency >= generalCost)
+        if (player.currentCurrency >= generalCost && player.level >= shopManager.ShopStock[gunPointerThingy].levelRequired)
         {
             player.AddGun(shopManager.ShopStock[gunPointerThingy].gunPrefab);
             RemoveSellable();

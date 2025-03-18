@@ -68,11 +68,13 @@ public class WalkerGenerator : MonoBehaviour
 
         // Add the wall border before floor generation
         AddWallBorder();
+        CreateSpawnArea(new Vector2Int((int)StartPosition.x, (int)StartPosition.y));
 
-        StartCoroutine(CreateFloors());
+
+        CreateFloors();
     }
 
-    IEnumerator CreateFloors()
+    void CreateFloors()
     {
         // The floor generation should be limited to `Grid.EMPTY` cells, 
         // ensuring that walls and the wall border are not overwritten.
@@ -99,13 +101,13 @@ public class WalkerGenerator : MonoBehaviour
 
             if (hasCreatedFloor)
             {
-                yield return new WaitForSeconds(WaitTime);
+                // Optionally, you can add any additional logic here if needed.
             }
 
             if ((float)TileCount / (float)gridHandler.Length >= FillPercent)
             {
                 FillEmptyTilesWithWalls(); // Fill any remaining empty tiles with walls
-                yield break; // Exit after floors are completed
+                return; // Exit the function when floors are completed (no need for yield)
             }
         }
     }
@@ -242,6 +244,29 @@ public class WalkerGenerator : MonoBehaviour
                     {
                         yield return new WaitForSeconds(WaitTime);
                     }
+                }
+            }
+        }
+    }
+
+    void CreateSpawnArea(Vector2Int center)
+    {
+        for (int x = -1; x <= 1; x++)
+        {
+            for (int y = -1; y <= 1; y++)
+            {
+                Vector2Int tilePos = new Vector2Int(center.x + x, center.y + y);
+
+                // Ensure we're within grid bounds
+                if (tilePos.x >= 0 && tilePos.x < MapWidth && tilePos.y >= 0 && tilePos.y < MapHeight)
+                {
+                    // Set as floor in grid
+                    gridHandler[tilePos.x, tilePos.y] = Grid.FLOOR;
+
+                    // Set the floor tile in Tilemap
+                    tileMap.SetTile(new Vector3Int(tilePos.x, tilePos.y, 0), Floor);
+
+                    TileCount++; // Increase the floor tile count
                 }
             }
         }

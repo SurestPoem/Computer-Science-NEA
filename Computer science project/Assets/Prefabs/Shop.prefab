@@ -94,22 +94,31 @@ MonoBehaviour:
   ShopStock:
   - gunPrefab: {fileID: 8071540375318704547, guid: 16f4d56aefd2e5247a6cf7f4ccde82ed, type: 3}
     gunCost: 40
+    levelRequired: 1
   - gunPrefab: {fileID: 1713014761418437074, guid: 19755ab4b7d6d5546b201cb78e5f2f8a, type: 3}
     gunCost: 50
+    levelRequired: 2
   - gunPrefab: {fileID: 6560186579227709239, guid: 6aa967061189b264896fc6ed0b93274a, type: 3}
     gunCost: 55
+    levelRequired: 4
   - gunPrefab: {fileID: 3683310747538838024, guid: 01ff73d03478be343803c9e7ba0ae274, type: 3}
     gunCost: 70
+    levelRequired: 5
   - gunPrefab: {fileID: 2411999366630212562, guid: 2e308d20eb962b444941d84f7d75f5ce, type: 3}
     gunCost: 85
+    levelRequired: 7
   - gunPrefab: {fileID: 5382643019497250915, guid: d43f6c6a29369d34bb960bf4aabaae70, type: 3}
     gunCost: 90
+    levelRequired: 8
   - gunPrefab: {fileID: 3311915046366774433, guid: 5a3cfc95b0336ea41addfb9d1f345ac6, type: 3}
     gunCost: 120
+    levelRequired: 10
   - gunPrefab: {fileID: 6853719506003411835, guid: 345161e248bb6a24891004213491a20b, type: 3}
     gunCost: 125
+    levelRequired: 12
   - gunPrefab: {fileID: 8281085056928925149, guid: f47c8826bb49c8049934db4541df9a19, type: 3}
     gunCost: 200
+    levelRequired: 15
   UpgradeStock:
   - upgradeAmount: 1
     upgradeCost: 39

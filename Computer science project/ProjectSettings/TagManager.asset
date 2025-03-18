@@ -8,6 +8,7 @@ TagManager:
   - Gun
   - Slider
   - Crosshair
+  - Wall
   layers:
   - Default
   - TransparentFX

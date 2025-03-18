@@ -273,9 +273,11 @@ public class Player : Entity
     {
         if (controls.Player.Dev.triggered)
         {
-            currentCurrency += 10000000;
-            maxHealth =+ 100000;
+            IncreaseStats("maxHealth", 1000000);
+            EarnCurrency(10000000);
+            EarnXP(100000000);
             health = maxHealth;
+
         }
     }
 

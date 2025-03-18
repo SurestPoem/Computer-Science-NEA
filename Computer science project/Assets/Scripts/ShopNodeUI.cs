@@ -14,6 +14,7 @@ public class ShopNodeUI : MonoBehaviour
     public TextMeshProUGUI shopNodeStats;
     public ShopNode shopNode;
     public ShopManager shopManager;
+    public TextMeshProUGUI gunLevelText;
 
     void Update()
     {
@@ -63,18 +64,21 @@ public class ShopNodeUI : MonoBehaviour
                 "Cooldown: " + shopNode.shopManager.ShopStock[shopNode.gunPointerThingy].gunPrefab.GetComponent<Gun>().cooldownTime + "\n" +
                 "Bullet Speed: " + shopNode.shopManager.ShopStock[shopNode.gunPointerThingy].gunPrefab.GetComponent<Gun>().bulletSpeed;
             shopNodeName.text = (shopNode.shopManager.ShopStock[shopNode.gunPointerThingy].gunPrefab.GetComponent<Gun>().gunName);
+            gunLevelText.text = ("Level: " + shopNode.shopManager.ShopStock[shopNode.gunPointerThingy].levelRequired);
         }
         else if (shopNode.currentSellableType == ShopNode.SellableType.Upgrade)
         {
             costText.text = (shopNode.generalCost.ToString() + " Upgrade");
             shopNodeStats.text = ("Amount:" + "\n" + shopNode.shopManager.UpgradeStock[shopNode.upgradePointerThingy].upgradeAmount.ToString());
             shopNodeName.text = shopNode.shopManager.UpgradeStock[shopNode.upgradePointerThingy].upgradeType.ToString();
+            gunLevelText.text = ("Level:  0");
         }
         else if (shopNode.currentSellableType == ShopNode.SellableType.Null)
         {
             costText.text = ("Item purchased");
             shopNodeStats.text = ("Purchased");
             shopNodeName.text = ("Item purchased");
+            gunLevelText.text = ("Item purchased");
         }
     }
 }
