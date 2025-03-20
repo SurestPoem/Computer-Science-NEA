@@ -9,6 +9,7 @@ TagManager:
   - Slider
   - Crosshair
   - Wall
+  - Node
   layers:
   - Default
   - TransparentFX

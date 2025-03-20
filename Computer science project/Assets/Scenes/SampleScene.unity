@@ -692,7 +692,7 @@ MonoBehaviour:
   playableMapHeight: 30
   MapWidth: 0
   MapHeight: 0
-  MaximumWalkers: 15
+  MaximumWalkers: 4
   TileCount: 0
   FillPercent: 0.4
   WaitTime: 0
