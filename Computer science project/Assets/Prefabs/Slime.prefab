@@ -59,7 +59,7 @@ MonoBehaviour:
   regenRate: 0
   player: {fileID: 0}
   IsFreeze: 0
-  detectionDistance: 0
+  chaseDistance: 5
   collideDamage: 0
   baseCollideDamage: 2
   damageCooldown: 0.5
@@ -70,6 +70,8 @@ MonoBehaviour:
   - itemPrefab: {fileID: 1383925665828577346, guid: 21530bf8293529a40a0f339bb403eed3, type: 3}
     dropChance: 1
   deadBodyPrefab: {fileID: 9178326787673341792, guid: efea2ff82c7f39a44b11d7d3d7682c78, type: 3}
+  currentNode: {fileID: 0}
+  path: []
 --- !u!95 &4845883913908984215
 Animator:
   serializedVersion: 5

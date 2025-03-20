@@ -17,13 +17,23 @@ public class WalkerGenerator : MonoBehaviour
     public Tilemap tileMap; // Single Tilemap for both floor and wall tiles
     public RuleTile Floor;
     public RuleTile Wall;
-    public int MapWidth = 30;
-    public int MapHeight = 30;
+    public int playableMapWidth = 30;
+    public int playableMapHeight = 30;
+    public int MapWidth;
+    public int MapHeight;
 
     public int MaximumWalkers = 10;
     public int TileCount = default;
     public float FillPercent = 0.4f;
-    public float WaitTime = 0.5f;
+    public float WaitTime = 0.01f;
+
+    public Node nodePrefab;
+    public List<Node> nodeList;
+    public GameObject nodeParent;
+
+    public Enemy enemy;
+
+    private bool canDrawGizmos;
 
     // Add a public variable for the start position
     public Vector2 StartPosition = new Vector2(15, 15);
@@ -31,14 +41,11 @@ public class WalkerGenerator : MonoBehaviour
     public Vector2 spawnAreaMax = new Vector2(10, 10); // Maximum bounds (top-right corner)
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        MapWidth = playableMapWidth + 2;
+        MapHeight = playableMapHeight + 2;
         InitialiseGrid();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
     }
 
     void InitialiseGrid()
@@ -106,6 +113,7 @@ public class WalkerGenerator : MonoBehaviour
 
             if ((float)TileCount / (float)gridHandler.Length >= FillPercent)
             {
+                CreateNodes();
                 FillEmptyTilesWithWalls(); // Fill any remaining empty tiles with walls
                 return; // Exit the function when floors are completed (no need for yield)
             }
@@ -135,7 +143,7 @@ public class WalkerGenerator : MonoBehaviour
     }
 
     void FillEmptyTilesWithWalls()
-    {
+    {        
         // Loop through the entire grid and place walls on empty tiles
         for (int x = 0; x < gridHandler.GetLength(0); x++)
         {
@@ -247,6 +255,7 @@ public class WalkerGenerator : MonoBehaviour
                 }
             }
         }
+        
     }
 
     void CreateSpawnArea(Vector2Int center)
@@ -285,6 +294,89 @@ public class WalkerGenerator : MonoBehaviour
 
         // Pick a random direction
         return directions[Random.Range(0, directions.Count)];
+    }
+
+
+
+    void CreateNodes()
+    {
+        Debug.Log("CreateNodes Called");
+
+        // Check if nodeParent is assigned in the Inspector
+        if (nodeParent == null)
+        {
+            Debug.LogError("Node Parent is not assigned!");
+            return;
+        }
+
+        for (int x = 0; x < gridHandler.GetLength(0); x++)
+        {
+            for (int y = 0; y < gridHandler.GetLength(1); y++)
+            {
+                if (gridHandler[x, y] == Grid.FLOOR)
+                {
+                    // Instantiate the node and set its position
+                    Node node = Instantiate(nodePrefab, new Vector2(x + 0.5f, y + 0.5f), Quaternion.identity);
+
+                    // Set the parent of the node
+                    node.transform.SetParent(nodeParent.transform);
+
+                    nodeList.Add(node);
+                }
+            }
+        }
+        CreateConnections();
+    }
+
+    void CreateConnections()
+    {
+        Debug.Log("CreateConnections Called");
+        for (int i = 0; i < nodeList.Count; i++)
+        {
+            for (int j = i + 1; j < nodeList.Count; j++)
+            {
+                // Check distance between nodes
+                if (Vector2.Distance(nodeList[i].transform.position, nodeList[j].transform.position) < 1.5f)
+                {
+                    // Simply connect without the duplicate check
+                    ConnectNodes(nodeList[i], nodeList[j]);
+                    ConnectNodes(nodeList[j], nodeList[i]); // If bidirectional connections are needed
+                }
+            }
+        }
+
+        canDrawGizmos = true;
+    }
+
+    void ConnectNodes(Node from, Node to)
+    {
+        if(from == to) { return; }
+
+        from.connections.Add(to);
+    }
+
+    void SpawnAI()
+    {
+        Node randNode = nodeList[Random.Range(0, nodeList.Count)];
+
+        Enemy newEnemy = Instantiate(enemy, randNode.transform.position, Quaternion.identity);
+
+        newEnemy.currentNode = randNode;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (canDrawGizmos)
+        {
+            Gizmos.color = Color.blue;
+            for(int i =0; i < nodeList.Count; i++)
+            {
+                for(int j = 0; j < nodeList[i].connections.Count; j++)
+                {
+                    Gizmos.DrawLine(nodeList[i].transform.position, nodeList[i].connections[j].transform.position);
+                }
+            }
+        }
     }
 }
 

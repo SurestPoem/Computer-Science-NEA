@@ -6,14 +6,15 @@ using UnityEngine.Tilemaps;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject enemyPrefab;
-    public float spawnRate = 2f;  // Spawn every 2 seconds
+    [SerializeField] private GameObject enemyPrefab;
+    public float spawnRate = 2f;
     private float nextSpawnTime = 0f;
-    public int enemiesPerSpawn = 3; // Number of enemies to spawn each time
+    public int enemiesPerSpawn = 3;
+    public Tilemap tileMap;
+    public RuleTile Floor;
 
-    public Tilemap tileMap; // Reference to the Tilemap
-    public RuleTile Floor; // Reference to the floor tile
+    // Reference to the WalkerGenerator (adjust the reference to match your game)
+    public WalkerGenerator walkerGenerator;
 
     void Start()
     {
@@ -34,18 +35,21 @@ public class EnemySpawner : MonoBehaviour
     {
         for (int i = 0; i < enemiesPerSpawn; i++)
         {
-            // Generate random offset for spawn position
-            Vector3 offset = new Vector3(Random.Range(-8f, 8f), Random.Range(-5f, 5f), 0f);
-            Vector3 spawnPosition = transform.position + offset;
+            // Get a random tile position within the Tilemap bounds
+            Vector3Int spawnTilePosition = new Vector3Int(
+                Random.Range(tileMap.cellBounds.min.x, tileMap.cellBounds.max.x),
+                Random.Range(tileMap.cellBounds.min.y, tileMap.cellBounds.max.y),
+                0);
 
-            // Convert the spawn position to a Vector3Int for tilemap usage
-            Vector3Int spawnTilePosition = tileMap.WorldToCell(spawnPosition);
+            // Convert the tile position to a world position
+            Vector3 spawnPosition = tileMap.CellToWorld(spawnTilePosition) + tileMap.tileAnchor;
 
-            // Check if the tile at the spawn position is a floor
+            // Check if the tile at the spawn position is a floor tile
             TileBase tileAtPosition = tileMap.GetTile(spawnTilePosition);
 
             if (tileAtPosition == Floor) // Only spawn if it's a floor tile
             {
+                Debug.Log("Spawning enemy at: " + spawnPosition);
                 Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
             }
         }

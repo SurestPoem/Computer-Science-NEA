@@ -7,6 +7,5 @@ public class Charger : Enemy
     void Update()
     {
         base.Update();
-        ChasePlayer();
     }
 }
