@@ -21,18 +21,6 @@ public class Enemy : Entity
     void Update()
     {
         base.Update();
-        float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
-
-        if (distanceToPlayer < chaseDistance)
-        {
-            // Chase directly when the player is within chase range
-            ChasePlayer();
-        }
-        else
-        {
-            // Use A* pathfinding if the player is not within chase range
-            CreatePath();
-        }
     }
 
     public void DealCollideDamage(Player player)
@@ -134,16 +122,8 @@ public class Enemy : Entity
             {
                 // Instantiate loot with a random offset within 0.5f range
                 Vector3 offset = new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0f);
-                InstantiateLoot(lootItem.itemPrefab, transform.position + offset);
+                Instantiate(lootItem.itemPrefab, transform.position + offset, Quaternion.identity);
             }
-        }
-    }
-    void InstantiateLoot(GameObject loot, Vector3 position)
-    {
-        if (loot)
-        {
-        // Instantiate the loot at the position with a random offset
-        GameObject droppedLoot = Instantiate(loot, position, Quaternion.identity);
         }
     }
 
@@ -158,7 +138,7 @@ public class Enemy : Entity
         base.Die();   // Call base class's Die() method
     }
 
-    protected override void Initialise()
+    protected override void Initialise() //called in Start() method of superclass Entity
     {
         maxHealth = Mathf.RoundToInt(baseMaxHealth * GameManager.Instance.difficultyMultiplier);
         collideDamage = Mathf.RoundToInt(baseCollideDamage * GameManager.Instance.difficultyMultiplier);

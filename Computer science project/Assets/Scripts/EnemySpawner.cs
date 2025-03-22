@@ -35,23 +35,46 @@ public class EnemySpawner : MonoBehaviour
     {
         for (int i = 0; i < enemiesPerSpawn; i++)
         {
-            // Get a random tile position within the Tilemap bounds
-            Vector3Int spawnTilePosition = new Vector3Int(
-                Random.Range(tileMap.cellBounds.min.x, tileMap.cellBounds.max.x),
-                Random.Range(tileMap.cellBounds.min.y, tileMap.cellBounds.max.y),
-                0);
+            // Try to spawn the enemy
+            Vector3 spawnPosition = GetValidSpawnPosition();
 
-            // Convert the tile position to a world position
-            Vector3 spawnPosition = tileMap.CellToWorld(spawnTilePosition) + tileMap.tileAnchor;
-
-            // Check if the tile at the spawn position is a floor tile
-            TileBase tileAtPosition = tileMap.GetTile(spawnTilePosition);
-
-            if (tileAtPosition == Floor) // Only spawn if it's a floor tile
+            if (spawnPosition != Vector3.zero) // If a valid spawn position was found
             {
                 Debug.Log("Spawning enemy at: " + spawnPosition);
                 Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
             }
+            else
+            {
+                //No code nessisary here
+            }
+        }
+    }
+
+    // Recursively get a valid spawn position
+    Vector3 GetValidSpawnPosition(int maxAttempts = 10)
+    {
+        if (maxAttempts <= 0)
+        {
+            return Vector3.zero; // No valid position found, return a "failure" value
+        }
+
+        Vector3Int spawnTilePosition = new Vector3Int(
+            Random.Range(tileMap.cellBounds.min.x, tileMap.cellBounds.max.x),
+            Random.Range(tileMap.cellBounds.min.y, tileMap.cellBounds.max.y),
+            0);
+
+        Vector3 spawnPosition = tileMap.CellToWorld(spawnTilePosition) + tileMap.tileAnchor;
+
+        TileBase tileAtPosition = tileMap.GetTile(spawnTilePosition);
+
+        if (tileAtPosition == Floor)
+        {
+            return spawnPosition; // Return valid position
+        }
+        else
+        {
+            // Recurse with one fewer attempt
+            return GetValidSpawnPosition(maxAttempts - 1);
         }
     }
 }

@@ -8,7 +8,7 @@ public class ShopNodeUI : MonoBehaviour
 {
     public TextMeshProUGUI costText;
     public Image gunShopImage;
-    public Sprite noGunImageLol;
+    public Sprite upgradeImage;
     public Sprite nullIconImage;
     public TextMeshProUGUI shopNodeName;
     public TextMeshProUGUI shopNodeStats;
@@ -42,11 +42,11 @@ public class ShopNodeUI : MonoBehaviour
     {
         if (shopNode.currentSellableType == ShopNode.SellableType.Gun)
         {
-            gunShopImage.sprite = shopNode.shopManager.ShopStock[shopNode.gunPointerThingy].gunPrefab.GetComponent<Gun>().gunIcon;
+            gunShopImage.sprite = shopNode.shopManager.ShopStock[shopNode.gunPointer].gunPrefab.GetComponent<Gun>().gunIcon;
         }
         else if (shopNode.currentSellableType == ShopNode.SellableType.Upgrade)
         {
-            gunShopImage.sprite = noGunImageLol;
+            gunShopImage.sprite = upgradeImage;
         }
         else if (shopNode.currentSellableType == ShopNode.SellableType.Null)
         {
@@ -60,17 +60,17 @@ public class ShopNodeUI : MonoBehaviour
         {
             costText.text = (shopNode.generalCost.ToString() + " Buy");
             shopNodeStats.text =
-                "Damage: " + shopNode.shopManager.ShopStock[shopNode.gunPointerThingy].gunPrefab.GetComponent<Gun>().damageStat + "\n" +
-                "Cooldown: " + shopNode.shopManager.ShopStock[shopNode.gunPointerThingy].gunPrefab.GetComponent<Gun>().cooldownTime + "\n" +
-                "Bullet Speed: " + shopNode.shopManager.ShopStock[shopNode.gunPointerThingy].gunPrefab.GetComponent<Gun>().bulletSpeed;
-            shopNodeName.text = (shopNode.shopManager.ShopStock[shopNode.gunPointerThingy].gunPrefab.GetComponent<Gun>().gunName);
-            gunLevelText.text = ("Level: " + shopNode.shopManager.ShopStock[shopNode.gunPointerThingy].levelRequired);
+                "Damage: " + shopNode.shopManager.ShopStock[shopNode.gunPointer].gunPrefab.GetComponent<Gun>().damageStat + "\n" +
+                "Cooldown: " + shopNode.shopManager.ShopStock[shopNode.gunPointer].gunPrefab.GetComponent<Gun>().cooldownTime + "\n" +
+                "Bullet Speed: " + shopNode.shopManager.ShopStock[shopNode.gunPointer].gunPrefab.GetComponent<Gun>().bulletSpeed;
+            shopNodeName.text = (shopNode.shopManager.ShopStock[shopNode.gunPointer].gunPrefab.GetComponent<Gun>().gunName);
+            gunLevelText.text = ("Level: " + shopNode.shopManager.ShopStock[shopNode.gunPointer].levelRequired);
         }
         else if (shopNode.currentSellableType == ShopNode.SellableType.Upgrade)
         {
             costText.text = (shopNode.generalCost.ToString() + " Upgrade");
-            shopNodeStats.text = ("Amount:" + "\n" + shopNode.shopManager.UpgradeStock[shopNode.upgradePointerThingy].upgradeAmount.ToString());
-            shopNodeName.text = shopNode.shopManager.UpgradeStock[shopNode.upgradePointerThingy].upgradeType.ToString();
+            shopNodeStats.text = ("Amount:" + "\n" + shopNode.shopManager.UpgradeStock[shopNode.upgradePointer].upgradeAmount.ToString());
+            shopNodeName.text = shopNode.shopManager.UpgradeStock[shopNode.upgradePointer].upgradeType.ToString();
             gunLevelText.text = ("Level:  0");
         }
         else if (shopNode.currentSellableType == ShopNode.SellableType.Null)

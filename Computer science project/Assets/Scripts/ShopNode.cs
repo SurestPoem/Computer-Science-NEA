@@ -10,8 +10,8 @@ public class ShopNode : MonoBehaviour
     public enum SellableType { Gun, Upgrade, Null }
     public SellableType currentSellableType;
     public int generalCost;
-    public int gunPointerThingy = 0;
-    public int upgradePointerThingy = 0;
+    public int gunPointer = 0;
+    public int upgradePointer = 0;
     public ShopManager shopManager;
 
     void Start()
@@ -22,14 +22,14 @@ public class ShopNode : MonoBehaviour
 
     private void RemoveSellable()
     {
-        shopManager.ShopStock.RemoveAt(gunPointerThingy);
+        shopManager.ShopStock.RemoveAt(gunPointer);
     }
 
     public void BuyGun()
     {
-        if (player.currentCurrency >= generalCost && player.level >= shopManager.ShopStock[gunPointerThingy].levelRequired)
+        if (player.currentCurrency >= generalCost && player.level >= shopManager.ShopStock[gunPointer].levelRequired)
         {
-            player.AddGun(shopManager.ShopStock[gunPointerThingy].gunPrefab);
+            player.AddGun(shopManager.ShopStock[gunPointer].gunPrefab);
             RemoveSellable();
             player.UseCurrency(generalCost);
             currentSellableType = SellableType.Null;
@@ -44,19 +44,18 @@ public class ShopNode : MonoBehaviour
     {
         if (player.currentCurrency >= generalCost)
         {
-            // Correct way to access the enum value from ShopUpgradeItem
-            ShopUpgradeItem.UpgradeType upgradeType = shopManager.UpgradeStock[upgradePointerThingy].upgradeType;
+            ShopUpgradeItem.UpgradeType upgradeType = shopManager.UpgradeStock[upgradePointer].upgradeType;
 
             switch (upgradeType)
             {
                 case ShopUpgradeItem.UpgradeType.MaxHealth:
-                    player.IncreaseStats("maxHealth", shopManager.UpgradeStock[upgradePointerThingy].upgradeAmount);
+                    player.IncreaseStats("maxHealth", shopManager.UpgradeStock[upgradePointer].upgradeAmount);
                     break;
                 case ShopUpgradeItem.UpgradeType.MoveSpeed:
-                    player.IncreaseStats("moveSpeed", shopManager.UpgradeStock[upgradePointerThingy].upgradeAmount);
+                    player.IncreaseStats("moveSpeed", shopManager.UpgradeStock[upgradePointer].upgradeAmount);
                     break;
                 case ShopUpgradeItem.UpgradeType.RegenRate:
-                    player.IncreaseStats("regenRate", shopManager.UpgradeStock[upgradePointerThingy].upgradeAmount);
+                    player.IncreaseStats("regenRate", shopManager.UpgradeStock[upgradePointer].upgradeAmount);
                     break;
                 default:
                     Debug.LogError("Unknown upgrade type.");
@@ -74,24 +73,23 @@ public class ShopNode : MonoBehaviour
 
     public void RandomiseUpgradeValues()
     {
-        // Correctly access the upgradeType field of the selected ShopUpgradeItem
-        ShopUpgradeItem.UpgradeType upgradeType = shopManager.UpgradeStock[upgradePointerThingy].upgradeType;
+        ShopUpgradeItem.UpgradeType upgradeType = shopManager.UpgradeStock[upgradePointer].upgradeType;
 
         switch (upgradeType)
         {
             case ShopUpgradeItem.UpgradeType.MaxHealth:
-                // Randomize the amount of max health the player can buy (between 1 and 5, for example)
-                shopManager.UpgradeStock[upgradePointerThingy].upgradeAmount = Random.Range(1, 7);
+                // Randomize the amount of max health
+                shopManager.UpgradeStock[upgradePointer].upgradeAmount = Random.Range(1, 7);
                 break;
 
             case ShopUpgradeItem.UpgradeType.MoveSpeed:
-                // Randomize move speed upgrade (between 1 and 3, for example)
-                shopManager.UpgradeStock[upgradePointerThingy].upgradeAmount = Random.Range(1, 4);
+                // Randomize move speed upgrade
+                shopManager.UpgradeStock[upgradePointer].upgradeAmount = Random.Range(1, 4);
                 break;
 
             case ShopUpgradeItem.UpgradeType.RegenRate:
-                // Randomize regen rate upgrade (between 1 and 2, for example)
-                shopManager.UpgradeStock[upgradePointerThingy].upgradeAmount = Random.Range(1, 4);
+                // Randomize regen rate upgrade
+                shopManager.UpgradeStock[upgradePointer].upgradeAmount = Random.Range(1, 4);
                 break;
 
             default:
@@ -115,11 +113,11 @@ public class ShopNode : MonoBehaviour
 
         if (currentSellableType == SellableType.Gun)
         {
-            gunPointerThingy = (Random.Range(0, shopManager.ShopStock.Count));
+            gunPointer = (Random.Range(0, shopManager.ShopStock.Count));
         }
         else if (currentSellableType == SellableType.Upgrade)
         {
-            upgradePointerThingy = (Random.Range(0, shopManager.UpgradeStock.Count));
+            upgradePointer = (Random.Range(0, shopManager.UpgradeStock.Count));
             RandomiseUpgradeValues();
         }
 
@@ -130,11 +128,11 @@ public class ShopNode : MonoBehaviour
     {
         if (currentSellableType == SellableType.Upgrade)
         {
-            generalCost = shopManager.UpgradeStock[upgradePointerThingy].upgradeCost * shopManager.UpgradeStock[upgradePointerThingy].upgradeAmount;
+            generalCost = shopManager.UpgradeStock[upgradePointer].upgradeCost * shopManager.UpgradeStock[upgradePointer].upgradeAmount;
         }
         else if (currentSellableType == SellableType.Gun)
         {
-            generalCost = shopManager.ShopStock[gunPointerThingy].gunCost;
+            generalCost = shopManager.ShopStock[gunPointer].gunCost;
         }
     }
 }

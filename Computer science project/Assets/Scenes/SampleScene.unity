@@ -688,18 +688,18 @@ MonoBehaviour:
   tileMap: {fileID: 1112113927}
   Floor: {fileID: 11400000, guid: eb04afbeaa339f34aaf038d836044fd8, type: 2}
   Wall: {fileID: 11400000, guid: f93f480f1178d604996ad6bac7f4e41b, type: 2}
-  playableMapWidth: 30
-  playableMapHeight: 30
+  playableMapWidth: 25
+  playableMapHeight: 25
   MapWidth: 0
   MapHeight: 0
-  MaximumWalkers: 4
+  MaximumWalkers: 5
   TileCount: 0
-  FillPercent: 0.4
+  FillPercent: 0.3
   WaitTime: 0
   nodePrefab: {fileID: 2847058998921512403, guid: 09a76b44fb74e284b8dae265061dbbf5, type: 3}
   nodeList: []
   nodeParent: {fileID: 444996545}
-  enemy: {fileID: 7128403049209373940, guid: 65a824c5e249e3d41a7c5babc8802933, type: 3}
+  enemy: {fileID: 0}
   StartPosition: {x: 15, y: 15}
   spawnAreaMin: {x: 5, y: 5}
   spawnAreaMax: {x: 10, y: 10}
@@ -818,7 +818,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -35, y: 25}
+  m_AnchoredPosition: {x: -29, y: 25}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 0}
 --- !u!1 &353243950
@@ -1139,8 +1139,8 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 2
-  m_MatchWidthOrHeight: 0.5
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -1496,7 +1496,7 @@ Camera:
   far clip plane: 100
   field of view: 80.07747
   orthographic: 1
-  orthographic size: 3.5
+  orthographic size: 3
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1542,7 +1542,7 @@ MonoBehaviour:
   player: {fileID: 158078888}
   smoothSpeed: 0.01
   offset: {x: 0, y: 0, z: 0}
-  distanceThreshold: 2
+  distanceThreshold: 1
 --- !u!1 &607769098
 GameObject:
   m_ObjectHideFlags: 0
@@ -1770,7 +1770,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &736478162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1784,8 +1784,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 7131957743748288424, guid: 65a824c5e249e3d41a7c5babc8802933, type: 3}
-  spawnRate: 5
-  enemiesPerSpawn: 1
+  spawnRate: 9
+  enemiesPerSpawn: 2
   tileMap: {fileID: 1112113927}
   Floor: {fileID: 11400000, guid: eb04afbeaa339f34aaf038d836044fd8, type: 2}
   walkerGenerator: {fileID: 280823905}
@@ -2245,7 +2245,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 150, y: 150}
+  m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &844772914
 MonoBehaviour:
@@ -4416,8 +4416,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 6486128665900377829, guid: ccdcb86fd5233794ab0673f6883f64e0, type: 3}
-  spawnRate: 8
-  enemiesPerSpawn: 3
+  spawnRate: 10
+  enemiesPerSpawn: 2
   tileMap: {fileID: 1112113927}
   Floor: {fileID: 11400000, guid: eb04afbeaa339f34aaf038d836044fd8, type: 2}
   walkerGenerator: {fileID: 280823905}

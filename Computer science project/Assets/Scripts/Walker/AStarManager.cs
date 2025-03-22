@@ -1,5 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class AStarManager : MonoBehaviour
@@ -13,71 +13,88 @@ public class AStarManager : MonoBehaviour
 
     public List<Node> GeneratePath(Node start, Node end)
     {
-        List<Node> openSet = new List<Node>();
-        HashSet<Node> closedSet = new HashSet<Node>(); // To avoid revisiting nodes
-
-        foreach (Node n in FindObjectsOfType<Node>())
+        if (start == null || end == null)
         {
-            n.gScore = float.MaxValue;
-            n.cameFrom = null; // Reset path
+            Debug.LogError("Start or End node is null!");
+            return null;
         }
 
+        List<Node> openSet = new List<Node>();
+        HashSet<Node> closedSet = new HashSet<Node>();
+
+        // Reset all nodes
+        Node[] allNodes = FindObjectsOfType<Node>();
+        foreach (Node node in allNodes)
+        {
+            node.gScore = float.MaxValue;  // Reset gScore
+            node.hScore = 0;               // Reset hScore
+            node.cameFrom = null;          // Reset cameFrom
+        }
+
+        // Initialize start node
         start.gScore = 0;
         start.hScore = Vector2.Distance(start.transform.position, end.transform.position);
         openSet.Add(start);
 
         while (openSet.Count > 0)
         {
-            // Find node with the lowest F-score
-            int lowestF = 0;
+            // Find node with lowest F-score
+            Node currentNode = openSet[0];
             for (int i = 1; i < openSet.Count; i++)
             {
-                if (openSet[i].FScore() < openSet[lowestF].FScore())
+                if (openSet[i].FScore() < currentNode.FScore())
                 {
-                    lowestF = i;
+                    currentNode = openSet[i];
                 }
             }
 
-            Node currentNode = openSet[lowestF];
-            openSet.RemoveAt(lowestF);
+            openSet.Remove(currentNode);
             closedSet.Add(currentNode);
 
             // If we reached the end, reconstruct the path
             if (currentNode == end)
             {
-                List<Node> path = new List<Node>();
-                while (currentNode != null) // Build the path by backtracking
-                {
-                    path.Insert(0, currentNode);
-                    currentNode = currentNode.cameFrom;
-                }
-                return path;
+                return ReconstructPath(end);
             }
 
-            // Check neighbors
-            foreach (Node connectedNode in currentNode.connections)
+            // Process neighbors
+            foreach (Node neighbor in currentNode.connections)
             {
-                if (closedSet.Contains(connectedNode)) continue; // Ignore visited nodes
+                if (closedSet.Contains(neighbor)) continue; // Ignore visited nodes
 
-                float heldGScore = currentNode.gScore + Vector2.Distance(currentNode.transform.position, connectedNode.transform.position);
+                float tentativeGScore = currentNode.gScore + Vector2.Distance(currentNode.transform.position, neighbor.transform.position);
 
-                if (!openSet.Contains(connectedNode))
+                if (!openSet.Contains(neighbor))
                 {
-                    openSet.Add(connectedNode);
+                    openSet.Add(neighbor);
                 }
-                else if (heldGScore >= connectedNode.gScore) // Skip if no better path
+                else if (tentativeGScore >= neighbor.gScore)
                 {
-                    continue;
+                    continue; // Skip if the new path is worse
                 }
 
-                // Update node with better path
-                connectedNode.cameFrom = currentNode;
-                connectedNode.gScore = heldGScore;
-                connectedNode.hScore = Vector2.Distance(connectedNode.transform.position, end.transform.position);
+                // Update the neighbor's properties
+                neighbor.cameFrom = currentNode; // Link the node to the parent (currentNode)
+                neighbor.gScore = tentativeGScore; // Update the gScore for this neighbor
+                neighbor.hScore = Vector2.Distance(neighbor.transform.position, end.transform.position); // Recalculate heuristic
             }
-            Debug.Log($"Processing node: {currentNode.name}, F-score: {currentNode.FScore()}");
         }
 
-        return null; // No valid path found
+        Debug.LogWarning("No valid path found!");
+        return null; // No valid path
+    }
+
+    private List<Node> ReconstructPath(Node end)
+    {
+        List<Node> path = new List<Node>();
+        Node current = end;
+
+        while (current != null)
+        {
+            path.Insert(0, current);
+            current = current.cameFrom;
+        }
+
+        return path;
     }
 }

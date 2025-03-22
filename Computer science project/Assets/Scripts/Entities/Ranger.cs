@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Charger : Enemy
+public class Ranger : Enemy
 {
     void Update()
     {
