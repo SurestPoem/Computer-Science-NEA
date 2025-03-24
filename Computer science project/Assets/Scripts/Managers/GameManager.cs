@@ -18,6 +18,10 @@ public class GameManager : MonoBehaviour
     public Difficulty currentDifficulty;
     public float difficultyMultiplier;
 
+    public enum GameType { Normal, Endless }
+    public GameType selectedGameType;  // Hold the player's selected game mode
+
+
 
     private void Awake()
     {
@@ -26,44 +30,49 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            gameObject.SetActive(true);
         }
         else
         {
             Destroy(gameObject);  // If a duplicate exists, destroy it
         }
-
-        DisableShop();
-        DisableDeathScreen();
-        DisablePauseScreen();
-        SetDifficultyMultiplier();
     }
 
 
 
-    void Start()
-    {          
-    }
-
-    void Update()
+    public void StartGame(int gameMode)
     {
-        //code here idk
-    }
+        selectedGameType = (GameType)gameMode;
 
-    void SetDifficultyMultiplier()
-    {
-        switch (currentDifficulty)
+        // Load the correct scene based on game mode
+        string sceneToLoad = (selectedGameType == GameType.Normal) ? "Game" : "Endless";
+        SceneManager.LoadScene(sceneToLoad);
+
+
+        if (!gameObject.activeInHierarchy)
         {
-            case Difficulty.Easy:
-                difficultyMultiplier = 0.65f;
-                break;
-            case Difficulty.Normal:
-                difficultyMultiplier = 1f;
-                break;
-            case Difficulty.Hard:
-                difficultyMultiplier = 1.25f;
-                break;
+            gameObject.SetActive(true);
         }
+        // Start a coroutine to wait for the scene to load before assigning UI elements
+        StartCoroutine(AssignSceneUI());
     }
+
+
+    public void SetDifficultyMultiplier()
+        {
+            switch (currentDifficulty)
+            {
+                case Difficulty.Easy:
+                    difficultyMultiplier = 0.65f;
+                    break;
+                case Difficulty.Normal:
+                    difficultyMultiplier = 1f;
+                    break;
+                case Difficulty.Hard:
+                    difficultyMultiplier = 1.15f;
+                    break;
+            }
+        }
 
     public void EnableShop()
     {
@@ -164,6 +173,29 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogWarning("Pause screen has been destroyed!");
         }
+    }
+
+    private IEnumerator AssignSceneUI()
+    {
+        // Find UI elements in the new scene
+        shopScreen = GameObject.FindWithTag("ShopScreen");
+        DeathScreen = GameObject.FindWithTag("DeathScreen");
+        pauseScreen = GameObject.FindWithTag("PauseScreen");
+
+        if (shopScreen == null) Debug.LogWarning("ShopScreen not found in scene!");
+        if (DeathScreen == null) Debug.LogWarning("DeathScreen not found in scene!");
+        if (pauseScreen == null) Debug.LogWarning("PauseScreen not found in scene!");
+
+        if(shopScreen) DisableShop();
+        if(DeathScreen) DisableDeathScreen();
+        if (pauseScreen) DisablePauseScreen();
+
+        yield return null;
+    }
+
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void QuitGame()

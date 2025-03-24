@@ -53,7 +53,7 @@ MonoBehaviour:
   maxHealth: 0
   baseMaxHealth: 35
   moveSpeed: 0
-  baseMoveSpeed: 2
+  baseMoveSpeed: 1.5
   healAmount: 0
   damageAmount: 0
   regenRate: 0
