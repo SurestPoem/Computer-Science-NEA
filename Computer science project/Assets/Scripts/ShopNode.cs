@@ -16,6 +16,7 @@ public class ShopNode : MonoBehaviour
 
     void Start()
     {
+        player = FindObjectOfType<Player>();
         PickSellableType();
     }
 
@@ -23,6 +24,7 @@ public class ShopNode : MonoBehaviour
     private void RemoveSellable()
     {
         shopManager.ShopStock.RemoveAt(gunPointer);
+        gunPointer = 0;
     }
 
     public void BuyGun()

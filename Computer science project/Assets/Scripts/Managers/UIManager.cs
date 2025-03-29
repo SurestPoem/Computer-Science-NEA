@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -14,10 +15,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Player player;
     public Image gunIconImage;
 
+
     void Start()
     {
         player = FindObjectOfType<Player>();
-         // Enable the controls
     }
 
     void Update()

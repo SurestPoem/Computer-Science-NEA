@@ -16,10 +16,17 @@ public class ShopNodeUI : MonoBehaviour
     public ShopManager shopManager;
     public TextMeshProUGUI gunLevelText;
 
+    void Awake()
+    {
+        shopManager = FindObjectOfType<ShopManager>();
+    }
     void Update()
     {
-        GunIconHandling();
-        HandleText();
+        if (shopNode != null)
+        {
+            GunIconHandling();
+            HandleText();
+        }
     }
 
     public void OnBuyButtonPressed()
@@ -53,6 +60,7 @@ public class ShopNodeUI : MonoBehaviour
             gunShopImage.sprite = nullIconImage;
         }
     }
+
 
     public void HandleText()
     {

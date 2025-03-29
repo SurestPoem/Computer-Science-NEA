@@ -64,18 +64,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""OpenShop"",
-                    ""type"": ""Button"",
-                    ""id"": ""41eb9cb4-57a5-4318-9d3a-4d33c2981997"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Pause"",
                     ""type"": ""Button"",
-                    ""id"": ""a30afa17-590b-44f0-b967-aa7d93c088a9"",
+                    ""id"": ""00d2a3cb-5deb-43f4-863a-cb873a125e83"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -84,7 +75,16 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Dev"",
                     ""type"": ""Button"",
-                    ""id"": ""1e083281-c368-4590-aae3-989f63db89b8"",
+                    ""id"": ""651a0ab8-68e6-4ead-a874-d96d6f2115ee"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenShop"",
+                    ""type"": ""Button"",
+                    ""id"": ""e1be3efd-7df9-402e-9c14-0776e6a5bfc6"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -270,29 +270,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""ca4310ee-d5f5-48ae-ba2a-c51491755386"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""OpenShop"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""595ee419-21a5-4562-85d4-152ddc20533c"",
-                    ""path"": ""<Gamepad>/dpad/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""OpenShop"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""eb14ec3e-617e-48a0-8a01-0821b7cebf0c"",
+                    ""id"": ""4cebcf35-3e73-4369-bf26-f1a8722774fd"",
                     ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -303,7 +281,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""b90fcf02-f0fb-4a6e-942b-83556e942d2c"",
+                    ""id"": ""28dce44a-9a61-4070-8c45-8a18d9fde24d"",
                     ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -314,7 +292,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""879327b0-1fd0-4617-9d12-6daef7639a89"",
+                    ""id"": ""ddb7cb95-10bd-4abd-836e-ef8c5e31993a"",
                     ""path"": ""<Keyboard>/alt"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -325,12 +303,34 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""deaf81e4-927d-48a2-b4b0-5f459c3bc60e"",
+                    ""id"": ""81f1d82d-b4af-4ce9-98ce-b12f9607ddaa"",
                     ""path"": ""<Gamepad>/select"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Dev"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""19dff6ef-083e-4992-9da4-24b3c1c798ee"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenShop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""401fef15-4c24-4d09-b40f-64d8a63aac33"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenShop"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -393,9 +393,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         m_Player_WeaponLeft = m_Player.FindAction("WeaponLeft", throwIfNotFound: true);
         m_Player_WeaponRight = m_Player.FindAction("WeaponRight", throwIfNotFound: true);
-        m_Player_OpenShop = m_Player.FindAction("OpenShop", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_Dev = m_Player.FindAction("Dev", throwIfNotFound: true);
+        m_Player_OpenShop = m_Player.FindAction("OpenShop", throwIfNotFound: true);
         // CrosshairMovement
         m_CrosshairMovement = asset.FindActionMap("CrosshairMovement", throwIfNotFound: true);
         m_CrosshairMovement_MouseMovement = m_CrosshairMovement.FindAction("MouseMovement", throwIfNotFound: true);
@@ -465,9 +465,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Shoot;
     private readonly InputAction m_Player_WeaponLeft;
     private readonly InputAction m_Player_WeaponRight;
-    private readonly InputAction m_Player_OpenShop;
     private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_Dev;
+    private readonly InputAction m_Player_OpenShop;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -476,9 +476,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
         public InputAction @WeaponLeft => m_Wrapper.m_Player_WeaponLeft;
         public InputAction @WeaponRight => m_Wrapper.m_Player_WeaponRight;
-        public InputAction @OpenShop => m_Wrapper.m_Player_OpenShop;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputAction @Dev => m_Wrapper.m_Player_Dev;
+        public InputAction @OpenShop => m_Wrapper.m_Player_OpenShop;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -500,15 +500,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @WeaponRight.started += instance.OnWeaponRight;
             @WeaponRight.performed += instance.OnWeaponRight;
             @WeaponRight.canceled += instance.OnWeaponRight;
-            @OpenShop.started += instance.OnOpenShop;
-            @OpenShop.performed += instance.OnOpenShop;
-            @OpenShop.canceled += instance.OnOpenShop;
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
             @Dev.started += instance.OnDev;
             @Dev.performed += instance.OnDev;
             @Dev.canceled += instance.OnDev;
+            @OpenShop.started += instance.OnOpenShop;
+            @OpenShop.performed += instance.OnOpenShop;
+            @OpenShop.canceled += instance.OnOpenShop;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -525,15 +525,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @WeaponRight.started -= instance.OnWeaponRight;
             @WeaponRight.performed -= instance.OnWeaponRight;
             @WeaponRight.canceled -= instance.OnWeaponRight;
-            @OpenShop.started -= instance.OnOpenShop;
-            @OpenShop.performed -= instance.OnOpenShop;
-            @OpenShop.canceled -= instance.OnOpenShop;
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
             @Dev.started -= instance.OnDev;
             @Dev.performed -= instance.OnDev;
             @Dev.canceled -= instance.OnDev;
+            @OpenShop.started -= instance.OnOpenShop;
+            @OpenShop.performed -= instance.OnOpenShop;
+            @OpenShop.canceled -= instance.OnOpenShop;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -611,9 +611,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnWeaponLeft(InputAction.CallbackContext context);
         void OnWeaponRight(InputAction.CallbackContext context);
-        void OnOpenShop(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnDev(InputAction.CallbackContext context);
+        void OnOpenShop(InputAction.CallbackContext context);
     }
     public interface ICrosshairMovementActions
     {

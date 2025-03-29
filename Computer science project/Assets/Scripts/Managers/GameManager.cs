@@ -7,21 +7,19 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public GameObject shopScreen;
-    public GameObject DeathScreen;
+    public GameObject deathScreen;
     public GameObject pauseScreen;
-    public bool ShopOnDev;
-    public bool DeathScreenOnDev;
+    public bool shopOnDev;
+    public bool deathScreenOnDev;
     [HideInInspector] public bool shopEnabled = false;
     [HideInInspector] public bool deathScreenEnabled = false;
     [HideInInspector] public bool pauseScreenEnabled = false;
-    public enum Difficulty {Easy, Normal, Hard}
+    public enum Difficulty { Easy, Normal, Hard }
     public Difficulty currentDifficulty;
     public float difficultyMultiplier;
 
     public enum GameType { Normal, Endless }
     public GameType selectedGameType;  // Hold the player's selected game mode
-
-
 
     private void Awake()
     {
@@ -30,15 +28,12 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            gameObject.SetActive(true);
         }
         else
         {
             Destroy(gameObject);  // If a duplicate exists, destroy it
         }
     }
-
-
 
     public void StartGame(int gameMode)
     {
@@ -48,49 +43,39 @@ public class GameManager : MonoBehaviour
         string sceneToLoad = (selectedGameType == GameType.Normal) ? "Game" : "Endless";
         SceneManager.LoadScene(sceneToLoad);
 
-
-        if (!gameObject.activeInHierarchy)
-        {
-            gameObject.SetActive(true);
-        }
-        // Start a coroutine to wait for the scene to load before assigning UI elements
-        StartCoroutine(AssignSceneUI());
+        StartCoroutine(LoadScreenUI());
     }
 
-
     public void SetDifficultyMultiplier()
+    {
+        switch (currentDifficulty)
         {
-            switch (currentDifficulty)
-            {
-                case Difficulty.Easy:
-                    difficultyMultiplier = 0.65f;
-                    break;
-                case Difficulty.Normal:
-                    difficultyMultiplier = 1f;
-                    break;
-                case Difficulty.Hard:
-                    difficultyMultiplier = 1.15f;
-                    break;
-            }
+            case Difficulty.Easy:
+                difficultyMultiplier = 0.65f;
+                break;
+            case Difficulty.Normal:
+                difficultyMultiplier = 1f;
+                break;
+            case Difficulty.Hard:
+                difficultyMultiplier = 1.15f;
+                break;
         }
+    }
 
+    // Shop functionality
     public void EnableShop()
     {
         if (shopScreen != null)
         {
-            shopScreen.SetActive(true); // Activate the shop screen
+            shopScreen.SetActive(true);
             shopEnabled = true;
+            Time.timeScale = 0f; // Freeze time
 
-            // Freeze time
-            Time.timeScale = 0f;
-
-            // Find all ShopNode components that are children of the shopScreen
+            // Loop through each ShopNode and call PickSellableType
             ShopNode[] shopNodes = shopScreen.GetComponentsInChildren<ShopNode>();
-
-            // Loop through each ShopNode and call PickSellableType()
             foreach (ShopNode shopNode in shopNodes)
             {
-                shopNode.PickSellableType(); // Call the method for each ShopNode
+                shopNode.PickSellableType(); // Initialize the sellable items
             }
         }
         else
@@ -99,7 +84,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Method to disable the shop
     public void DisableShop()
     {
         if (shopScreen != null)
@@ -114,11 +98,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Death screen functionality
     public void EnableDeathScreen()
     {
-        if (DeathScreen != null)
+        if (deathScreen != null)
         {
-            DeathScreen.SetActive(true);
+            deathScreen.SetActive(true);
             deathScreenEnabled = true;
             Time.timeScale = 0f; // Freeze time
         }
@@ -130,9 +115,9 @@ public class GameManager : MonoBehaviour
 
     public void DisableDeathScreen()
     {
-        if (DeathScreen != null)
+        if (deathScreen != null)
         {
-            DeathScreen.SetActive(false);
+            deathScreen.SetActive(false);
             deathScreenEnabled = false;
             Time.timeScale = 1f; // Resume time
         }
@@ -142,11 +127,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void RestartGame()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-
+    // Pause screen functionality
     public void EnablePauseScreen()
     {
         if (pauseScreen != null)
@@ -175,34 +156,36 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private IEnumerator AssignSceneUI()
+    // Restart the game
+    public void RestartGame()
     {
-        // Find UI elements in the new scene
-        shopScreen = GameObject.FindWithTag("ShopScreen");
-        DeathScreen = GameObject.FindWithTag("DeathScreen");
-        pauseScreen = GameObject.FindWithTag("PauseScreen");
-
-        if (shopScreen == null) Debug.LogWarning("ShopScreen not found in scene!");
-        if (DeathScreen == null) Debug.LogWarning("DeathScreen not found in scene!");
-        if (pauseScreen == null) Debug.LogWarning("PauseScreen not found in scene!");
-
-        if(shopScreen) DisableShop();
-        if(DeathScreen) DisableDeathScreen();
-        if (pauseScreen) DisablePauseScreen();
-
-        yield return null;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    // Load the main menu
     public void LoadMainMenu()
     {
+        // Load the MainMenu scene
         SceneManager.LoadScene("MainMenu");
     }
 
+    IEnumerator LoadScreenUI()
+    {
+        // Add a delay before finding the UI screens
+        yield return new WaitForSeconds(0.0001f); // Wait for 0.1 seconds
+
+        shopScreen = GameObject.FindGameObjectWithTag("ShopScreen");
+        deathScreen = GameObject.FindGameObjectWithTag("DeathScreen");
+        pauseScreen = GameObject.FindGameObjectWithTag("PauseScreen");
+
+        DisableShop();
+        DisableDeathScreen();
+        DisablePauseScreen();
+    }
+
+    // Quit the game
     public void QuitGame()
     {
-        // Optionally destroy any persistent objects here
-        Destroy(GameManager.Instance.gameObject);
-
         // Quit the application
         Application.Quit();
     }

@@ -369,7 +369,7 @@ MonoBehaviour:
   shopNodeName: {fileID: 8021454798545591894}
   shopNodeStats: {fileID: 2767568122701394056}
   shopNode: {fileID: 1746541895804751186}
-  shopManager: {fileID: 0}
+  shopManager: {fileID: 8925671665003016587, guid: 0825876a7d68ac34dbf1bda6eeebc501, type: 3}
   gunLevelText: {fileID: 722299831151410001}
 --- !u!1 &2746306474140459371
 GameObject:
