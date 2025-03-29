@@ -10,5 +10,6 @@ public class Slime : Enemy
     void Update()
     {
         base.Update();
+        ChasePlayer();
     }
 }

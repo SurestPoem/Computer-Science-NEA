@@ -9,8 +9,6 @@ public class GameManager : MonoBehaviour
     public GameObject shopScreen;
     public GameObject deathScreen;
     public GameObject pauseScreen;
-    public bool shopOnDev;
-    public bool deathScreenOnDev;
     [HideInInspector] public bool shopEnabled = false;
     [HideInInspector] public bool deathScreenEnabled = false;
     [HideInInspector] public bool pauseScreenEnabled = false;
@@ -42,8 +40,25 @@ public class GameManager : MonoBehaviour
         // Load the correct scene based on game mode
         string sceneToLoad = (selectedGameType == GameType.Normal) ? "Game" : "Endless";
         SceneManager.LoadScene(sceneToLoad);
-
+        SetDifficultyMultiplier();
         StartCoroutine(LoadScreenUI());
+    }
+
+    public void SetDifficulty(int sliderValue)
+    {
+
+        if (sliderValue == 0)
+        {
+            currentDifficulty = Difficulty.Easy;
+        }
+        else if (sliderValue == 1)
+        {
+            currentDifficulty = Difficulty.Normal;
+        }
+        else
+        {
+            currentDifficulty = Difficulty.Hard;
+        }
     }
 
     public void SetDifficultyMultiplier()
@@ -186,6 +201,7 @@ public class GameManager : MonoBehaviour
     // Quit the game
     public void QuitGame()
     {
+        Debug.Log("Quitting game...");
         // Quit the application
         Application.Quit();
     }
