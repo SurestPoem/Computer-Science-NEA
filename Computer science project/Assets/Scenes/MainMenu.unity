@@ -935,9 +935,9 @@ RectTransform:
   - {fileID: 1148859283}
   m_Father: {fileID: 2105258456}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 225}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: 75}
   m_SizeDelta: {x: 700, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &718177343
@@ -1665,9 +1665,9 @@ RectTransform:
   - {fileID: 128876191}
   m_Father: {fileID: 2105258456}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -225}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: -75}
   m_SizeDelta: {x: 700, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2061198809
@@ -1802,7 +1802,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 800, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2105258457
 MonoBehaviour:
@@ -1854,11 +1854,11 @@ RectTransform:
   - {fileID: 324820286}
   m_Father: {fileID: 2105258456}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 477.99988, y: 0.000015258789}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 64, y: 0}
   m_SizeDelta: {x: 100, y: 600}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &2124916266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1913,7 +1913,7 @@ MonoBehaviour:
       - m_Target: {fileID: 2105258457}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: OnDifficultyChanged
-        m_Mode: 0
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2070,7 +2070,7 @@ PrefabInstance:
     - target: {fileID: 4138617526115567801, guid: 4e21307aba765ee4a9d2c2f458dd2f63, type: 3}
       propertyPath: mainMenuUI
       value: 
-      objectReference: {fileID: 2105258455}
+      objectReference: {fileID: 0}
     - target: {fileID: 4138617526115567801, guid: 4e21307aba765ee4a9d2c2f458dd2f63, type: 3}
       propertyPath: shopScreen
       value: 

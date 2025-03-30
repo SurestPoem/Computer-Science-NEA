@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4791104669449913757}
   - component: {fileID: 6720162663414087205}
-  - component: {fileID: 5230158755437924047}
+  - component: {fileID: 2230388837874675549}
   m_Layer: 0
   m_Name: AlienShotgun
   m_TagString: Gun
@@ -117,7 +117,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5230158755437924047
+--- !u!114 &2230388837874675549
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,12 +126,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5382643019497250915}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3de16d2c29effb9429a72d1f12a1c596, type: 3}
+  m_Script: {fileID: 11500000, guid: beb46f3637394064eab6319e0eabb712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunName: Alien Shotgun
-  damageStat: 40
-  cooldownTime: 2.5
+  gunName: AlienShotgun
+  damageStat: 6
+  cooldownTime: 3.5
   bulletSpeed: 25
   distanceFromPlayer: 0.5
   gunSpriteRenderer: {fileID: 6720162663414087205}
@@ -140,3 +140,5 @@ MonoBehaviour:
   playerTransform: {fileID: 0}
   crosshairTransform: {fileID: 0}
   gunIcon: {fileID: 1489178307, guid: 080b2f62b8ab26e40b6907cb748b5d94, type: 3}
+  numberOfPellets: 7
+  spreadAngle: 25

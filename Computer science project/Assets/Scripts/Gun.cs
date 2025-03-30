@@ -16,14 +16,14 @@ public class Gun : MonoBehaviour
     public Transform muzzlePoint;
     [Header("Misc")]
     public GameObject bulletPrefab;
-    private float timeSinceLastShot = 0f;
+    protected float timeSinceLastShot = 0f;
     
     public Transform playerTransform;
     public Transform crosshairTransform;
     public Sprite gunIcon;
 
 
-    private PlayerControls controls;
+    protected PlayerControls controls;
 
     void Start()
     {
@@ -72,7 +72,7 @@ public class Gun : MonoBehaviour
     }
 
 
-    public void Shoot()
+    public virtual void Shoot()
     {
         if (timeSinceLastShot < cooldownTime)
             return;
