@@ -5,12 +5,9 @@ using UnityEngine.Tilemaps;
 
 public class WalkerGenerator : MonoBehaviour
 {
-    public enum Grid
-    {
-        FLOOR,
-        WALL,
-        EMPTY
-    }
+    public enum Grid { FLOOR, WALL, EMPTY }
+    public enum GenerationMode { RandomWalker, FullGrid }
+    public GenerationMode currentGenerationMode;
 
     public Grid[,] gridHandler;
     public List<WalkerObject> Walkers;
@@ -51,6 +48,8 @@ public class WalkerGenerator : MonoBehaviour
     void InitialiseGrid()
     {
         gridHandler = new Grid[MapWidth, MapHeight];
+
+        // Set all tiles to EMPTY initially
         for (int x = 0; x < gridHandler.GetLength(0); x++)
         {
             for (int y = 0; y < gridHandler.GetLength(1); y++)
@@ -59,8 +58,22 @@ public class WalkerGenerator : MonoBehaviour
             }
         }
 
-        Walkers = new List<WalkerObject>();
+        AddWallBorder(); // Add a wall border around the map
 
+        // Based on the selected mode, either initialize with walkers or a full grid
+        if (currentGenerationMode == GenerationMode.RandomWalker)
+        {
+            Walkers = new List<WalkerObject>();
+            InitializeWalkerMode();
+        }
+        else if (currentGenerationMode == GenerationMode.FullGrid)
+        {
+            InitializeFullGridMode();
+        }
+    }
+
+    void InitializeWalkerMode()
+    {
         // Clamp the start position within the bounds of the grid
         int startX = Mathf.Clamp((int)StartPosition.x, 0, MapWidth - 1);
         int startY = Mathf.Clamp((int)StartPosition.y, 0, MapHeight - 1);
@@ -74,11 +87,31 @@ public class WalkerGenerator : MonoBehaviour
         TileCount++;
 
         // Add the wall border before floor generation
-        AddWallBorder();
+        
         CreateSpawnArea(new Vector2Int((int)StartPosition.x, (int)StartPosition.y));
 
 
         CreateFloors();
+    }
+
+    void InitializeFullGridMode()
+    {
+        CreateSpawnArea(new Vector2Int((int)StartPosition.x, (int)StartPosition.y));
+        for (int x = 1; x < MapWidth - 1; x++) // Skip outer walls
+        {
+            for (int y = 1; y < MapHeight - 1; y++) // Skip outer walls
+            {
+                if (gridHandler[x, y] == Grid.EMPTY)
+                {
+                    gridHandler[x, y] = Grid.FLOOR;
+                    tileMap.SetTile(new Vector3Int(x, y, 0), Floor); // Set floor tile on the tilemap
+                    TileCount++;
+                }
+            }
+        }
+
+        // Create nodes (optional, can be used for pathfinding)
+        CreateNodes();
     }
 
     void CreateFloors()
@@ -379,13 +412,3 @@ public class WalkerGenerator : MonoBehaviour
         }
     }
 }
-
-
-
-/*
- if ((float)TileCount / (float)gridHandler.Length >= FillPercent)
-            {
-                FillEmptyTilesWithWalls(); // This can be placed here if the floor generation is done.
-                yield break; // Exit after floors are completed
-            }
-*/

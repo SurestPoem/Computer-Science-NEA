@@ -180,6 +180,7 @@ public class GameManager : MonoBehaviour
     // Load the main menu
     public void LoadMainMenu()
     {
+        ResetValues();
         // Load the MainMenu scene
         SceneManager.LoadScene("MainMenu");
     }
@@ -196,6 +197,20 @@ public class GameManager : MonoBehaviour
         DisableShop();
         DisableDeathScreen();
         DisablePauseScreen();
+    }
+
+    private void ResetValues()
+    {
+        Time.timeScale = 1f;
+        if (deathScreen != null && deathScreenEnabled == true) DisableDeathScreen();
+        if (shopScreen != null && shopEnabled == true) DisableShop();
+        if (pauseScreen != null && pauseScreenEnabled == true) DisablePauseScreen();
+        shopScreen = null;
+        deathScreen = null;
+        pauseScreen = null;
+        currentDifficulty = Difficulty.Normal;
+        difficultyMultiplier = 1f;
+        selectedGameType = GameType.Normal;
     }
 
     // Quit the game
