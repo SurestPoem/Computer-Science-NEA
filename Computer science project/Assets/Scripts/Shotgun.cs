@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +8,6 @@ public class Shotgun : Gun
     public int numberOfPellets = 5;           // Number of pellets fired
     public float spreadAngle = 15f;           // Spread angle in degrees
 
-    // Override the Shoot method to implement shotgun behavior
     public override void Shoot()
     {
         if (timeSinceLastShot < cooldownTime)
@@ -28,11 +27,16 @@ public class Shotgun : Gun
             // Rotate the shoot direction by the angle offset
             Vector2 pelletDirection = Quaternion.Euler(0, 0, angleOffset) * shootDirection;
 
-            // Create and initialize each bullet
             GameObject bullet = Instantiate(bulletPrefab, muzzlePoint.position, Quaternion.identity);
-            bullet.GetComponent<Bullet>().SetSpeed(bulletSpeed);
-            bullet.GetComponent<Bullet>().SetDirection(pelletDirection);
-            bullet.GetComponent<Bullet>().SetGun(this);  // Pass reference to the shotgun
+            Bullet bulletScript = bullet.GetComponent<Bullet>(); // Get the Bullet component
+
+            if (bulletScript != null)
+            {
+                bulletScript.SetSpeed(bulletSpeed);
+                bulletScript.SetDirection(pelletDirection);
+                bulletScript.SetShooter(Bullet.ShooterType.Player); // ✅ Corrected way
+                bulletScript.SetGun(this);  // Pass reference to the shotgun
+            }
         }
     }
 }

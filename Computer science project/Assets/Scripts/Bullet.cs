@@ -5,6 +5,9 @@ using UnityEngine.Tilemaps;
 
 public class Bullet : MonoBehaviour
 {
+    public enum ShooterType { Player, Enemy }
+    public ShooterType shooter = ShooterType.Player;
+
     public float speed;
     public float bulletLifetime;
     public Vector2 bulletDirection;
@@ -15,19 +18,17 @@ public class Bullet : MonoBehaviour
     {
         // Destroy the bullet after a set time (bulletLifetime)
         Destroy(gameObject, bulletLifetime);
-
     }
 
     void Update()
     {
-        // Move the bullet in the direction it was shot
         transform.Translate(bulletDirection * speed * Time.deltaTime);
     }
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        // If the bullet hits an enemy
-        if (collider.CompareTag("Enemy") && !hasHit)
+        // If the bullet was fired by the player, it should damage enemies
+        if (shooter == ShooterType.Player && collider.CompareTag("Enemy") && !hasHit)
         {
             hasHit = true;
             collider.GetComponent<Enemy>().takeDamage(gun.damageStat);
@@ -35,27 +36,33 @@ public class Bullet : MonoBehaviour
             Debug.Log("Bullet Destroyed - Hit Enemy");
         }
 
+        // If the bullet was fired by an enemy, it should damage the player
+        if (shooter == ShooterType.Enemy && collider.CompareTag("Player") && !hasHit)
+        {
+            hasHit = true;
+            collider.GetComponent<Player>().takeDamage(gun.damageStat);
+            Destroy(gameObject);
+            Debug.Log("Bullet Destroyed - Hit Player");
+        }
+
         // If the bullet hits a wall (TilemapCollider2D)
         if (collider.CompareTag("Wall") || collider.GetComponent<TilemapCollider2D>() != null)
         {
-            HitWall(collider); // Call the method that destroys or handles wall hit behavior
+            HitWall(collider);
         }
     }
 
-    // Method to handle what happens when bullet hits a wall
     protected virtual void HitWall(Collider2D wall)
     {
         Destroy(gameObject);
         Debug.Log("Bullet Destroyed - Hit Wall");
     }
 
-    // Set the direction of the bullet
     public void SetDirection(Vector2 direction)
     {
         bulletDirection = direction;
     }
 
-    // Set the Gun reference
     public void SetGun(Gun gunReference)
     {
         gun = gunReference;
@@ -64,5 +71,10 @@ public class Bullet : MonoBehaviour
     public void SetSpeed(float bulletSpeed)
     {
         speed = bulletSpeed;
+    }
+
+    public void SetShooter(ShooterType shooterType)
+    {
+        shooter = shooterType;
     }
 }

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -84,9 +84,15 @@ public class Gun : MonoBehaviour
 
         // Create and initialize the bullet
         GameObject bullet = Instantiate(bulletPrefab, muzzlePoint.position, Quaternion.identity);
-        bullet.GetComponent<Bullet>().SetSpeed(bulletSpeed);
-        bullet.GetComponent<Bullet>().SetDirection(shootDirection);
-        bullet.GetComponent<Bullet>().SetGun(this); // Pass reference to the gun
+        Bullet bulletScript = bullet.GetComponent<Bullet>(); // Get the Bullet component
+
+        if (bulletScript != null)
+        {
+            bulletScript.SetSpeed(bulletSpeed);
+            bulletScript.SetDirection(shootDirection);
+            bulletScript.SetShooter(Bullet.ShooterType.Player); 
+            bulletScript.SetGun(this);  
+        }
     }
 
 }

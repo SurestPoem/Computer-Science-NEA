@@ -236,7 +236,7 @@ PrefabInstance:
     - target: {fileID: 5099450243057994543, guid: 4f91b8cd17cb2d642a0237fabfb43b6d, type: 3}
       propertyPath: gunShopImage
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6085152753329653356}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -258,6 +258,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4375184120951387185, guid: 4f91b8cd17cb2d642a0237fabfb43b6d, type: 3}
   m_PrefabInstance: {fileID: 1152260084822389607}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6085152753329653356 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6597606609626035467, guid: 4f91b8cd17cb2d642a0237fabfb43b6d, type: 3}
+  m_PrefabInstance: {fileID: 1152260084822389607}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5094670312254202651
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -361,12 +372,23 @@ PrefabInstance:
     - target: {fileID: 5099450243057994543, guid: 4f91b8cd17cb2d642a0237fabfb43b6d, type: 3}
       propertyPath: gunShopImage
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2106716958725805584}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f91b8cd17cb2d642a0237fabfb43b6d, type: 3}
+--- !u!114 &2106716958725805584 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6597606609626035467, guid: 4f91b8cd17cb2d642a0237fabfb43b6d, type: 3}
+  m_PrefabInstance: {fileID: 5094670312254202651}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &8792189133119248170 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4375184120951387185, guid: 4f91b8cd17cb2d642a0237fabfb43b6d, type: 3}
@@ -475,12 +497,23 @@ PrefabInstance:
     - target: {fileID: 5099450243057994543, guid: 4f91b8cd17cb2d642a0237fabfb43b6d, type: 3}
       propertyPath: gunShopImage
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4071371924294162806}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f91b8cd17cb2d642a0237fabfb43b6d, type: 3}
+--- !u!114 &4071371924294162806 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6597606609626035467, guid: 4f91b8cd17cb2d642a0237fabfb43b6d, type: 3}
+  m_PrefabInstance: {fileID: 7137927717441907837}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &6897480215643461708 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4375184120951387185, guid: 4f91b8cd17cb2d642a0237fabfb43b6d, type: 3}

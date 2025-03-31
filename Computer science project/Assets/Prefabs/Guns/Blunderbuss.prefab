@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1082853091641088832}
   - component: {fileID: 1228616720183202398}
-  - component: {fileID: 8401928195240434085}
+  - component: {fileID: -6805099211194530867}
   m_Layer: 0
   m_Name: Blunderbuss
   m_TagString: Gun
@@ -86,7 +86,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8401928195240434085
+--- !u!114 &-6805099211194530867
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,20 +95,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 3683310747538838024}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3de16d2c29effb9429a72d1f12a1c596, type: 3}
+  m_Script: {fileID: 11500000, guid: beb46f3637394064eab6319e0eabb712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gunName: Blunderbuss
-  damageStat: 40
-  cooldownTime: 2.5
-  bulletSpeed: 50
+  damageStat: 15
+  cooldownTime: 1.8
+  bulletSpeed: 7
   distanceFromPlayer: 0.4
   gunSpriteRenderer: {fileID: 1228616720183202398}
   muzzlePoint: {fileID: 3297781797926293310}
-  bulletPrefab: {fileID: 5838070477860344463, guid: b70a5f348273ebc439b33cd082354732, type: 3}
+  bulletPrefab: {fileID: 3683310747538838024}
   playerTransform: {fileID: 0}
   crosshairTransform: {fileID: 0}
   gunIcon: {fileID: 991607640, guid: 8526b5feb3d867c44b7b4d4fb3806968, type: 3}
+  numberOfPellets: 8
+  spreadAngle: 40
 --- !u!1 &6286081907487505515
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public Difficulty currentDifficulty;
     public float difficultyMultiplier;
 
-    public enum GameType { Normal, Endless }
+    public enum GameType { Normal, Endless, Tutorial }
     public GameType selectedGameType;  // Hold the player's selected game mode
 
     private void Awake()
@@ -174,7 +174,8 @@ public class GameManager : MonoBehaviour
     // Restart the game
     public void RestartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        ResetValues();
+        StartGame((int)selectedGameType);
     }
 
     // Load the main menu
@@ -183,12 +184,14 @@ public class GameManager : MonoBehaviour
         ResetValues();
         // Load the MainMenu scene
         SceneManager.LoadScene("MainMenu");
+        
+
     }
 
     IEnumerator LoadScreenUI()
     {
         // Add a delay before finding the UI screens
-        yield return new WaitForSeconds(0.0001f); // Wait for 0.1 seconds
+        yield return new WaitForSeconds(0.01f); // Wait for 0.1 seconds
 
         shopScreen = GameObject.FindGameObjectWithTag("ShopScreen");
         deathScreen = GameObject.FindGameObjectWithTag("DeathScreen");
@@ -208,9 +211,7 @@ public class GameManager : MonoBehaviour
         shopScreen = null;
         deathScreen = null;
         pauseScreen = null;
-        currentDifficulty = Difficulty.Normal;
         difficultyMultiplier = 1f;
-        selectedGameType = GameType.Normal;
     }
 
     // Quit the game
@@ -221,5 +222,3 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 }
-
-
