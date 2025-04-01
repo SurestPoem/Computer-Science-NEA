@@ -110,7 +110,17 @@ public class ShopNode : MonoBehaviour
         }
         else
         {
-            currentSellableType = (Random.Range(0, 2) == 0) ? SellableType.Gun : SellableType.Upgrade;
+            // 2/3 chance for Gun, 1/3 chance for Upgrade
+            int randomChoice = Random.Range(0, 3);  // Random value between 0 and 2
+
+            if (randomChoice < 2)  // 2/3 chance for Gun (randomChoice 0 or 1)
+            {
+                currentSellableType = SellableType.Gun;
+            }
+            else  // 1/3 chance for Upgrade (randomChoice 2)
+            {
+                currentSellableType = SellableType.Upgrade;
+            }
         }
 
         if (currentSellableType == SellableType.Gun)

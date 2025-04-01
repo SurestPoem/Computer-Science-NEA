@@ -31,6 +31,26 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);  // If a duplicate exists, destroy it
         }
+
+        // Subscribe to scene loaded event to reassign UI elements
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Ensure the UI elements are reinitialized after a scene is loaded
+        
+        StartCoroutine(InitializeUI());
+
+        if (shopScreen == null || deathScreen == null || pauseScreen == null)
+        {
+            Debug.LogError("Some UI screens are missing!");
+        }
+
+        // Reset UI states (ensure they're all disabled at scene load)
+        DisableShop();
+        DisableDeathScreen();
+        DisablePauseScreen();
     }
 
     public void StartGame(int gameMode)
@@ -41,12 +61,10 @@ public class GameManager : MonoBehaviour
         string sceneToLoad = (selectedGameType == GameType.Normal) ? "Game" : "Endless";
         SceneManager.LoadScene(sceneToLoad);
         SetDifficultyMultiplier();
-        StartCoroutine(LoadScreenUI());
     }
 
     public void SetDifficulty(int sliderValue)
     {
-
         if (sliderValue == 0)
         {
             currentDifficulty = Difficulty.Easy;
@@ -184,22 +202,37 @@ public class GameManager : MonoBehaviour
         ResetValues();
         // Load the MainMenu scene
         SceneManager.LoadScene("MainMenu");
-        
-
     }
 
-    IEnumerator LoadScreenUI()
+    IEnumerator InitializeUI()
     {
-        // Add a delay before finding the UI screens
-        yield return new WaitForSeconds(0.01f); // Wait for 0.1 seconds
+        yield return new WaitForSeconds(0.1f);
+        if (shopScreen == null)
+        {
+            shopScreen = GameObject.FindGameObjectWithTag("ShopScreen");
+            if (shopScreen == null)
+            {
+                Debug.LogWarning("ShopScreen is missing.");
+            }
+        }
 
-        shopScreen = GameObject.FindGameObjectWithTag("ShopScreen");
-        deathScreen = GameObject.FindGameObjectWithTag("DeathScreen");
-        pauseScreen = GameObject.FindGameObjectWithTag("PauseScreen");
+        if (deathScreen == null)
+        {
+            deathScreen = GameObject.FindGameObjectWithTag("DeathScreen");
+            if (deathScreen == null)
+            {
+                Debug.LogWarning("DeathScreen is missing.");
+            }
+        }
 
-        DisableShop();
-        DisableDeathScreen();
-        DisablePauseScreen();
+        if (pauseScreen == null)
+        {
+            pauseScreen = GameObject.FindGameObjectWithTag("PauseScreen");
+            if (pauseScreen == null)
+            {
+                Debug.LogWarning("PauseScreen is missing.");
+            }
+        }
     }
 
     private void ResetValues()

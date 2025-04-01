@@ -229,6 +229,7 @@ public class Player : Entity
     public override void Die()
     {
         Debug.Log("Player has Died");
+        IsDead = true;
         if (GameManager.Instance != null)
         {
             GameManager.Instance.EnableDeathScreen();

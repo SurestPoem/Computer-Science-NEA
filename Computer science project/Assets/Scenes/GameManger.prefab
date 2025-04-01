@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4138617526115567801}
   m_Layer: 0
   m_Name: GameManger
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,8 +47,6 @@ MonoBehaviour:
   shopScreen: {fileID: 1411759701013263079, guid: 0825876a7d68ac34dbf1bda6eeebc501, type: 3}
   deathScreen: {fileID: 7655399128826083664, guid: ef7478af91fb6974cafece1501453c46, type: 3}
   pauseScreen: {fileID: 2820563028155304822, guid: 6bc30264e5fb3a449addb3d5f6f2b64c, type: 3}
-  shopOnDev: 0
-  deathScreenOnDev: 0
   shopEnabled: 0
   deathScreenEnabled: 0
   pauseScreenEnabled: 0

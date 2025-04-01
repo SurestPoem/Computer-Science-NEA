@@ -25,7 +25,7 @@ public class Gun : MonoBehaviour
 
     protected PlayerControls controls;
 
-    void Start()
+    void Awake()
     {
         playerTransform = FindObjectOfType<Player>().transform;
         controls = new PlayerControls();

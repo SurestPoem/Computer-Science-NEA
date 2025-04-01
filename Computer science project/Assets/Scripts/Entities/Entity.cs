@@ -18,10 +18,10 @@ public class Entity : MonoBehaviour
     [Header("Regen-rate settings")]
     public float regenRate = 0f;
     protected float regenTimer = 0f;
-
     [Header("Misc")]
     public Player player;// Reference to Player class
     public bool IsFreeze;
+    public bool IsDead;
     public SpriteRenderer spriteRenderer;
 
 
@@ -33,11 +33,14 @@ public class Entity : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (health <= 0)
+        if (!IsDead)
         {
-            Die();
-            Debug.Log(name + " health at 0");
-        }
+            if (health <= 0)
+            {
+                Die();
+                Debug.Log(name + " health at 0");
+            }
+        }        
     }
 
 
@@ -49,20 +52,25 @@ public class Entity : MonoBehaviour
 
     public void takeDamage(float damageAmount)
     {
-        health -= damageAmount;
-        health = Mathf.Clamp(health, 0f, maxHealth); // Ensure health doesn't go below 0
-        StartCoroutine(DamageVisual());
-        Debug.Log(name + " took damage: " + damageAmount + ", Remaining health: " + health);  // Debugging line
+        if (!IsDead)
+        {
+            health -= damageAmount;
+            health = Mathf.Clamp(health, 0f, maxHealth); // Ensure health doesn't go below 0
+            StartCoroutine(DamageVisual());
+            Debug.Log(name + " took damage: " + damageAmount + ", Remaining health: " + health);  // Debugging line
 
             if (health <= 0f)
             {
                 Die();
             }
+        }
+        
     }
 
     public virtual void Die()
     {
         Destroy(gameObject); // Destroy the enemy
+        IsDead = true;
         Debug.Log(name + "Dead");
         player.IncreaseKills();
     }

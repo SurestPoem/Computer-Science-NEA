@@ -34,7 +34,7 @@ RectTransform:
   - {fileID: 2577970528870560546}
   - {fileID: 584337253755126558}
   - {fileID: 8469506256074525249}
-  - {fileID: 2595472937742548263}
+  - {fileID: 2642339566761066889}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -105,7 +105,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!1001 &849250120717793249
+--- !u!1001 &821525712851635023
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -147,7 +147,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3444651863664741062, guid: 7456fc9048d48ec43934a028eda8fc6a, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -2
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3444651863664741062, guid: 7456fc9048d48ec43934a028eda8fc6a, type: 3}
       propertyPath: m_SizeDelta.y
@@ -183,7 +183,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3444651863664741062, guid: 7456fc9048d48ec43934a028eda8fc6a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3444651863664741062, guid: 7456fc9048d48ec43934a028eda8fc6a, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -205,19 +205,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: HUD Panel
       objectReference: {fileID: 0}
-    - target: {fileID: 6761538623640109271, guid: 7456fc9048d48ec43934a028eda8fc6a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7456fc9048d48ec43934a028eda8fc6a, type: 3}
---- !u!224 &2595472937742548263 stripped
+--- !u!224 &2642339566761066889 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3444651863664741062, guid: 7456fc9048d48ec43934a028eda8fc6a, type: 3}
-  m_PrefabInstance: {fileID: 849250120717793249}
+  m_PrefabInstance: {fileID: 821525712851635023}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &998696021708481801
 PrefabInstance:
@@ -336,6 +332,10 @@ PrefabInstance:
     - target: {fileID: 1411759701013263079, guid: 0825876a7d68ac34dbf1bda6eeebc501, type: 3}
       propertyPath: m_Name
       value: ShopManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 1411759701013263079, guid: 0825876a7d68ac34dbf1bda6eeebc501, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6492054199357397051, guid: 0825876a7d68ac34dbf1bda6eeebc501, type: 3}
       propertyPath: m_Pivot.x
@@ -518,6 +518,10 @@ PrefabInstance:
     - target: {fileID: 7655399128826083664, guid: ef7478af91fb6974cafece1501453c46, type: 3}
       propertyPath: m_Name
       value: DeathScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 7655399128826083664, guid: ef7478af91fb6974cafece1501453c46, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
