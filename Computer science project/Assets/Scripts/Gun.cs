@@ -89,6 +89,7 @@ public class Gun : MonoBehaviour
         if (bulletScript != null)
         {
             bulletScript.SetSpeed(bulletSpeed);
+            bulletScript.SetDamage(damageStat);
             bulletScript.SetDirection(shootDirection);
             bulletScript.SetShooter(Bullet.ShooterType.Player); 
             bulletScript.SetGun(this);  

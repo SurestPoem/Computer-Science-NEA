@@ -13,6 +13,7 @@ public class Bullet : MonoBehaviour
     public Vector2 bulletDirection;
     private Gun gun;  // Reference to the Gun
     private bool hasHit = false;
+    public float damage;
 
     protected virtual void Start()
     {
@@ -31,7 +32,7 @@ public class Bullet : MonoBehaviour
         if (shooter == ShooterType.Player && collider.CompareTag("Enemy") && !hasHit)
         {
             hasHit = true;
-            collider.GetComponent<Enemy>().takeDamage(gun.damageStat);
+            collider.GetComponent<Enemy>().takeDamage(damage);
             Destroy(gameObject);
             Debug.Log("Bullet Destroyed - Hit Enemy");
         }
@@ -40,7 +41,7 @@ public class Bullet : MonoBehaviour
         if (shooter == ShooterType.Enemy && collider.CompareTag("Player") && !hasHit)
         {
             hasHit = true;
-            collider.GetComponent<Player>().takeDamage(gun.damageStat);
+            collider.GetComponent<Player>().takeDamage(damage);
             Destroy(gameObject);
             Debug.Log("Bullet Destroyed - Hit Player");
         }
@@ -76,5 +77,10 @@ public class Bullet : MonoBehaviour
     public void SetShooter(ShooterType shooterType)
     {
         shooter = shooterType;
+    }
+
+    public void SetDamage(float bulletDamage)
+    {
+        damage = bulletDamage;
     }
 }
