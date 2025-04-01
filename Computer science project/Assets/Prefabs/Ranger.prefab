@@ -91,11 +91,11 @@ MonoBehaviour:
   regenRate: 0
   player: {fileID: 0}
   IsFreeze: 0
+  spriteRenderer: {fileID: 6260687641150642613}
   chaseDistance: 0
   collideDamage: 0
   baseCollideDamage: 0
   damageCooldown: 1
-  EnemySpriteRenderer: {fileID: 6260687641150642613}
   lootTable:
   - itemPrefab: {fileID: 6650102648760111512, guid: ec926851760277f45bdc0a18f6181808, type: 3}
     dropChance: 100
@@ -108,11 +108,14 @@ MonoBehaviour:
   path: []
   bulletPrefab: {fileID: 3610556043354662966, guid: 43a7be39bfa09734dba7a1ad0237e9fe, type: 3}
   firePoint: {fileID: 6522820975939105723}
-  shootCooldown: 3
-  minAttackRange: 2
+  minAttackRange: 4
   maxAttackRange: 7
-  bulletSpeed: 3
-  rangedDamage: 15
+  shootCooldown: 0
+  baseShootCooldown: 3
+  bulletSpeed: 0
+  baseBulletSpeed: 5
+  rangedDamage: 0
+  baseRangedDamage: 18
 --- !u!95 &6948329416515531148
 Animator:
   serializedVersion: 5

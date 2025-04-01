@@ -28,18 +28,18 @@ public class WalkerGenerator : MonoBehaviour
     public List<Node> nodeList;
     public GameObject nodeParent;
 
+    public Player playerTransform;
     public Enemy enemy;
 
     private bool canDrawGizmos;
 
     // Add a public variable for the start position
     public Vector2 StartPosition = new Vector2(15, 15);
-    public Vector2 spawnAreaMin = new Vector2(5, 5);  // Minimum bounds (bottom-left corner)
-    public Vector2 spawnAreaMax = new Vector2(10, 10); // Maximum bounds (top-right corner)
 
     // Start is called before the first frame update
     void Awake()
     {
+        playerTransform = FindObjectOfType<Player>();
         MapWidth = playableMapWidth + 2;
         MapHeight = playableMapHeight + 2;
         InitialiseGrid();
@@ -64,11 +64,15 @@ public class WalkerGenerator : MonoBehaviour
         if (currentGenerationMode == GenerationMode.RandomWalker)
         {
             Walkers = new List<WalkerObject>();
+            SetRandomStartPosition();
             InitializeWalkerMode();
+            playerTransform.transform.position = new Vector3(StartPosition.x, StartPosition.y, 0);
         }
         else if (currentGenerationMode == GenerationMode.FullGrid)
         {
+            SetRandomStartPosition();
             InitializeFullGridMode();
+            playerTransform.transform.position = new Vector3(StartPosition.x, StartPosition.y, 0);
         }
     }
 
@@ -96,7 +100,6 @@ public class WalkerGenerator : MonoBehaviour
 
     void InitializeFullGridMode()
     {
-        CreateSpawnArea(new Vector2Int((int)StartPosition.x, (int)StartPosition.y));
         for (int x = 1; x < MapWidth - 1; x++) // Skip outer walls
         {
             for (int y = 1; y < MapHeight - 1; y++) // Skip outer walls
@@ -312,6 +315,16 @@ public class WalkerGenerator : MonoBehaviour
                 }
             }
         }
+    }
+
+    void SetRandomStartPosition()
+    {
+        float startx = Random.Range(3, playableMapWidth - 2);
+        float starty = Random.Range(3, playableMapHeight - 2);
+
+        StartPosition = new Vector2(startx, starty);
+
+        CreateSpawnArea(new Vector2Int((int)startx, (int)starty));
     }
 
     Vector2 GetDirection()

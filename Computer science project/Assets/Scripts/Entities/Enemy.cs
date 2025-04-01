@@ -10,7 +10,6 @@ public class Enemy : Entity
     protected Transform playerTransform;
     public float damageCooldown = 1f; // Cooldown time
     private float lastDamageTime = -1f;
-    public SpriteRenderer EnemySpriteRenderer;
     public List<LootItem> lootTable = new List<LootItem>();
     public GameObject deadBodyPrefab;
     [Header("Pathfinding things")]
@@ -43,11 +42,11 @@ public class Enemy : Entity
 
             if (direction.x < 0)
             {
-                EnemySpriteRenderer.flipX = true; // Flip the sprite
+                spriteRenderer.flipX = true; // Flip the sprite
             }
             else
             {
-                EnemySpriteRenderer.flipX = false; // Reset flip
+                spriteRenderer.flipX = false; // Reset flip
             }
         }
     }

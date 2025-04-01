@@ -6,7 +6,8 @@ using UnityEngine.Tilemaps;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject enemyPrefab;
+    public List<EnemySpawnItem> enemyTypes = new List<EnemySpawnItem>();
+    [SerializeField] public GameObject enemyPrefab;
     public float spawnRate = 2f;
     private float nextSpawnTime = 0f;
     public int enemiesPerSpawn = 3;
@@ -16,46 +17,48 @@ public class EnemySpawner : MonoBehaviour
     // Reference to the WalkerGenerator (adjust the reference to match your game)
     public WalkerGenerator walkerGenerator;
 
-    void Start()
+    void Awake()
     {
+        walkerGenerator = FindObjectOfType<WalkerGenerator>();
         spawnRate = spawnRate / GameManager.Instance.difficultyMultiplier;
         enemiesPerSpawn = Mathf.RoundToInt(enemiesPerSpawn * GameManager.Instance.difficultyMultiplier);
+        nextSpawnTime = Time.time + spawnRate;
     }
 
     void Update()
     {
         if (Time.time >= nextSpawnTime)
         {
-            SpawnEnemies();
+            StartCoroutine(SpawnEnemies());
             nextSpawnTime = Time.time + spawnRate;
         }
     }
 
-    public void SpawnEnemies()
+    public IEnumerator SpawnEnemies()
     {
+        PickEnemyType();
+        int maxAttempts = walkerGenerator.MapWidth * walkerGenerator.MapHeight; // Ensure this is set correctly
+
         for (int i = 0; i < enemiesPerSpawn; i++)
         {
-            // Try to spawn the enemy
-            Vector3 spawnPosition = GetValidSpawnPosition();
+            Vector3 spawnPosition = GetValidSpawnPosition(maxAttempts);
 
             if (spawnPosition != Vector3.zero) // If a valid spawn position was found
             {
                 Debug.Log("Spawning enemy at: " + spawnPosition);
                 Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
             }
-            else
-            {
-                //No code nessisary here
-            }
+            //Waits a short time before spawning the next enemy
+            yield return new WaitForSeconds(0.1f);
         }
     }
 
     // Recursively get a valid spawn position
-    Vector3 GetValidSpawnPosition(int maxAttempts = 10)
+    Vector3 GetValidSpawnPosition(int maxAttempts)
     {
         if (maxAttempts <= 0)
         {
-            return Vector3.zero; // No valid position found, return a "failure" value
+            return Vector3.zero; // No valid position found
         }
 
         Vector3Int spawnTilePosition = new Vector3Int(
@@ -75,6 +78,26 @@ public class EnemySpawner : MonoBehaviour
         {
             // Recurse with one fewer attempt
             return GetValidSpawnPosition(maxAttempts - 1);
+        }
+    }
+
+    public void PickEnemyType()
+    {
+        float totalChance = 0;
+        foreach (EnemySpawnItem enemy in enemyTypes)
+        {
+            totalChance += enemy.spawnChance;
+        }
+        float randomValue = Random.Range(0, totalChance);
+        foreach (EnemySpawnItem enemy in enemyTypes)
+        {
+            if (randomValue < enemy.spawnChance)
+            {
+                enemyPrefab = enemy.enemyPrefab;
+                enemiesPerSpawn = enemy.spawnAmount;
+                return;
+            }
+            randomValue -= enemy.spawnChance;
         }
     }
 }

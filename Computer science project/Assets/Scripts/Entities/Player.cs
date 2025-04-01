@@ -10,7 +10,6 @@ public class Player : Entity
     private Vector2 moveInput;
     private Animator animator;
     private PlayerControls controls;
-    public SpriteRenderer playerSpriteRenderer;
     public CrosshairController crosshair;
 
     public int killCount = 0;
@@ -53,11 +52,11 @@ public class Player : Entity
 
             if (moveInput.x < 0)
             {
-                playerSpriteRenderer.flipX = true;
+                spriteRenderer.flipX = true;
             }
             else if (moveInput.x > 0)
             {
-                playerSpriteRenderer.flipX = false;
+                spriteRenderer.flipX = false;
             }
 
         }
@@ -89,6 +88,21 @@ public class Player : Entity
         }
     }
 
+    public void StartWithGun()
+    {
+        GameObject newGunObject = Instantiate(avalibleWeapons[currentGunIndex], transform.position, Quaternion.identity, transform);
+        currentGun = newGunObject.GetComponent<Gun>();
+
+        GameObject crosshair = GameObject.FindGameObjectWithTag("Crosshair");
+        if (crosshair != null)
+        {
+            currentGun.crosshairTransform = crosshair.transform;
+        }
+        else
+        {
+            Debug.LogError("Crosshair not found!");
+        }
+    }
     public void PlayerOpenShop()
     {
         if (controls.Player.OpenShop.triggered)
@@ -267,6 +281,8 @@ public class Player : Entity
         animator = GetComponent<Animator>();
         controls = new PlayerControls();
         controls.Player.Enable(); // Enable the controls
+        crosshair = FindObjectOfType<CrosshairController>();
+        StartWithGun();
     }
 
     public void DevButton()

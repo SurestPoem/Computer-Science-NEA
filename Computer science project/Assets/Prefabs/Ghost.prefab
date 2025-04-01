@@ -58,11 +58,11 @@ MonoBehaviour:
   regenRate: 0
   player: {fileID: 0}
   IsFreeze: 0
+  spriteRenderer: {fileID: 0}
   chaseDistance: 0
   collideDamage: 0
   baseCollideDamage: 2
   damageCooldown: 3
-  EnemySpriteRenderer: {fileID: 2244072306592529510}
   lootTable:
   - itemPrefab: {fileID: 4470593630696399813, guid: 543c5295256608942aca2edd59898c95, type: 3}
     dropChance: 100
@@ -76,7 +76,7 @@ MonoBehaviour:
     dropChance: 5
   - itemPrefab: {fileID: 5093429702563864004, guid: 70ba677663d281144966b9e9382cbeaa, type: 3}
     dropChance: 16.6
-  deadBodyPrefab: {fileID: 0}
+  deadBodyPrefab: {fileID: 1620135634515618181}
   currentNode: {fileID: 0}
   path: []
 --- !u!95 &8340492282843029916

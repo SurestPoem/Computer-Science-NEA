@@ -22,6 +22,7 @@ public class Entity : MonoBehaviour
     [Header("Misc")]
     public Player player;// Reference to Player class
     public bool IsFreeze;
+    public SpriteRenderer spriteRenderer;
 
 
     // Start is called before the first frame update
@@ -50,6 +51,7 @@ public class Entity : MonoBehaviour
     {
         health -= damageAmount;
         health = Mathf.Clamp(health, 0f, maxHealth); // Ensure health doesn't go below 0
+        StartCoroutine(DamageVisual());
         Debug.Log(name + " took damage: " + damageAmount + ", Remaining health: " + health);  // Debugging line
 
             if (health <= 0f)
@@ -63,6 +65,16 @@ public class Entity : MonoBehaviour
         Destroy(gameObject); // Destroy the enemy
         Debug.Log(name + "Dead");
         player.IncreaseKills();
+    }
+
+    protected IEnumerator DamageVisual()
+    {
+        //Adds light transparent red to the sprite to show damage
+        spriteRenderer.color = new Color(0.8f, 0.1f, 0.1f, 1);
+
+        yield return new WaitForSeconds(0.25f);
+
+        spriteRenderer.color = Color.white;
     }
 
     protected virtual void Initialise()

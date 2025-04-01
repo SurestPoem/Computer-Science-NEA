@@ -59,11 +59,11 @@ MonoBehaviour:
   regenRate: 0
   player: {fileID: 0}
   IsFreeze: 0
+  spriteRenderer: {fileID: 6260687641150642613}
   chaseDistance: 0
   collideDamage: 0
   baseCollideDamage: 5
   damageCooldown: 2
-  EnemySpriteRenderer: {fileID: 6260687641150642613}
   lootTable:
   - itemPrefab: {fileID: 4470593630696399813, guid: 543c5295256608942aca2edd59898c95, type: 3}
     dropChance: 100

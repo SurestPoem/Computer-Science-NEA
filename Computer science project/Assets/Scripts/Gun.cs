@@ -52,22 +52,17 @@ public class Gun : MonoBehaviour
 
     public void RotateAndPositionGun(Vector3 crosshairPosition)
     {
-        crosshairPosition.z = 0; // Keep it on the correct plane
+        crosshairPosition.z = 0;
 
-        // Calculate direction from player to the crosshair
         Vector3 direction = crosshairPosition - playerTransform.position;
-        direction.Normalize(); // Normalize to get direction only
+        direction.Normalize();
 
-        // Set the gun's position based on distance from the player
         transform.position = playerTransform.position + direction * distanceFromPlayer;
 
-        // Calculate the angle between the gun and the crosshair
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        // Apply the rotation to the gun
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
-        // Flip the gun sprite when moving left
         gunSpriteRenderer.flipY = direction.x < 0;
     }
 
