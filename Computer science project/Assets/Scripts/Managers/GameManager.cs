@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public bool shopEnabled = false;
     [HideInInspector] public bool deathScreenEnabled = false;
     [HideInInspector] public bool pauseScreenEnabled = false;
-    public enum Difficulty { Easy, Normal, Hard }
+    public enum Difficulty { Easy, Normal, Hard, Baby }   
     public Difficulty currentDifficulty;
     public float difficultyMultiplier;
 
@@ -31,26 +31,6 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);  // If a duplicate exists, destroy it
         }
-
-        // Subscribe to scene loaded event to reassign UI elements
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        // Ensure the UI elements are reinitialized after a scene is loaded
-        
-        StartCoroutine(InitializeUI());
-
-        if (shopScreen == null || deathScreen == null || pauseScreen == null)
-        {
-            Debug.LogError("Some UI screens are missing!");
-        }
-
-        // Reset UI states (ensure they're all disabled at scene load)
-        DisableShop();
-        DisableDeathScreen();
-        DisablePauseScreen();
     }
 
     public void StartGame(int gameMode)
@@ -58,8 +38,9 @@ public class GameManager : MonoBehaviour
         selectedGameType = (GameType)gameMode;
 
         // Load the correct scene based on game mode
-        string sceneToLoad = (selectedGameType == GameType.Normal) ? "Game" : "Endless";
+        string sceneToLoad = (selectedGameType == GameType.Normal) ? "Game" : (selectedGameType == GameType.Endless) ? "Endless" : "Tutorial";
         SceneManager.LoadScene(sceneToLoad);
+        StartCoroutine(InitializeUI());
         SetDifficultyMultiplier();
     }
 
@@ -73,7 +54,7 @@ public class GameManager : MonoBehaviour
         {
             currentDifficulty = Difficulty.Normal;
         }
-        else
+        else if (sliderValue == 2)
         {
             currentDifficulty = Difficulty.Hard;
         }
@@ -91,6 +72,25 @@ public class GameManager : MonoBehaviour
                 break;
             case Difficulty.Hard:
                 difficultyMultiplier = 1.15f;
+                break;
+            case Difficulty.Baby:
+                difficultyMultiplier = 0.1f;
+                break;
+        }
+    }
+
+    public void AddDifficultyMultiplier()
+    {
+        switch (currentDifficulty)
+        {
+            case Difficulty.Easy:
+                difficultyMultiplier += 0.02f;
+                break;
+            case Difficulty.Normal:
+                difficultyMultiplier += 0.03f;
+                break;
+            case Difficulty.Hard:
+                difficultyMultiplier += 0.02f;
                 break;
         }
     }
@@ -193,7 +193,9 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         ResetValues();
-        StartGame((int)selectedGameType);
+        // Reload the current scene
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        StartCoroutine(InitializeUI());
     }
 
     // Load the main menu
@@ -206,10 +208,11 @@ public class GameManager : MonoBehaviour
 
     IEnumerator InitializeUI()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.01f);        
         if (shopScreen == null)
         {
             shopScreen = GameObject.FindGameObjectWithTag("ShopScreen");
+            DisableShop();
             if (shopScreen == null)
             {
                 Debug.LogWarning("ShopScreen is missing.");
@@ -219,6 +222,7 @@ public class GameManager : MonoBehaviour
         if (deathScreen == null)
         {
             deathScreen = GameObject.FindGameObjectWithTag("DeathScreen");
+            DisableDeathScreen();
             if (deathScreen == null)
             {
                 Debug.LogWarning("DeathScreen is missing.");
@@ -228,6 +232,7 @@ public class GameManager : MonoBehaviour
         if (pauseScreen == null)
         {
             pauseScreen = GameObject.FindGameObjectWithTag("PauseScreen");
+            DisablePauseScreen();
             if (pauseScreen == null)
             {
                 Debug.LogWarning("PauseScreen is missing.");

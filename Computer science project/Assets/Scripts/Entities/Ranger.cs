@@ -21,7 +21,6 @@ public class Ranger : Enemy
     {
         base.Update();
         HandleMovement();
-        AttemptShoot();
     }
 
     private void HandleMovement()
@@ -39,7 +38,11 @@ public class Ranger : Enemy
             // Too far -> Move closer
             ChasePlayer();
         }
-        // If within range, stay in place and attack
+
+        else if (distanceToPlayer >= minAttackRange && distanceToPlayer <= maxAttackRange)
+        {
+            AttemptShoot();
+        }
     }
 
     private void AttemptShoot()

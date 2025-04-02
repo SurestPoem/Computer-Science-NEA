@@ -20,9 +20,10 @@ public class EnemySpawner : MonoBehaviour
     void Awake()
     {
         walkerGenerator = FindObjectOfType<WalkerGenerator>();
+        tileMap = FindObjectOfType<Tilemap>();
         spawnRate = spawnRate / GameManager.Instance.difficultyMultiplier;
         enemiesPerSpawn = Mathf.RoundToInt(enemiesPerSpawn * GameManager.Instance.difficultyMultiplier);
-        nextSpawnTime = Time.time + spawnRate;
+        nextSpawnTime = 3;
     }
 
     void Update()
@@ -99,5 +100,6 @@ public class EnemySpawner : MonoBehaviour
             }
             randomValue -= enemy.spawnChance;
         }
+        enemiesPerSpawn = Mathf.RoundToInt(enemiesPerSpawn * GameManager.Instance.difficultyMultiplier);
     }
 }

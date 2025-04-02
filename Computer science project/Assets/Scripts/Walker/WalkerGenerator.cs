@@ -45,7 +45,7 @@ public class WalkerGenerator : MonoBehaviour
         InitialiseGrid();
     }
 
-    void InitialiseGrid()
+    public void InitialiseGrid()
     {
         gridHandler = new Grid[MapWidth, MapHeight];
 
@@ -58,11 +58,10 @@ public class WalkerGenerator : MonoBehaviour
             }
         }
 
-        AddWallBorder(); // Add a wall border around the map
-
         // Based on the selected mode, either initialize with walkers or a full grid
         if (currentGenerationMode == GenerationMode.RandomWalker)
         {
+            AddWallBorder();
             Walkers = new List<WalkerObject>();
             SetRandomStartPosition();
             InitializeWalkerMode();
@@ -70,6 +69,7 @@ public class WalkerGenerator : MonoBehaviour
         }
         else if (currentGenerationMode == GenerationMode.FullGrid)
         {
+            AddWallBorder();
             SetRandomStartPosition();
             InitializeFullGridMode();
             playerTransform.transform.position = new Vector3(StartPosition.x, StartPosition.y, 0);
@@ -91,7 +91,7 @@ public class WalkerGenerator : MonoBehaviour
         TileCount++;
 
         // Add the wall border before floor generation
-        
+
         CreateSpawnArea(new Vector2Int((int)StartPosition.x, (int)StartPosition.y));
 
 
@@ -179,7 +179,7 @@ public class WalkerGenerator : MonoBehaviour
     }
 
     void FillEmptyTilesWithWalls()
-    {        
+    {
         // Loop through the entire grid and place walls on empty tiles
         for (int x = 0; x < gridHandler.GetLength(0); x++)
         {
@@ -291,7 +291,7 @@ public class WalkerGenerator : MonoBehaviour
                 }
             }
         }
-        
+
     }
 
     void CreateSpawnArea(Vector2Int center)
@@ -340,6 +340,20 @@ public class WalkerGenerator : MonoBehaviour
 
         // Pick a random direction
         return directions[Random.Range(0, directions.Count)];
+    }
+
+    public void ResetGrid()  //Clears the tilemap and resets the grid, then regenerates the grid
+    {
+        foreach (Node node in nodeList)
+        {
+            Destroy(node.gameObject);
+        }
+        nodeList.Clear();
+        canDrawGizmos = false;
+        tileMap.ClearAllTiles();
+        TileCount = 0;
+
+        InitialiseGrid();
     }
 
 
@@ -396,7 +410,7 @@ public class WalkerGenerator : MonoBehaviour
 
     void ConnectNodes(Node from, Node to)
     {
-        if(from == to) { return; }
+        if (from == to) { return; }
 
         from.connections.Add(to);
     }

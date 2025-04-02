@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7101400021507706911}
   - component: {fileID: 6942600000915892754}
-  - component: {fileID: 6042744454689238428}
+  - component: {fileID: 4617533240276648997}
   m_Layer: 0
   m_Name: SMG
   m_TagString: Gun
@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -15.550374, y: -0.8115023, z: -0.01484375}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.0625}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.0625}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3388511552435612540}
@@ -75,18 +75,18 @@ SpriteRenderer:
   m_SortingLayerID: 384795743
   m_SortingLayer: 4
   m_SortingOrder: 2
-  m_Sprite: {fileID: -200009849, guid: a1ed48ab091055840996b14c47a79c29, type: 3}
+  m_Sprite: {fileID: -1822612709, guid: d3ef9835cac7934479a3cb216e7cb06e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.44, y: 0.29}
+  m_Size: {x: 0.4, y: 0.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6042744454689238428
+--- !u!114 &4617533240276648997
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,12 +95,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1713014761418437074}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3de16d2c29effb9429a72d1f12a1c596, type: 3}
+  m_Script: {fileID: 11500000, guid: 670fcbeb5b05cf444bf89c0b48901735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunName: SMG
-  damageStat: 7
-  cooldownTime: 0.2
+  gunName: Submachine Gun
+  damageStat: 5
+  cooldownTime: 0.3
   bulletSpeed: 35
   distanceFromPlayer: 0.5
   gunSpriteRenderer: {fileID: 6942600000915892754}
@@ -108,7 +108,9 @@ MonoBehaviour:
   bulletPrefab: {fileID: 5838070477860344463, guid: b70a5f348273ebc439b33cd082354732, type: 3}
   playerTransform: {fileID: 0}
   crosshairTransform: {fileID: 0}
-  gunIcon: {fileID: -200009849, guid: a1ed48ab091055840996b14c47a79c29, type: 3}
+  gunIcon: {fileID: -1822612709, guid: d3ef9835cac7934479a3cb216e7cb06e, type: 3}
+  overheatCooldown: 1
+  shotsBeforeOverheat: 20
 --- !u!1 &8811328341145039440
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,7 +136,7 @@ Transform:
   m_GameObject: {fileID: 8811328341145039440}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.166, y: -0.019, z: 0}
+  m_LocalPosition: {x: 0.157, y: 0.008, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

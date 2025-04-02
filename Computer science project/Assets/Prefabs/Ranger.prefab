@@ -83,14 +83,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   maxHealth: 0
-  baseMaxHealth: 50
+  baseMaxHealth: 55
   moveSpeed: 0
-  baseMoveSpeed: 2
+  baseMoveSpeed: 1.5
   healAmount: 0
   damageAmount: 0
   regenRate: 0
   player: {fileID: 0}
   IsFreeze: 0
+  IsDead: 0
   spriteRenderer: {fileID: 6260687641150642613}
   chaseDistance: 0
   collideDamage: 0
@@ -103,19 +104,19 @@ MonoBehaviour:
     dropChance: 44.4
   - itemPrefab: {fileID: 4238488023573314709, guid: fc07a09c765b74e4180fd86b444da90c, type: 3}
     dropChance: 4.9
-  deadBodyPrefab: {fileID: 2938666789275465980, guid: 52902021547e4ac44bc88590e5ce0ec0, type: 3}
+  deadBodyPrefab: {fileID: 439165326045580202, guid: d82454da945fcf349aedc86e800ce9d6, type: 3}
   currentNode: {fileID: 0}
   path: []
   bulletPrefab: {fileID: 3610556043354662966, guid: 43a7be39bfa09734dba7a1ad0237e9fe, type: 3}
   firePoint: {fileID: 6522820975939105723}
-  minAttackRange: 4
+  minAttackRange: 2
   maxAttackRange: 6
   shootCooldown: 0
-  baseShootCooldown: 3
+  baseShootCooldown: 2.7
   bulletSpeed: 0
-  baseBulletSpeed: 5
+  baseBulletSpeed: 5.5
   rangedDamage: 0
-  baseRangedDamage: 18
+  baseRangedDamage: 19
 --- !u!95 &6948329416515531148
 Animator:
   serializedVersion: 5

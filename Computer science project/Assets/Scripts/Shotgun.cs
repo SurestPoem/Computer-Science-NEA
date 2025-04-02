@@ -33,6 +33,7 @@ public class Shotgun : Gun
             if (bulletScript != null)
             {
                 bulletScript.SetSpeed(bulletSpeed);
+                bulletScript.SetDamage(damageStat);
                 bulletScript.SetDirection(pelletDirection);
                 bulletScript.SetShooter(Bullet.ShooterType.Player); // ✅ Corrected way
                 bulletScript.SetGun(this);  // Pass reference to the shotgun

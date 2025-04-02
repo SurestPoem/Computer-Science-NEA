@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1541122859105754823}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.1653, y: 0.0003, z: 0}
+  m_LocalPosition: {x: 0.3, y: -0.013, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6633616751412114665}
   - component: {fileID: 7232611164201428526}
-  - component: {fileID: 1032337379510152447}
+  - component: {fileID: -1305483096113488682}
   m_Layer: 0
   m_Name: Minigun
   m_TagString: Gun
@@ -59,7 +59,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.23083338, y: 0.044166666, z: -0.011875}
-  m_LocalScale: {x: 0.5, y: 1, z: 0.25}
+  m_LocalScale: {x: 0.3, y: 0.7, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3364638320702808324}
@@ -106,18 +106,18 @@ SpriteRenderer:
   m_SortingLayerID: 384795743
   m_SortingLayer: 4
   m_SortingOrder: 2
-  m_Sprite: {fileID: 2111743591, guid: a1ed48ab091055840996b14c47a79c29, type: 3}
+  m_Sprite: {fileID: 1373837445, guid: d3ef9835cac7934479a3cb216e7cb06e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.35, y: 0.12}
+  m_Size: {x: 0.7, y: 0.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1032337379510152447
+--- !u!114 &-1305483096113488682
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,12 +126,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3311915046366774433}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3de16d2c29effb9429a72d1f12a1c596, type: 3}
+  m_Script: {fileID: 11500000, guid: 670fcbeb5b05cf444bf89c0b48901735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gunName: Minigun
-  damageStat: 10
-  cooldownTime: 0
+  damageStat: 4
+  cooldownTime: 0.1
   bulletSpeed: 40
   distanceFromPlayer: 0.6
   gunSpriteRenderer: {fileID: 7232611164201428526}
@@ -139,4 +139,6 @@ MonoBehaviour:
   bulletPrefab: {fileID: 5838070477860344463, guid: b70a5f348273ebc439b33cd082354732, type: 3}
   playerTransform: {fileID: 0}
   crosshairTransform: {fileID: 0}
-  gunIcon: {fileID: 2111743591, guid: a1ed48ab091055840996b14c47a79c29, type: 3}
+  gunIcon: {fileID: 1373837445, guid: d3ef9835cac7934479a3cb216e7cb06e, type: 3}
+  overheatCooldown: 3
+  shotsBeforeOverheat: 50

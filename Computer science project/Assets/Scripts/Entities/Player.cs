@@ -188,7 +188,7 @@ public class Player : Entity
 
     private void HandleShooting()
     {
-        if (currentGun != null && controls.Player.Shoot.triggered)
+        if (currentGun != null && controls.Player.Shoot.ReadValue<float>() > 0.5f) // If the shoot button is pressed
         {
             currentGun.Shoot();
         }

@@ -105,7 +105,7 @@ MonoBehaviour:
   distanceFromPlayer: 0.4
   gunSpriteRenderer: {fileID: 1228616720183202398}
   muzzlePoint: {fileID: 3297781797926293310}
-  bulletPrefab: {fileID: 3683310747538838024}
+  bulletPrefab: {fileID: 5838070477860344463, guid: b70a5f348273ebc439b33cd082354732, type: 3}
   playerTransform: {fileID: 0}
   crosshairTransform: {fileID: 0}
   gunIcon: {fileID: 991607640, guid: 8526b5feb3d867c44b7b4d4fb3806968, type: 3}

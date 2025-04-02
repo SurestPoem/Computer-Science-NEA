@@ -59,6 +59,7 @@ MonoBehaviour:
   regenRate: 0
   player: {fileID: 0}
   IsFreeze: 0
+  IsDead: 0
   spriteRenderer: {fileID: 6260687641150642613}
   chaseDistance: 0
   collideDamage: 0
@@ -72,7 +73,7 @@ MonoBehaviour:
   - itemPrefab: {fileID: 6828200667513715598, guid: db2006b9e96b8fe4da72153fb37d285e, type: 3}
     dropChance: 15
   - itemPrefab: {fileID: 1383925665828577346, guid: 21530bf8293529a40a0f339bb403eed3, type: 3}
-    dropChance: 1
+    dropChance: 0
   - itemPrefab: {fileID: 4238488023573314709, guid: fc07a09c765b74e4180fd86b444da90c, type: 3}
     dropChance: 5
   - itemPrefab: {fileID: 5093429702563864004, guid: 70ba677663d281144966b9e9382cbeaa, type: 3}

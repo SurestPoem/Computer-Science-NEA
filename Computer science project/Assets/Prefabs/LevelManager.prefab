@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2525431624653107467
+--- !u!1 &1396654158892098982
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,44 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6860850770820204092}
-  - component: {fileID: 4138617526115567801}
+  - component: {fileID: 281124916856802565}
+  - component: {fileID: 5400787690161592295}
   m_Layer: 0
-  m_Name: GameManger
-  m_TagString: GameManager
+  m_Name: LevelManager
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6860850770820204092
+--- !u!4 &281124916856802565
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2525431624653107467}
+  m_GameObject: {fileID: 1396654158892098982}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 304.05997, y: 690.00995, z: 0}
+  m_LocalPosition: {x: 274.55872, y: 165.12051, z: -2.8165174}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4138617526115567801
+--- !u!114 &5400787690161592295
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2525431624653107467}
+  m_GameObject: {fileID: 1396654158892098982}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 655062f7f97523047a17aa128c2e99be, type: 3}
+  m_Script: {fileID: 11500000, guid: 1b8e89c0e7a494941a54fdce6f176f75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shopScreen: {fileID: 0}
-  deathScreen: {fileID: 0}
-  pauseScreen: {fileID: 0}
-  shopEnabled: 0
-  deathScreenEnabled: 0
-  pauseScreenEnabled: 0
-  currentDifficulty: 1
-  difficultyMultiplier: 0
-  selectedGameType: 0
+  player: {fileID: 0}
+  walkerGenerator: {fileID: 0}
+  enemySpawner: {fileID: 0}
+  currentStage: 1
+  objectiveComplete: 0

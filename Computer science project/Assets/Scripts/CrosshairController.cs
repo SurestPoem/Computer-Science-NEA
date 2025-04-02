@@ -20,12 +20,15 @@ public class CrosshairController : MonoBehaviour
     private Player player;
 
     private Camera mainCamera;  // Reference to the main camera
+    public float maxCrosshairDistance = 5f; // Maximum distance the crosshair can move from the player
+    private Transform playerTransform; // Reference to the player's transform
 
     void Start()
     {
         mainCamera = Camera.main; // Cache the main camera
         crosshairPosition = transform.position; // Set initial position
         lastMousePosition = Mouse.current.position.ReadValue(); // Store initial mouse position
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform; // Find the player
     }
 
     private void Awake()
@@ -75,6 +78,9 @@ public class CrosshairController : MonoBehaviour
             crosshairPosition = new Vector2(worldMousePos.x, worldMousePos.y);
         }
 
+        // Clamp the crosshair position within the screen bounds
+        ClampCrosshairPosition();
+
         // Apply world-space position
         transform.position = crosshairPosition;
 
@@ -87,5 +93,29 @@ public class CrosshairController : MonoBehaviour
         // Clean up actions
         mouseMoveAction.Disable();
         joystickMoveAction.Disable();
+    }
+
+    private void ClampCrosshairPosition()
+    {
+        // Get screen bounds in world space
+        Vector3 screenBottomLeft = mainCamera.ScreenToWorldPoint(new Vector3(0, 0, mainCamera.nearClipPlane));
+        Vector3 screenTopRight = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, mainCamera.nearClipPlane));
+
+        // Clamp the crosshair position within the screen bounds
+        crosshairPosition.x = Mathf.Clamp(crosshairPosition.x, screenBottomLeft.x, screenTopRight.x);
+        crosshairPosition.y = Mathf.Clamp(crosshairPosition.y, screenBottomLeft.y, screenTopRight.y);
+
+        // Calculate the direction from the player to the crosshair
+        Vector2 directionToPlayer = crosshairPosition - (Vector2)playerTransform.position;
+
+        // Check if the crosshair is beyond the allowed max distance
+        if (directionToPlayer.magnitude > maxCrosshairDistance)
+        {
+            // Normalize the direction to have a magnitude of 1, then multiply by max distance
+            directionToPlayer = directionToPlayer.normalized * maxCrosshairDistance;
+
+            // Set the crosshair position based on the new direction (relative to the player)
+            crosshairPosition = (Vector2)playerTransform.position + directionToPlayer;
+        }
     }
 }

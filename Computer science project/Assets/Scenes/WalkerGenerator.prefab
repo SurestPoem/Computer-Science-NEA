@@ -53,17 +53,16 @@ MonoBehaviour:
   playableMapHeight: 25
   MapWidth: 0
   MapHeight: 0
-  MaximumWalkers: 5
+  MaximumWalkers: 10
   TileCount: 0
   FillPercent: 0.3
   WaitTime: 0
   nodePrefab: {fileID: 2847058998921512403, guid: 09a76b44fb74e284b8dae265061dbbf5, type: 3}
   nodeList: []
   nodeParent: {fileID: 0}
+  playerTransform: {fileID: 0}
   enemy: {fileID: 0}
   StartPosition: {x: 15, y: 15}
-  spawnAreaMin: {x: 5, y: 5}
-  spawnAreaMax: {x: 10, y: 10}
 --- !u!114 &5195235855081532416
 MonoBehaviour:
   m_ObjectHideFlags: 0
