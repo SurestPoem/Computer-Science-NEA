@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7339416947651879143}
   - component: {fileID: 3895928140076579993}
-  - component: {fileID: 5195235855081532416}
   m_Layer: 0
   m_Name: WalkerGenerator
   m_TagString: Untagged
@@ -63,15 +62,3 @@ MonoBehaviour:
   playerTransform: {fileID: 0}
   enemy: {fileID: 0}
   StartPosition: {x: 15, y: 15}
---- !u!114 &5195235855081532416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 159989636525471301}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55b3fdc8395ed64489e96b3a20a966a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

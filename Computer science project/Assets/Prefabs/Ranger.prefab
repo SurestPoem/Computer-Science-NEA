@@ -109,8 +109,8 @@ MonoBehaviour:
   path: []
   bulletPrefab: {fileID: 3610556043354662966, guid: 43a7be39bfa09734dba7a1ad0237e9fe, type: 3}
   firePoint: {fileID: 6522820975939105723}
-  minAttackRange: 2
-  maxAttackRange: 6
+  minAttackRange: 3.5
+  maxAttackRange: 4
   shootCooldown: 0
   baseShootCooldown: 2.7
   bulletSpeed: 0

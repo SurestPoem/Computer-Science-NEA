@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 4845883913908984215}
   - component: {fileID: 3806625734375310213}
   - component: {fileID: 2415032807538282893}
-  - component: {fileID: 3174312079600784171}
   - component: {fileID: 1744981892741494523}
+  - component: {fileID: 4079411082938282961}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Enemy
@@ -59,15 +59,18 @@ MonoBehaviour:
   regenRate: 0
   player: {fileID: 0}
   IsFreeze: 0
+  IsDead: 0
   spriteRenderer: {fileID: 3806625734375310213}
   chaseDistance: 5
   collideDamage: 0
-  baseCollideDamage: 2
-  damageCooldown: 0.5
+  baseCollideDamage: 3
+  damageCooldown: 1.2
   lootTable:
   - itemPrefab: {fileID: 4470593630696399813, guid: 543c5295256608942aca2edd59898c95, type: 3}
     dropChance: 99
-  - itemPrefab: {fileID: 1383925665828577346, guid: 21530bf8293529a40a0f339bb403eed3, type: 3}
+  - itemPrefab: {fileID: 6650102648760111512, guid: ec926851760277f45bdc0a18f6181808, type: 3}
+    dropChance: 15
+  - itemPrefab: {fileID: 5093429702563864004, guid: 70ba677663d281144966b9e9382cbeaa, type: 3}
     dropChance: 1
   deadBodyPrefab: {fileID: 9178326787673341792, guid: efea2ff82c7f39a44b11d7d3d7682c78, type: 3}
   currentNode: {fileID: 0}
@@ -172,8 +175,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &3174312079600784171
-CircleCollider2D:
+--- !u!70 &1744981892741494523
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -204,10 +207,10 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.11370696}
-  serializedVersion: 2
-  m_Radius: 0.044472143
---- !u!70 &1744981892741494523
+  m_Offset: {x: 0.001347484, y: -0.11212297}
+  m_Size: {x: 0.13377109, y: 0.08508349}
+  m_Direction: 1
+--- !u!70 &4079411082938282961
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -239,6 +242,6 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.001347484, y: -0.11212297}
-  m_Size: {x: 0.13377109, y: 0.08508349}
+  m_Offset: {x: 0.0020886767, y: -0.11253213}
+  m_Size: {x: 0.12762426, y: 0.081149265}
   m_Direction: 1

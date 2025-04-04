@@ -21,18 +21,14 @@ public class ShopNode : MonoBehaviour
     }
 
 
-    private void RemoveSellable()
-    {
-        shopManager.ShopStock.RemoveAt(gunPointer);
-        gunPointer = 0;
-    }
-
+   
     public void BuyGun()
     {
         if (player.currentCurrency >= generalCost && player.level >= shopManager.ShopStock[gunPointer].levelRequired)
         {
             player.AddGun(shopManager.ShopStock[gunPointer].gunPrefab);
-            RemoveSellable();
+            shopManager.RemoveGun(gunPointer);
+            gunPointer = 0;
             player.UseCurrency(generalCost);
             currentSellableType = SellableType.Null;
         }
@@ -111,9 +107,9 @@ public class ShopNode : MonoBehaviour
         else
         {
             // 2/3 chance for Gun, 1/3 chance for Upgrade
-            int randomChoice = Random.Range(0, 3);  // Random value between 0 and 2
+            int randomChoice = Random.Range(0, 4);  // Random value between 0 and 2
 
-            if (randomChoice < 2)  // 2/3 chance for Gun (randomChoice 0 or 1)
+            if (randomChoice < 3)  // 2/3 chance for Gun (randomChoice 0 or 1)
             {
                 currentSellableType = SellableType.Gun;
             }

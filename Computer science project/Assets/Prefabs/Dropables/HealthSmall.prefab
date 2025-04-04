@@ -128,7 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
   player: {fileID: 0}
-  healthValue: 5
+  healthValue: 10
 --- !u!70 &8693712776777030655
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

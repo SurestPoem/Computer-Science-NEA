@@ -59,7 +59,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -15.550374, y: -0.8115023, z: -0.01484375}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.0625}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.0625}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1262958199354753317}
@@ -133,9 +133,10 @@ MonoBehaviour:
   damageStat: 100
   cooldownTime: 0.5
   bulletSpeed: 40
-  distanceFromPlayer: 0.6
+  distanceFromPlayer: 0.55
   gunSpriteRenderer: {fileID: 2969873504083480929}
   muzzlePoint: {fileID: 1262958199354753317}
+  shootSound: {fileID: 8300000, guid: c8b946dc5e9e7b841bb0cc201c23256a, type: 3}
   bulletPrefab: {fileID: 5838070477860344463, guid: b70a5f348273ebc439b33cd082354732, type: 3}
   playerTransform: {fileID: 0}
   crosshairTransform: {fileID: 0}

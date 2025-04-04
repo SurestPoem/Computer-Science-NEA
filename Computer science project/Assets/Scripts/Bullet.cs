@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour
     public float bulletLifetime;
     public Vector2 bulletDirection;
     private Gun gun;  // Reference to the Gun
-    private bool hasHit = false;
+    protected bool hasHit = false;
     public float damage;
 
     protected virtual void Start()
@@ -26,31 +26,49 @@ public class Bullet : MonoBehaviour
         transform.Translate(bulletDirection * speed * Time.deltaTime);
     }
 
-    void OnTriggerEnter2D(Collider2D collider)
+    protected virtual void OnTriggerEnter2D(Collider2D collider)
     {
-        // If the bullet was fired by the player, it should damage enemies
+        // Handle Player collision
         if (shooter == ShooterType.Player && collider.CompareTag("Enemy") && !hasHit)
         {
-            hasHit = true;
-            collider.GetComponent<Enemy>().takeDamage(damage);
-            Destroy(gameObject);
-            Debug.Log("Bullet Destroyed - Hit Enemy");
+            var enemy = collider.GetComponent<Enemy>();
+            if (enemy != null) // Check if the enemy component exists
+            {
+                HitEnemy(enemy);
+            }
         }
 
-        // If the bullet was fired by an enemy, it should damage the player
+        // Handle Enemy collision
         if (shooter == ShooterType.Enemy && collider.CompareTag("Player") && !hasHit)
         {
-            hasHit = true;
-            collider.GetComponent<Player>().takeDamage(damage);
-            Destroy(gameObject);
-            Debug.Log("Bullet Destroyed - Hit Player");
+            var player = collider.GetComponent<Player>();
+            if (player != null) // Check if the player component exists
+            {
+                HitPlayer(player);
+            }
         }
 
-        // If the bullet hits a wall (TilemapCollider2D)
+        // Handle Wall collision
         if (collider.CompareTag("Wall") || collider.GetComponent<TilemapCollider2D>() != null)
         {
             HitWall(collider);
         }
+    }
+
+    protected virtual void HitEnemy(Enemy enemy)
+    {
+        hasHit = true;
+        enemy.takeDamage(damage); // Directly use the Enemy reference
+        Destroy(gameObject);
+        Debug.Log("Bullet Destroyed - Hit Enemy");
+    }
+
+    protected virtual void HitPlayer(Player player)
+    {
+        hasHit = true;
+        player.takeDamage(damage); // Directly use the Player reference
+        Destroy(gameObject);
+        Debug.Log("Bullet Destroyed - Hit Player");
     }
 
     protected virtual void HitWall(Collider2D wall)

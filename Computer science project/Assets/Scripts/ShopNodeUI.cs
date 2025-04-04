@@ -8,7 +8,6 @@ public class ShopNodeUI : MonoBehaviour
 {
     public TextMeshProUGUI costText;
     public Image gunShopImage;
-    public Sprite upgradeImage;
     public Sprite nullIconImage;
     public TextMeshProUGUI shopNodeName;
     public TextMeshProUGUI shopNodeStats;
@@ -53,7 +52,7 @@ public class ShopNodeUI : MonoBehaviour
         }
         else if (shopNode.currentSellableType == ShopNode.SellableType.Upgrade)
         {
-            gunShopImage.sprite = upgradeImage;
+            gunShopImage.sprite = shopNode.shopManager.UpgradeStock[shopNode.upgradePointer].upgradeImage;
         }
         else if (shopNode.currentSellableType == ShopNode.SellableType.Null)
         {

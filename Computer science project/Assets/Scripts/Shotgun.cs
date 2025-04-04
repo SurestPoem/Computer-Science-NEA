@@ -15,6 +15,8 @@ public class Shotgun : Gun
 
         timeSinceLastShot = 0f;
 
+        AudioManager.instance.PlaySound(shootSound, Random.Range(0.5f, 1.5f));
+        ApplyShootEffect(); // Apply shoot effect
         // Get the direction to the crosshair (target)
         Vector2 shootDirection = (crosshairTransform.position - muzzlePoint.position).normalized;
 
@@ -32,11 +34,7 @@ public class Shotgun : Gun
 
             if (bulletScript != null)
             {
-                bulletScript.SetSpeed(bulletSpeed);
-                bulletScript.SetDamage(damageStat);
-                bulletScript.SetDirection(pelletDirection);
-                bulletScript.SetShooter(Bullet.ShooterType.Player); // ✅ Corrected way
-                bulletScript.SetGun(this);  // Pass reference to the shotgun
+                SetBulletStats(bulletScript, pelletDirection); // Set the bullet stats
             }
         }
     }

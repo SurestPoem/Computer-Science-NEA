@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class LevelManager : MonoBehaviour
 {
     public Player player;
@@ -9,6 +10,8 @@ public class LevelManager : MonoBehaviour
     public GameObject enemySpawner;
     public int currentStage = 1;
     public bool objectiveComplete = false;
+    public int killGoal = 30;
+
 
     void Awake()
     {
@@ -27,7 +30,7 @@ public class LevelManager : MonoBehaviour
     {
         if (objectiveComplete)
         {
-            NextStage();
+            EndStage();
         }
     }
 
@@ -44,7 +47,7 @@ public class LevelManager : MonoBehaviour
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject enemy in enemies)
         {
-            Destroy(enemy); // Destroy each enemy
+            Destroy(enemy);
         }
     }
 
@@ -64,5 +67,15 @@ public class LevelManager : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         
         enemySpawner.SetActive(true);
+    }
+
+    public void DecreaseKillGoal()
+    {
+        killGoal--;
+        if (killGoal <= 0)
+        {
+            objectiveComplete = true;
+            EndStage();
+        }
     }
 }

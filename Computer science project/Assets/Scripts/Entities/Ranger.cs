@@ -20,6 +20,7 @@ public class Ranger : Enemy
     void Update()
     {
         base.Update();
+        AttemptShoot();
         HandleMovement();
     }
 
@@ -29,9 +30,7 @@ public class Ranger : Enemy
 
         if (distanceToPlayer < minAttackRange)
         {
-            // Too close -> Back away
-            Vector3 direction = (transform.position - playerTransform.position).normalized;
-            transform.position += direction * moveSpeed * Time.deltaTime;
+            RetreatFromPlayer();
         }
         else if (distanceToPlayer > maxAttackRange)
         {
@@ -41,7 +40,7 @@ public class Ranger : Enemy
 
         else if (distanceToPlayer >= minAttackRange && distanceToPlayer <= maxAttackRange)
         {
-            AttemptShoot();
+            StartCoroutine(Strafe());
         }
     }
 

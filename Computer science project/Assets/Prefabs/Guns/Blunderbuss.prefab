@@ -102,9 +102,11 @@ MonoBehaviour:
   damageStat: 15
   cooldownTime: 1.8
   bulletSpeed: 7
-  distanceFromPlayer: 0.4
+  distanceFromPlayer: 0.45
   gunSpriteRenderer: {fileID: 1228616720183202398}
   muzzlePoint: {fileID: 3297781797926293310}
+  scaleAmount: 1.4
+  shootSound: {fileID: 8300000, guid: f58b5eebae848c444aa4d90b89962a6e, type: 3}
   bulletPrefab: {fileID: 5838070477860344463, guid: b70a5f348273ebc439b33cd082354732, type: 3}
   playerTransform: {fileID: 0}
   crosshairTransform: {fileID: 0}

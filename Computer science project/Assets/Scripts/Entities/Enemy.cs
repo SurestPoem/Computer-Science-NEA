@@ -9,7 +9,7 @@ public class Enemy : Entity
     public float baseCollideDamage;
     protected Transform playerTransform;
     public float damageCooldown = 1f; // Cooldown time
-    private float lastDamageTime = -1f;
+    protected float lastDamageTime = -1f;
     public List<LootItem> lootTable = new List<LootItem>();
     public GameObject deadBodyPrefab;
     [Header("Pathfinding things")]
@@ -48,6 +48,34 @@ public class Enemy : Entity
             {
                 spriteRenderer.flipX = false; // Reset flip
             }
+        }
+    }
+
+    protected void RetreatFromPlayer()
+    {
+        if (IsFreeze != true)
+        {
+            Vector3 direction = (transform.position - playerTransform.position).normalized; // Use playerTransform
+            transform.position += direction * moveSpeed * Time.deltaTime;
+            if (direction.x < 0)
+            {
+                spriteRenderer.flipX = true; // Flip the sprite
+            }
+            else
+            {
+                spriteRenderer.flipX = false; // Reset flip
+            }
+        }
+    }
+
+    protected IEnumerator Strafe()
+    {
+        if (IsFreeze != true)
+        {
+            Vector3 direction = (playerTransform.position - transform.position).normalized; // Use playerTransform
+            Vector3 strafeDirection = new Vector3(-direction.y, direction.x, 0); // Perpendicular direction
+            transform.position += strafeDirection * moveSpeed * Time.deltaTime;
+            yield return new WaitForSeconds(1f);
         }
     }
 

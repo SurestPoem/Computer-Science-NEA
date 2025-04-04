@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &640262275740341172
 RectTransform:
   m_ObjectHideFlags: 0
@@ -123,8 +123,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4138617526115567801, guid: 4e21307aba765ee4a9d2c2f458dd2f63, type: 3}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: StartGame
-        m_Mode: 3
+        m_MethodName: RestartGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

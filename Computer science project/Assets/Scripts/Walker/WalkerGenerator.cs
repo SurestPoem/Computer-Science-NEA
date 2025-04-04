@@ -24,12 +24,11 @@ public class WalkerGenerator : MonoBehaviour
     public float FillPercent = 0.4f;
     public float WaitTime = 0.01f;
 
-    public Node nodePrefab;
-    public List<Node> nodeList;
-    public GameObject nodeParent;
+    //public Node nodePrefab;
+    //public List<Node> nodeList;
+    //public GameObject nodeParent;
 
     public Player playerTransform;
-    public Enemy enemy;
 
     private bool canDrawGizmos;
 
@@ -113,8 +112,7 @@ public class WalkerGenerator : MonoBehaviour
             }
         }
 
-        // Create nodes (optional, can be used for pathfinding)
-        CreateNodes();
+        //CreateNodes();
     }
 
     void CreateFloors()
@@ -149,7 +147,7 @@ public class WalkerGenerator : MonoBehaviour
 
             if ((float)TileCount / (float)gridHandler.Length >= FillPercent)
             {
-                CreateNodes();
+                //CreateNodes();
                 FillEmptyTilesWithWalls(); // Fill any remaining empty tiles with walls
                 return; // Exit the function when floors are completed (no need for yield)
             }
@@ -344,21 +342,21 @@ public class WalkerGenerator : MonoBehaviour
 
     public void ResetGrid()  //Clears the tilemap and resets the grid, then regenerates the grid
     {
-        foreach (Node node in nodeList)
+        /*foreach (Node node in nodeList)
         {
             Destroy(node.gameObject);
         }
         nodeList.Clear();
-        canDrawGizmos = false;
+        canDrawGizmos = false; */
         tileMap.ClearAllTiles();
         TileCount = 0;
 
         InitialiseGrid();
     }
+}
 
 
-
-    void CreateNodes()
+ /*   void CreateNodes()
     {
         Debug.Log("CreateNodes Called");
 
@@ -438,4 +436,4 @@ public class WalkerGenerator : MonoBehaviour
             }
         }
     }
-}
+ */

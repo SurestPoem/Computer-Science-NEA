@@ -28,31 +28,31 @@ public class Dropable : MonoBehaviour
         }
     }
 
-    // OnTriggerEnter2D is called when the player enters the item's trigger collider
+    //Called when the player enters the item's trigger collider  (Set this trigger collider as a few times larger than the item actual size itself)
     public void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.CompareTag("Player")) // Only start moving if the player is the one triggering
+        if (collider.CompareTag("Player")) 
         {
-            isMovingTowardPlayer = true; // Start the movement when the player enters the trigger
+            isMovingTowardPlayer = true; 
         }
     }
 
     // This method moves the item towards the player
     private void MoveTowardPlayer()
     {
-        Vector3 direction = (playerTransform.position - transform.position).normalized; // Calculate direction to the player
-        transform.position += direction * pickupSpeed * Time.deltaTime; // Move the item
+        Vector3 direction = (playerTransform.position - transform.position).normalized; //Calculates the direction towards the player
+        transform.position += direction * pickupSpeed * Time.deltaTime; //Moves items towards the direction
 
         // Check if the item is close enough to the player
         if (Vector3.Distance(transform.position, playerTransform.position) <= pickupDistanceThreshold)
         {
-            OnPickup(); // Trigger pickup behavior
-            Destroy(gameObject); // Destroy item once it reaches the player
+            OnPickup();
+            Destroy(gameObject); // Destroys item
         }
     }
     protected virtual void OnPickup()
     {
         Debug.Log(name + " item picked up");
-        //Override this in subclasses to suit individual pickup items need
+        //Overrided in subclasses to suit the item needs
     }
 }

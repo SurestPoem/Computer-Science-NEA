@@ -11,6 +11,7 @@ public class Player : Entity
     private Animator animator;
     private PlayerControls controls;
     public CrosshairController crosshair;
+    public LevelManager levelManager;
 
     public int killCount = 0;
     [Header("Level + Currency")]
@@ -213,6 +214,7 @@ public class Player : Entity
         }
         else if (statName == "moveSpeed")
         {
+            value /= 5f;
             moveSpeed += value;
         }
         else if (statName == "regenRate")
@@ -244,6 +246,10 @@ public class Player : Entity
     {
         killCount++;
         Debug.Log("Kill count updated to " + killCount);
+        if (levelManager != null)
+        {
+            levelManager.DecreaseKillGoal();
+        }
     }
 
     public void EarnXP(int xpGained)
@@ -278,6 +284,7 @@ public class Player : Entity
 
     protected override void Initialise() //called in the Entitys Start() method
     {
+        levelManager = FindObjectOfType<LevelManager>();
         base.Initialise();
         animator = GetComponent<Animator>();
         controls = new PlayerControls();
