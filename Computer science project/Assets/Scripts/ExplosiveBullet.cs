@@ -37,7 +37,7 @@ public class ExplosiveBullet : Bullet
             GameObject explosion = Instantiate(explosionEffect, transform.position, Quaternion.identity);
             float scaleFactor = explosionRadius * 2;  // Adjust the divisor to control scaling factor
             explosion.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
-            Destroy(explosion, 2f); // Destroy the explosion effect after 2 seconds
+            Destroy(explosion, 1f); // Destroy the explosion effect after 2 seconds
         }
         // Find all enemies within the explosion radius and apply damage
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);

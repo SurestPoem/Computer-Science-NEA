@@ -16,7 +16,6 @@ public class RapidFire : Gun
         // If the gun is overheating, don't shoot
         if (isOverheating)
         {
-            Debug.Log("Gun is overheating, can't shoot.");
             return;
         }
 
@@ -30,9 +29,9 @@ public class RapidFire : Gun
             // If we've fired enough shots to overheat
             if (shotsFired >= shotsBeforeOverheat)
             {
-                shotsFired = 0;           // Reset shots fired count
-                isOverheating = true;     // Set the gun to overheating state
-                StartCoroutine(CooldownOverheat());   // Start the cooldown coroutine
+                shotsFired = 0;          
+                isOverheating = true;     
+                StartCoroutine(CooldownOverheat());  
             }
         }
     }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4812687052098758541}
   m_Layer: 0
   m_Name: CurrencyMedium
-  m_TagString: Untagged
+  m_TagString: Dropable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

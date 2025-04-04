@@ -6,6 +6,7 @@ using UnityEngine.Tilemaps;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public List<EnemySpawnItem> avalibleEnemies = new List<EnemySpawnItem>();
     public List<EnemySpawnItem> enemyTypes = new List<EnemySpawnItem>();
     [SerializeField] public GameObject enemyPrefab;
     public float spawnRate = 2f;

@@ -9,9 +9,11 @@ public class GameManager : MonoBehaviour
     public GameObject shopScreen;
     public GameObject deathScreen;
     public GameObject pauseScreen;
+    public GameObject winScreen;
     [HideInInspector] public bool shopEnabled = false;
     [HideInInspector] public bool deathScreenEnabled = false;
     [HideInInspector] public bool pauseScreenEnabled = false;
+    [HideInInspector] public bool winScreenEnabled = false;
     public enum Difficulty { Easy, Normal, Hard, Baby }   
     public Difficulty currentDifficulty;
     public float difficultyMultiplier;
@@ -189,6 +191,32 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void EnableWinScreen()
+    {
+        if (winScreen != null)
+        {
+            winScreen.SetActive(true);
+            Time.timeScale = 0f; // Freeze time
+        }
+        else
+        {
+            Debug.LogWarning("Win screen is null or has been destroyed.");
+        }
+    }
+
+    public void DisableWinScreen()
+    {
+        if (winScreen != null)
+        {
+            winScreen.SetActive(false);
+            Time.timeScale = 1f; // Resume time
+        }
+        else
+        {
+            Debug.LogWarning("Win screen has been destroyed!");
+        }
+    }
+
     // Restart the game
     public void RestartGame()
     {
@@ -238,6 +266,16 @@ public class GameManager : MonoBehaviour
                 Debug.LogWarning("PauseScreen is missing.");
             }
         }
+
+        if (winScreen == null)
+        {
+            winScreen = GameObject.FindGameObjectWithTag("WinScreen");
+            DisableWinScreen();
+            if (winScreen == null)
+            {
+                Debug.LogWarning("WinScreen is missing.");
+            }
+        }
     }
 
     private void ResetValues()
@@ -246,9 +284,11 @@ public class GameManager : MonoBehaviour
         if (deathScreen != null && deathScreenEnabled == true) DisableDeathScreen();
         if (shopScreen != null && shopEnabled == true) DisableShop();
         if (pauseScreen != null && pauseScreenEnabled == true) DisablePauseScreen();
+        if (winScreen != null && winScreenEnabled == true) DisableWinScreen();
         shopScreen = null;
         deathScreen = null;
         pauseScreen = null;
+        winScreen = null;
         difficultyMultiplier = 1f;
     }
 

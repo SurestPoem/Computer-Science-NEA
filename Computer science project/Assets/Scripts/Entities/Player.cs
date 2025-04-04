@@ -12,6 +12,7 @@ public class Player : Entity
     private PlayerControls controls;
     public CrosshairController crosshair;
     public LevelManager levelManager;
+    [HideInInspector] public bool devMode = false;
 
     public int killCount = 0;
     [Header("Level + Currency")]
@@ -106,16 +107,19 @@ public class Player : Entity
     }
     public void PlayerOpenShop()
     {
-        if (controls.Player.OpenShop.triggered)
+        if (GameManager.Instance.selectedGameType == GameManager.GameType.Endless || devMode == true)
         {
-            Debug.Log("Shop button pressed");
-            if (GameManager.Instance.shopEnabled == true)
+            if (controls.Player.OpenShop.triggered)
             {
-                GameManager.Instance.DisableShop();
-            }
-            else
-            {
-                GameManager.Instance.EnableShop();
+                Debug.Log("Shop button pressed");
+                if (GameManager.Instance.shopEnabled == true)
+                {
+                    GameManager.Instance.DisableShop();
+                }
+                else
+                {
+                    GameManager.Instance.EnableShop();
+                }
             }
         }
     }
@@ -297,6 +301,7 @@ public class Player : Entity
     {
         if (controls.Player.Dev.triggered)
         {
+            devMode = true;
             IncreaseStats("maxHealth", 1000000);
             EarnCurrency(10000000);
             EarnXP(100000000);

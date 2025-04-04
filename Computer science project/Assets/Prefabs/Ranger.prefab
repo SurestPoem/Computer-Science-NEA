@@ -112,11 +112,11 @@ MonoBehaviour:
   minAttackRange: 3.5
   maxAttackRange: 4
   shootCooldown: 0
-  baseShootCooldown: 2.7
+  baseShootCooldown: 3.2
   bulletSpeed: 0
-  baseBulletSpeed: 5.5
+  baseBulletSpeed: 4.5
   rangedDamage: 0
-  baseRangedDamage: 19
+  baseRangedDamage: 18
 --- !u!95 &6948329416515531148
 Animator:
   serializedVersion: 5

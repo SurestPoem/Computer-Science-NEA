@@ -49,4 +49,4 @@ MonoBehaviour:
   enemySpawner: {fileID: 0}
   currentStage: 1
   objectiveComplete: 0
-  killGoal: 100
+  killGoal: 30
