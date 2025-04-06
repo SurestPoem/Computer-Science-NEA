@@ -46,6 +46,15 @@ public class WalkerGenerator : MonoBehaviour
 
     public void InitialiseGrid()
     {
+        MaximumWalkers = Random.Range(1, 6);
+        if (GameManager.Instance == null)
+        {
+            FillPercent = Random.Range(0.15f, 0.4f);
+        }
+        else if (GameManager.Instance != null)
+        {
+            FillPercent = Random.Range(0.15f, 0.5f) * GameManager.Instance.difficultyMultiplier;
+        }            
         gridHandler = new Grid[MapWidth, MapHeight];
 
         // Set all tiles to EMPTY initially
@@ -64,14 +73,14 @@ public class WalkerGenerator : MonoBehaviour
             Walkers = new List<WalkerObject>();
             SetRandomStartPosition();
             InitializeWalkerMode();
-            playerTransform.transform.position = new Vector3(StartPosition.x, StartPosition.y, 0);
+            SpawnPlayer();
         }
         else if (currentGenerationMode == GenerationMode.FullGrid)
         {
             AddWallBorder();
             SetRandomStartPosition();
             InitializeFullGridMode();
-            playerTransform.transform.position = new Vector3(StartPosition.x, StartPosition.y, 0);
+            SpawnPlayer();
         }
     }
 
@@ -338,6 +347,19 @@ public class WalkerGenerator : MonoBehaviour
 
         // Pick a random direction
         return directions[Random.Range(0, directions.Count)];
+    }
+
+    public void SpawnPlayer()
+    {
+        if (playerTransform == null)
+        {
+            return;
+        }
+        else
+        {
+            playerTransform.transform.position = new Vector3(StartPosition.x, StartPosition.y, 0);
+        }
+            
     }
 
     public void ResetGrid()  //Clears the tilemap and resets the grid, then regenerates the grid

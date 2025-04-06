@@ -64,12 +64,4 @@ public class ExplosiveBullet : Bullet
     {
         explosionDamage = damage;
     }
-
-    public void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, explosionRadius);
-    }
-
-
 }
