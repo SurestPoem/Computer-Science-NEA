@@ -107,7 +107,7 @@ public class Player : Entity
     }
     public void PlayerOpenShop()
     {
-        if (GameManager.Instance.selectedGameType == GameManager.GameType.Endless || devMode == true)
+        if (GameManager.Instance.selectedGameType == GameManager.GameType.Endless || GameManager.Instance.selectedGameType == GameManager.GameType.Tutorial || devMode == true)
         {
             if (controls.Player.OpenShop.triggered)
             {

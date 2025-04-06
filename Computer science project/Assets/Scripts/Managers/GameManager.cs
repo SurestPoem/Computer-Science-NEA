@@ -94,6 +94,9 @@ public class GameManager : MonoBehaviour
             case Difficulty.Hard:
                 difficultyMultiplier += 0.02f;
                 break;
+            case Difficulty.Baby:
+                difficultyMultiplier += 0f;  // No increase for Baby difficulty
+                break;
         }
     }
 

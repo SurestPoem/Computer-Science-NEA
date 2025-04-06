@@ -11,23 +11,26 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI killText;
     public TextMeshProUGUI levelText;
+    public TextMeshProUGUI goalText;
     public TextMeshProUGUI currencyText;
     [SerializeField] private Player player;
+    private LevelManager levelManager;
     public Image gunIconImage;
-
 
     void Start()
     {
         player = FindObjectOfType<Player>();
+        levelManager = FindObjectOfType<LevelManager>();
     }
 
     void Update()
     {
+     
         PlayerHealthBar();
         PlayerKillCount();
         PlayerCurrencySystem();
         CurrentGunUI();
-    // Update crosshair position
+        GoalText();
     }
 
     public void PlayerHealthBar()
@@ -91,5 +94,25 @@ public class UIManager : MonoBehaviour
         }
 
         gunIconImage.sprite = player.currentGun.gunIcon;
+    }
+
+    public void GoalText()
+    {
+        if (goalText == null)
+        {
+            return; 
+        }
+        if (GameManager.Instance.selectedGameType == GameManager.GameType.Normal)
+        {
+            goalText.text = "Level " + levelManager.currentStage.ToString() + ": " + levelManager.killGoal.ToString() + " Kills";
+        }
+        else if (GameManager.Instance.selectedGameType == GameManager.GameType.Endless)
+        {
+            goalText.text = "Next reward: " + levelManager.killGoal.ToString() + " Kills";
+        }
+        else if (GameManager.Instance.selectedGameType == GameManager.GameType.Tutorial)
+        {
+            goalText.text = "Goal " + levelManager.currentTutorialMessage;
+        }
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RapidFire : Gun
+public class OverheatingGun : Gun
 {
     public float overheatCooldown = 1f;  // The cooldown duration after overheating
     public float shotsBeforeOverheat = 5; // Number of shots before overheating

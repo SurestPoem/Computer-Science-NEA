@@ -12,24 +12,38 @@ public class LevelManager : MonoBehaviour
     public int stageToWin = 5;
     public bool objectiveComplete = false;
     public int killGoal = 30;
+    public GameObject tutorialCheckpoint;
+    private List<string> tutorialMessages = new List<string>()
+    {
+        "Use WASD to move around.",                   // Stage 1
+        "Using the mouse to move the crosshair, use left click to shoot and kill the charger",                    // Stage 2
+        "You took damage, pick up the health pack to heal",            // Stage 3
+        "Press Q to open the shop and buy something with the currency just given to you",                // Stage 4
+        "Now defeat the four slimes",       // Stage 5
+        "You are now done with the tutorial."        // Stage 6
+    };
+    public string currentTutorialMessage = "";
 
 
     void Awake()
     {
         player = FindObjectOfType<Player>();
-        walkerGenerator = FindObjectOfType<WalkerGenerator>();
-        enemySpawner = GameObject.Find("EnemySpawner");
+        if (GameManager.Instance.selectedGameType == GameManager.GameType.Normal || GameManager.Instance.selectedGameType == GameManager.GameType.Endless)
+        {
+            walkerGenerator = FindObjectOfType<WalkerGenerator>();
+            enemySpawner = GameObject.Find("EnemySpawner");
+        }
+        else if (GameManager.Instance.selectedGameType == GameManager.GameType.Tutorial)
+        {
+            
+        }
+        
     }
 
     // Start is called before the first frame update
     void Start()
     {
         StartStages();
-    }
-
-    void Update()
-    {
-
     }
 
     public void NextStage()
@@ -39,31 +53,51 @@ public class LevelManager : MonoBehaviour
 
     public void EndStage()
     {
+        
         if (GameManager.Instance.selectedGameType == GameManager.GameType.Normal)
         {
-            enemySpawner.SetActive(false);
-            GameManager.Instance.EnableShop();
-            player.health = player.maxHealth;
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            int enemiesDestroyed = 0;
-            foreach (GameObject enemy in enemies)
+            if (currentStage < stageToWin)
             {
-                Destroy(enemy);
-                enemiesDestroyed += 1;
+                currentStage++;
+                enemySpawner.SetActive(false);
+                GameManager.Instance.EnableShop();
+                player.health = player.maxHealth;
+                GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+                int enemiesDestroyed = 0;
+                foreach (GameObject enemy in enemies)
+                {
+                    Destroy(enemy);
+                    enemiesDestroyed ++;
+                }                
+                GameObject[] dropables = GameObject.FindGameObjectsWithTag("Dropable");
+                int dropablesDestroyed = 0;
+                foreach (GameObject dropable in dropables)
+                {
+                    Destroy(dropable);
+                    dropablesDestroyed ++;
+                }
+                Debug.Log("Enemies destroyed: " + enemiesDestroyed + " and Dropables destroyed: " + dropablesDestroyed);
             }
-            Debug.Log("Enemies destroyed: " + enemiesDestroyed);
-            GameObject[] dropables = GameObject.FindGameObjectsWithTag("Dropables");
-            foreach(GameObject dropable in dropables)
+            else if (currentStage >= stageToWin)
             {
-                Destroy(dropable);
+                WinGame();
             }
-            
-        }
 
+        }
         else if (GameManager.Instance.selectedGameType == GameManager.GameType.Endless)
         {
+            currentStage++;
             player.health = player.maxHealth;
             NextStage();
+        }
+        else if (GameManager.Instance.selectedGameType == GameManager.GameType.Tutorial)
+        {            
+            currentStage++;
+            StartCoroutine(StartNewStage());            
+        }
+        else
+        {
+            Debug.LogError("Invalid game type selected.");
         }
     }
 
@@ -71,12 +105,17 @@ public class LevelManager : MonoBehaviour
     {
         currentStage = 1;
         objectiveComplete = false;
+        
+        if (GameManager.Instance.selectedGameType == GameManager.GameType.Tutorial)
+        {
+            currentStage = 1;
+            StartNextTutorialStage();
+        }
     }
 
     public IEnumerator StartNewStage()
     {
         objectiveComplete = false;
-        currentStage++;
         GameManager.Instance.AddDifficultyMultiplier();
         if (GameManager.Instance.selectedGameType == GameManager.GameType.Normal)
         {            
@@ -91,16 +130,74 @@ public class LevelManager : MonoBehaviour
             killGoal = 30 + (currentStage * 2);
             yield return null;
         }
-        
+        else if (GameManager.Instance.selectedGameType == GameManager.GameType.Tutorial)
+        {
+            StartNextTutorialStage();
+            yield return null;
+        }
+        else
+        {
+            Debug.LogError("Invalid game type selected.");
+        }
+    }
+
+    public void WinGame()
+    {
+        objectiveComplete = true;
+        GameManager.Instance.DisableShop();
+        GameManager.Instance.DisablePauseScreen();
+        GameManager.Instance.EnableWinScreen();
     }
 
     public void DecreaseKillGoal()
     {
         killGoal--;
-        if (killGoal <= 0 && !objectiveComplete)
+        if (GameManager.Instance.selectedGameType != GameManager.GameType.Tutorial)
         {
-            objectiveComplete = true;
-            EndStage();
+            if (killGoal <= 0 && !objectiveComplete)
+            {
+                objectiveComplete = true;
+                EndStage();
+            }
+        }
+    }
+
+    public void StartNextTutorialStage()
+    {
+        ShowTutorialMessage();
+
+        if (currentStage == 3)
+        {
+            player.takeDamage(20f);
+        }
+        if (currentStage == 4)
+        {
+            player.EarnCurrency(300);
+            player.EarnXP(5000);
+            //Gives player enough level and currency to buy something from the shop
+        }
+        if (currentStage == 5)
+        {
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (GameObject enemy in enemies)
+            {
+                enemy.GetComponent<Enemy>().IsFreeze = true;
+            }
+        }
+        if (currentStage == 6)
+        {
+            WinGame();
+        }
+        
+        
+    }
+    void ShowTutorialMessage()
+    {
+        if (currentStage - 1 < tutorialMessages.Count)
+        {
+            currentTutorialMessage = tutorialMessages[currentStage - 1];
+            Debug.Log("Tutorial Message: " + currentTutorialMessage);
+           
         }
     }
 }

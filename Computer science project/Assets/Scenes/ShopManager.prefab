@@ -126,15 +126,15 @@ MonoBehaviour:
   UpgradeStock:
   - upgradeType: 0
     upgradeAmount: 1
-    upgradeCost: 39
+    upgradeCost: 37
     upgradeImage: {fileID: 21300000, guid: 8243ecfe56ef58d46b1db1ce9ebfbd85, type: 3}
   - upgradeType: 1
     upgradeAmount: 1
-    upgradeCost: 57
+    upgradeCost: 47
     upgradeImage: {fileID: 21300000, guid: 610acdb7c9a1f7a4c95d00edcb3f14d8, type: 3}
   - upgradeType: 2
     upgradeAmount: 1
-    upgradeCost: 83
+    upgradeCost: 71
     upgradeImage: {fileID: 21300000, guid: ff0d4a4edd756f34cab66ea566fc9216, type: 3}
 --- !u!1 &2935910601697612639
 GameObject:
@@ -306,7 +306,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 50}
+  m_AnchoredPosition: {x: 0, y: 80}
   m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &1940908339403388069
@@ -390,7 +390,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4715826799988194351}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5400787690161592295, guid: 05046324010458b4e9fab5c9a1fbfed5, type: 3}
+        m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
+        m_MethodName: EndStage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1152260084822389607
 PrefabInstance:
   m_ObjectHideFlags: 0

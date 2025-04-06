@@ -51,7 +51,7 @@ public class Gun : MonoBehaviour
 
     void Start()
     {
-        timeSinceLastShot = 0f;
+        timeSinceLastShot = cooldownTime; // Initialize to allow immediate shooting
     }
     void Update()
     {

@@ -34,8 +34,8 @@ RectTransform:
   - {fileID: 2577970528870560546}
   - {fileID: 584337253755126558}
   - {fileID: 1349035096666277655}
-  - {fileID: 2642339566761066889}
   - {fileID: 4859018379472562020}
+  - {fileID: 2642339566761066889}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -116,11 +116,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2848965157974171047, guid: 7456fc9048d48ec43934a028eda8fc6a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2891135948537843583, guid: 7456fc9048d48ec43934a028eda8fc6a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3444651863664741062, guid: 7456fc9048d48ec43934a028eda8fc6a, type: 3}
       propertyPath: m_Pivot.x
@@ -208,7 +208,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6761538623640109271, guid: 7456fc9048d48ec43934a028eda8fc6a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
