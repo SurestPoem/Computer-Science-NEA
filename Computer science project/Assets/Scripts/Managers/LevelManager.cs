@@ -15,12 +15,12 @@ public class LevelManager : MonoBehaviour
     public GameObject tutorialCheckpoint;
     private List<string> tutorialMessages = new List<string>()
     {
-        "Use WASD to move around.",                   // Stage 1
-        "Using the mouse to move the crosshair, use left click to shoot and kill the charger",                    // Stage 2
-        "You took damage, pick up the health pack to heal",            // Stage 3
-        "Press Q to open the shop and buy something with the currency just given to you",                // Stage 4
-        "Now defeat the four slimes",       // Stage 5
-        "You are now done with the tutorial."        // Stage 6
+        "Use WASD to move around.",                                                             // Stage 1
+        "Using the mouse to move the crosshair \n use left click to shoot and kill the charger",  // Stage 2
+        "You took damage, \n pick up the health pack to heal",                                     // Stage 3
+        "Press Q to open the shop and buy \n something with the currency just given to you",       // Stage 4
+        "Now defeat the four slimes",                                                           // Stage 5
+        "You are now done with the tutorial."                                                   // Stage 6
     };
     public string currentTutorialMessage = "";
 
@@ -32,12 +32,7 @@ public class LevelManager : MonoBehaviour
         {
             walkerGenerator = FindObjectOfType<WalkerGenerator>();
             enemySpawner = GameObject.Find("EnemySpawner");
-        }
-        else if (GameManager.Instance.selectedGameType == GameManager.GameType.Tutorial)
-        {
-            
-        }
-        
+        }        
     }
 
     // Start is called before the first frame update
@@ -62,21 +57,7 @@ public class LevelManager : MonoBehaviour
                 enemySpawner.SetActive(false);
                 GameManager.Instance.EnableShop();
                 player.health = player.maxHealth;
-                GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-                int enemiesDestroyed = 0;
-                foreach (GameObject enemy in enemies)
-                {
-                    Destroy(enemy);
-                    enemiesDestroyed ++;
-                }                
-                GameObject[] dropables = GameObject.FindGameObjectsWithTag("Dropable");
-                int dropablesDestroyed = 0;
-                foreach (GameObject dropable in dropables)
-                {
-                    Destroy(dropable);
-                    dropablesDestroyed ++;
-                }
-                Debug.Log("Enemies destroyed: " + enemiesDestroyed + " and Dropables destroyed: " + dropablesDestroyed);
+                ClearObjects();
             }
             else if (currentStage >= stageToWin)
             {
@@ -109,6 +90,11 @@ public class LevelManager : MonoBehaviour
         if (GameManager.Instance.selectedGameType == GameManager.GameType.Tutorial)
         {
             currentStage = 1;
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (GameObject enemy in enemies)
+            {
+                enemy.GetComponent<Enemy>().IsFreeze = true;
+            }
             StartNextTutorialStage();
         }
     }
@@ -121,7 +107,7 @@ public class LevelManager : MonoBehaviour
         {            
             GameManager.Instance.DisableShop();
             walkerGenerator.ResetGrid();
-            killGoal = 30 + (currentStage * 5);
+            killGoal = 30 + (currentStage * 2);
             enemySpawner.SetActive(true);
             yield return null;
         }
@@ -165,7 +151,6 @@ public class LevelManager : MonoBehaviour
     public void StartNextTutorialStage()
     {
         ShowTutorialMessage();
-
         if (currentStage == 3)
         {
             player.takeDamage(20f);
@@ -181,15 +166,13 @@ public class LevelManager : MonoBehaviour
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
             foreach (GameObject enemy in enemies)
             {
-                enemy.GetComponent<Enemy>().IsFreeze = true;
+                enemy.GetComponent<Enemy>().IsFreeze = false;
             }
         }
         if (currentStage == 6)
         {
             WinGame();
-        }
-        
-        
+        }     
     }
     void ShowTutorialMessage()
     {
@@ -199,5 +182,24 @@ public class LevelManager : MonoBehaviour
             Debug.Log("Tutorial Message: " + currentTutorialMessage);
            
         }
+    }
+
+    private void ClearObjects()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        int enemiesDestroyed = 0;
+        foreach (GameObject enemy in enemies)
+        {
+            Destroy(enemy);
+            enemiesDestroyed++;
+        }
+        GameObject[] dropables = GameObject.FindGameObjectsWithTag("Dropable");
+        int dropablesDestroyed = 0;
+        foreach (GameObject dropable in dropables)
+        {
+            Destroy(dropable);
+            dropablesDestroyed++;
+        }
+        Debug.Log("Enemies destroyed: " + enemiesDestroyed + " and Dropables destroyed: " + dropablesDestroyed);
     }
 }

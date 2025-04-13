@@ -24,9 +24,9 @@ public class WalkerGenerator : MonoBehaviour
     public float FillPercent = 0.4f;
     public float WaitTime = 0.01f;
 
-    //public Node nodePrefab;
-    //public List<Node> nodeList;
-    //public GameObject nodeParent;
+    public Node nodePrefab;
+    public List<Node> nodeList;
+    public GameObject nodeParent;
 
     public Player playerTransform;
 
@@ -39,13 +39,16 @@ public class WalkerGenerator : MonoBehaviour
     void Awake()
     {
         playerTransform = FindObjectOfType<Player>();
-        MapWidth = playableMapWidth + 2;
-        MapHeight = playableMapHeight + 2;
         InitialiseGrid();
     }
 
     public void InitialiseGrid()
     {
+        CheckGrid();
+
+        MapWidth = playableMapWidth + 2;
+        MapHeight = playableMapHeight + 2;
+
         MaximumWalkers = Random.Range(1, 6);
         if (GameManager.Instance == null)
         {
@@ -121,7 +124,7 @@ public class WalkerGenerator : MonoBehaviour
             }
         }
 
-        //CreateNodes();
+        CreateNodes();
     }
 
     void CreateFloors()
@@ -156,7 +159,7 @@ public class WalkerGenerator : MonoBehaviour
 
             if ((float)TileCount / (float)gridHandler.Length >= FillPercent)
             {
-                //CreateNodes();
+                CreateNodes();
                 FillEmptyTilesWithWalls(); // Fill any remaining empty tiles with walls
                 return; // Exit the function when floors are completed (no need for yield)
             }
@@ -317,7 +320,6 @@ public class WalkerGenerator : MonoBehaviour
 
                     // Set the floor tile in Tilemap
                     tileMap.SetTile(new Vector3Int(tilePos.x, tilePos.y, 0), Floor);
-
                     TileCount++; // Increase the floor tile count
                 }
             }
@@ -364,23 +366,38 @@ public class WalkerGenerator : MonoBehaviour
 
     public void ResetGrid()  //Clears the tilemap and resets the grid, then regenerates the grid
     {
-        /*foreach (Node node in nodeList)
+        foreach (Node node in nodeList)
         {
             Destroy(node.gameObject);
         }
         nodeList.Clear();
-        canDrawGizmos = false; */
+        canDrawGizmos = false; 
         tileMap.ClearAllTiles();
         TileCount = 0;
 
         InitialiseGrid();
     }
-}
 
-
- /*   void CreateNodes()
+    public void CheckGrid()
     {
-        Debug.Log("CreateNodes Called");
+        if (playableMapWidth <= 4)
+        {
+            playableMapWidth = 5;
+            Debug.Log("MapWidth defaulted to minimum value of 5");
+        }
+        if (playableMapHeight <= 4)
+        {
+            Debug.Log("MapHeight defaulted to minimum value of 5");
+            playableMapHeight = 5;
+        }
+    }
+
+
+
+    void CreateNodes()
+    {
+        return; // Commented out to prevent node creation in this version
+        /*Debug.Log("CreateNodes Called");
 
         // Check if nodeParent is assigned in the Inspector
         if (nodeParent == null)
@@ -405,7 +422,7 @@ public class WalkerGenerator : MonoBehaviour
                 }
             }
         }
-        CreateConnections();
+        CreateConnections();*/
     }
 
     void CreateConnections()
@@ -435,14 +452,14 @@ public class WalkerGenerator : MonoBehaviour
         from.connections.Add(to);
     }
 
-    void SpawnAI()
+    /*void SpawnAI()
     {
         Node randNode = nodeList[Random.Range(0, nodeList.Count)];
 
         Enemy newEnemy = Instantiate(enemy, randNode.transform.position, Quaternion.identity);
 
         newEnemy.currentNode = randNode;
-    }
+    } */
 
     private void OnDrawGizmos()
     {
@@ -458,4 +475,4 @@ public class WalkerGenerator : MonoBehaviour
             }
         }
     }
- */
+ }

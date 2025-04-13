@@ -41,18 +41,22 @@ public class ExplosiveBullet : Bullet
         }
         // Find all enemies within the explosion radius and apply damage
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
+        int damagedPerExplosion = 0;
         foreach (Collider2D collider in colliders)
         {
             if (collider.CompareTag("Enemy") && shooter == ShooterType.Player)
             {
                 collider.GetComponent<Enemy>().takeDamage(explosionDamage);
+                damagedPerExplosion++;
             }
             else if (collider.CompareTag("Player") && shooter == ShooterType.Enemy)
             {
                 collider.GetComponent<Player>().takeDamage(explosionDamage);
+                damagedPerExplosion++;
             }
         }
         Destroy(gameObject);
+        Debug.Log("Entities damaged by explosion: " + damagedPerExplosion);
     }
 
     public void SetExplosionRadius(float radius)

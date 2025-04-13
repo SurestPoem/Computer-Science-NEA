@@ -12,7 +12,7 @@ public class Enemy : Entity
     protected float lastDamageTime = -1f;
     public List<LootItem> lootTable = new List<LootItem>();
     public GameObject deadBodyPrefab;
-    [Header("Pathfinding things")]
+    [Header("Pathfinding things - ignore")] //Ignore for now A* currently not working
     public Node currentNode;
     public List<Node> path = new List<Node>();
 

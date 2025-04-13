@@ -34,8 +34,7 @@ public class MainMenu : MonoBehaviour
     }
 
     public void TutorialGameButton()
-    {
-        GameManager.Instance.currentDifficulty = GameManager.Difficulty.Baby;
+    {        
         GameManager.Instance.StartGame(2);
     }
 

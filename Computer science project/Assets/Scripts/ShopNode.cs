@@ -34,7 +34,7 @@ public class ShopNode : MonoBehaviour
         }
         else
         {
-            Debug.Log("Player is broke, not enough currency");
+            Debug.Log("Player does not have enough currency or high enough level");
         }
     }
 

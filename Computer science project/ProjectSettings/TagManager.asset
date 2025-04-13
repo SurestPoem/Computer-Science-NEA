@@ -17,6 +17,7 @@ TagManager:
   - GameManager
   - Dropable
   - WinScreen
+  - NodeParent
   layers:
   - Default
   - TransparentFX

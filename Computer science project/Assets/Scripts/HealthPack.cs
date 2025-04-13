@@ -8,6 +8,7 @@ public class HealthPack : Dropable
 
     protected override void OnPickup()
     {
+        Debug.Log("Health Pack Picked Up, value: " + healthValue);
         player.Heal(healthValue);
     }
 

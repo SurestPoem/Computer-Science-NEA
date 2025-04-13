@@ -41,6 +41,7 @@ public class Currency : Dropable
 
     protected override void OnPickup()
     {
+        Debug.Log("Currency Picked Up, type " + currencyType);
         player.EarnXP(xpValue);
         player.EarnCurrency(currencyValue);
     }

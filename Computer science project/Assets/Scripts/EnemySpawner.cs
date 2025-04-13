@@ -24,7 +24,11 @@ public class EnemySpawner : MonoBehaviour
         tileMap = FindObjectOfType<Tilemap>();
         spawnRate = spawnRate / GameManager.Instance.difficultyMultiplier;
         enemiesPerSpawn = Mathf.RoundToInt(enemiesPerSpawn * GameManager.Instance.difficultyMultiplier);
-        nextSpawnTime = 3;
+    }
+
+    void Start()
+    {
+        nextSpawnTime = Time.time + spawnRate/2; // Start the first spawn after half the spawn rate
     }
 
     void Update()

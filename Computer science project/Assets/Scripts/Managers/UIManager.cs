@@ -112,7 +112,7 @@ public class UIManager : MonoBehaviour
         }
         else if (GameManager.Instance.selectedGameType == GameManager.GameType.Tutorial)
         {
-            goalText.text = "Goal " + levelManager.currentTutorialMessage;
+            goalText.text = levelManager.currentTutorialMessage;
         }
     }
 }

@@ -14,13 +14,12 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public bool deathScreenEnabled = false;
     [HideInInspector] public bool pauseScreenEnabled = false;
     [HideInInspector] public bool winScreenEnabled = false;
-    public enum Difficulty { Easy, Normal, Hard, Baby }   
+    public enum Difficulty { Easy, Normal, Hard }   
     public Difficulty currentDifficulty;
     public float difficultyMultiplier;
 
     public enum GameType { Normal, Endless, Tutorial }
     public GameType selectedGameType;  // Hold the player's selected game mode
-
     private void Awake()
     {
         // Ensure only one GameManager exists
@@ -33,6 +32,12 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);  // If a duplicate exists, destroy it
         }
+    }
+
+    void Update()
+    {
+        SlowMo(); // Call SlowMo method every frame
+        // Check for input to toggle slow motion
     }
 
     public void StartGame(int gameMode)
@@ -75,9 +80,6 @@ public class GameManager : MonoBehaviour
             case Difficulty.Hard:
                 difficultyMultiplier = 1.15f;
                 break;
-            case Difficulty.Baby:
-                difficultyMultiplier = 0.1f;
-                break;
         }
     }
 
@@ -93,9 +95,6 @@ public class GameManager : MonoBehaviour
                 break;
             case Difficulty.Hard:
                 difficultyMultiplier += 0.02f;
-                break;
-            case Difficulty.Baby:
-                difficultyMultiplier += 0f;  // No increase for Baby difficulty
                 break;
         }
     }
@@ -301,5 +300,18 @@ public class GameManager : MonoBehaviour
         Debug.Log("Quitting game...");
         // Quit the application
         Application.Quit();
+    }
+
+    public void SlowMo()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Time.timeScale = 0.08f; // Set slow motion
+        }
+
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            Time.timeScale = 1f; // Reset to normal speed
+        }
     }
 }
