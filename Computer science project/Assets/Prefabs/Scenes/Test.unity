@@ -335,19 +335,19 @@ PrefabInstance:
       objectReference: {fileID: 1451924835}
     - target: {fileID: 3895928140076579993, guid: 0de31641b8cbd9e4491fcaa8e352cb9d, type: 3}
       propertyPath: FillPercent
-      value: 0.9
+      value: 0.99999
       objectReference: {fileID: 0}
     - target: {fileID: 3895928140076579993, guid: 0de31641b8cbd9e4491fcaa8e352cb9d, type: 3}
       propertyPath: MaximumWalkers
-      value: 20
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3895928140076579993, guid: 0de31641b8cbd9e4491fcaa8e352cb9d, type: 3}
       propertyPath: playableMapWidth
-      value: 500
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3895928140076579993, guid: 0de31641b8cbd9e4491fcaa8e352cb9d, type: 3}
       propertyPath: playableMapHeight
-      value: 500
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7339416947651879143, guid: 0de31641b8cbd9e4491fcaa8e352cb9d, type: 3}
       propertyPath: m_LocalPosition.x

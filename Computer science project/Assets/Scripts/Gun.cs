@@ -20,54 +20,25 @@ public class Gun : MonoBehaviour
     public AudioClip shootSound;
     [Header("Misc")]
     public GameObject bulletPrefab;
-    protected float timeSinceLastShot = 0f;
+    protected float timeSinceLastShot = -Mathf.Infinity;
 
-    public Transform playerTransform;
-    public Transform crosshairTransform;
+    public Transform ownerTransform;
+    public Transform aimTarget;
     public Sprite gunIcon;
-
-
-    protected PlayerControls controls;
-
-    void Awake()
-    {
-        playerTransform = FindObjectOfType<Player>().transform;
-        controls = new PlayerControls();
-        controls.Player.Enable();  // Enable the controls
-        originalScale = gunSpriteRenderer.transform.localScale;
-
-
-        GameObject crosshair = GameObject.FindGameObjectWithTag("Crosshair");
-
-        if (crosshair != null)
-        {
-            crosshairTransform = crosshair.transform;
-        }
-        else
-        {
-            Debug.LogError("Crosshair not found");
-        }
-    }
 
     void Start()
     {
-        timeSinceLastShot = cooldownTime; // Initialize to allow immediate shooting
-    }
-    void Update()
-    {
-        timeSinceLastShot += Time.deltaTime;
-        RotateAndPositionGun(crosshairTransform.position);
-
+        originalScale = gunSpriteRenderer.transform.localScale;
     }
 
-    public void RotateAndPositionGun(Vector3 crosshairPosition)
+    public virtual void RotateAndPositionGun(Vector3 aimTargetPosition)
     {
-        crosshairPosition.z = 0;
+        aimTargetPosition.z = 0;
 
-        Vector3 direction = crosshairPosition - playerTransform.position;
+        Vector3 direction = aimTargetPosition - ownerTransform.position;
         direction.Normalize();
 
-        transform.position = playerTransform.position + direction * distanceFromPlayer;
+        transform.position = ownerTransform.position + direction * distanceFromPlayer;
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
@@ -79,15 +50,15 @@ public class Gun : MonoBehaviour
 
     public virtual void Shoot()
     {
-        if (timeSinceLastShot < cooldownTime)
+        if (Time.time - timeSinceLastShot < cooldownTime) // Time since last shot
             return;
 
-        timeSinceLastShot = 0f;
+        timeSinceLastShot = Time.time; // Record the time of this shot
         ApplyShootEffect(); // Apply shoot effect
         AudioManager.instance.PlaySound(shootSound, Random.Range(0.5f, 1.5f));
 
         // Get shoot direction based on crosshair world position
-        Vector2 shootDirection = (crosshairTransform.position - muzzlePoint.position).normalized;
+        Vector2 shootDirection = (aimTarget.position - muzzlePoint.position).normalized;
 
         // Create and initialize the bullet
         GameObject bullet = Instantiate(bulletPrefab, muzzlePoint.position, Quaternion.identity);

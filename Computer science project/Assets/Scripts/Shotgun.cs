@@ -10,15 +10,15 @@ public class Shotgun : Gun
 
     public override void Shoot()
     {
-        if (timeSinceLastShot < cooldownTime)
+        if (Time.time - timeSinceLastShot < cooldownTime) // Time since last shot
             return;
 
-        timeSinceLastShot = 0f;
+        timeSinceLastShot = Time.time; // Record the time of this shot
 
         AudioManager.instance.PlaySound(shootSound, Random.Range(0.5f, 1.5f));
         ApplyShootEffect(); // Apply shoot effect
         // Get the direction to the crosshair (target)
-        Vector2 shootDirection = (crosshairTransform.position - muzzlePoint.position).normalized;
+        Vector2 shootDirection = (aimTarget.position - muzzlePoint.position).normalized;
 
         // Create multiple bullets with spread
         for (int i = 0; i < numberOfPellets; i++)

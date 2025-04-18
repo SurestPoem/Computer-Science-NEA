@@ -16,6 +16,10 @@ public class Ranger : Enemy
     public float baseBulletSpeed;
     public float rangedDamage;
     public float baseRangedDamage;
+    public int numberOfBullets = 1;
+    public int baseNumberOfBullets = 1;
+    public float spreadAngle = 45f; // degrees
+    public float baseSpreadAngle = 45f; // degrees
 
     void Update()
     {
@@ -37,11 +41,6 @@ public class Ranger : Enemy
             // Too far -> Move closer
             ChasePlayer();
         }
-
-        else if (distanceToPlayer >= minAttackRange && distanceToPlayer <= maxAttackRange)
-        {
-            StartCoroutine(Strafe());
-        }
     }
 
     private void AttemptShoot()
@@ -57,18 +56,53 @@ public class Ranger : Enemy
     {
         if (bulletPrefab != null && firePoint != null)
         {
-            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-            Bullet bulletScript = bullet.GetComponent<Bullet>();
+            // Calculate how many bullets to fire
+            int bulletsToFire = Mathf.Max(numberOfBullets, baseNumberOfBullets);
 
-            if (bulletScript != null)
+            // Get the direction toward the player
+            Vector2 direction = (playerTransform.position - firePoint.position).normalized;
+
+            for (int i = 0; i < bulletsToFire; i++)
             {
-                bulletScript.SetDamage(rangedDamage);
-                Vector2 direction = (playerTransform.position - firePoint.position).normalized;
-                bulletScript.SetDirection(direction);
-                bulletScript.SetSpeed(bulletSpeed);
-                bulletScript.SetShooter(Bullet.ShooterType.Enemy);
+                // Instantiate the bullet
+                GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+                Bullet bulletScript = bullet.GetComponent<Bullet>();
+
+                if (bulletScript != null)
+                {
+                    bulletScript.SetDamage(rangedDamage);
+                    bulletScript.SetSpeed(bulletSpeed);
+                    bulletScript.SetShooter(Bullet.ShooterType.Enemy);
+
+                    // If this is the first bullet, aim directly at the player
+                    if (i == 0)
+                    {
+                        bulletScript.SetDirection(direction);
+                    }
+                    else
+                    {
+                        // Calculate spread for the other bullets
+                        float angle = Random.Range(-spreadAngle / 2f, spreadAngle / 2f);
+                        Vector2 spreadDirection = RotateDirection(direction, angle);
+                        bulletScript.SetDirection(spreadDirection);
+                    }
+                }
             }
         }
+    }
+
+    // Utility method to rotate the direction vector by a given angle in degrees
+    private Vector2 RotateDirection(Vector2 originalDirection, float angle)
+    {
+        float radians = angle * Mathf.Deg2Rad; // Convert angle to radians
+        float cos = Mathf.Cos(radians);
+        float sin = Mathf.Sin(radians);
+
+        // Rotate the direction vector
+        float x = originalDirection.x * cos - originalDirection.y * sin;
+        float y = originalDirection.x * sin + originalDirection.y * cos;
+
+        return new Vector2(x, y);
     }
 
     protected override void Initialise()
@@ -77,5 +111,7 @@ public class Ranger : Enemy
         shootCooldown = baseShootCooldown * GameManager.Instance.difficultyMultiplier;
         bulletSpeed = baseBulletSpeed * GameManager.Instance.difficultyMultiplier;
         rangedDamage = Mathf.RoundToInt(baseRangedDamage * GameManager.Instance.difficultyMultiplier);
+        numberOfBullets = Mathf.RoundToInt(baseNumberOfBullets * GameManager.Instance.difficultyMultiplier);
+        spreadAngle = baseSpreadAngle * GameManager.Instance.difficultyMultiplier;
     }
 }

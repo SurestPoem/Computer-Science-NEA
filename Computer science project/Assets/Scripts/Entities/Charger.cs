@@ -14,8 +14,7 @@ public class Charger : Enemy
         }
         else
         {
-            // Enemy retreats immediately after damaging player and continues until damageCooldown has passed
-            Strafe();
+           
         }
     }
 }

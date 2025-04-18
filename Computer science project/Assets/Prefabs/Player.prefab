@@ -63,6 +63,8 @@ MonoBehaviour:
   spriteRenderer: {fileID: 3297096859523437917}
   rb2d: {fileID: 85416550308021409}
   crosshair: {fileID: 0}
+  levelManager: {fileID: 0}
+  devMode: 0
   killCount: 0
   level: 0
   currentXP: 0

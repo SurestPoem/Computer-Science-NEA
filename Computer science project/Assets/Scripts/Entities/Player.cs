@@ -64,6 +64,13 @@ public class Player : Entity
         }
     }
 
+    private void OnDrawGizmos()
+    {
+        // Draw a blue line in the direction the player is moving
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(transform.position, transform.position + new Vector3(moveInput.normalized.x, moveInput.normalized.y, 0f) * 2f);
+    }
+
 
     private void HandleWeaponSwitching()
     {
@@ -94,11 +101,12 @@ public class Player : Entity
     {
         GameObject newGunObject = Instantiate(avalibleWeapons[currentGunIndex], transform.position, Quaternion.identity, transform);
         currentGun = newGunObject.GetComponent<Gun>();
+        currentGun.ownerTransform = this.transform;
 
         GameObject crosshair = GameObject.FindGameObjectWithTag("Crosshair");
         if (crosshair != null)
         {
-            currentGun.crosshairTransform = crosshair.transform;
+            currentGun.aimTarget = crosshair.transform;
         }
         else
         {
@@ -150,6 +158,7 @@ public class Player : Entity
         // Instantiate the new gun from the list
         GameObject newGunObject = Instantiate(avalibleWeapons[currentGunIndex], transform.position, Quaternion.identity, transform);
         currentGun = newGunObject.GetComponent<Gun>();
+        currentGun.ownerTransform = this.transform;
 
         // Make sure to assign the crosshairTransform (and any other properties you need to assign)
         if (currentGun != null)
@@ -157,7 +166,7 @@ public class Player : Entity
             GameObject crosshair = GameObject.FindGameObjectWithTag("Crosshair");
             if (crosshair != null)
             {
-                currentGun.crosshairTransform = crosshair.transform;
+                currentGun.aimTarget = crosshair.transform;
             }
             else
             {
@@ -309,6 +318,7 @@ public class Player : Entity
 
         }
     }
+
 
 }
 

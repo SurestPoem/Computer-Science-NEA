@@ -117,6 +117,10 @@ MonoBehaviour:
   baseBulletSpeed: 4.5
   rangedDamage: 0
   baseRangedDamage: 18
+  numberOfBullets: 0
+  baseNumberOfBullets: 1
+  spreadAngle: 0
+  baseSpreadAngle: 1
 --- !u!95 &6948329416515531148
 Animator:
   serializedVersion: 5

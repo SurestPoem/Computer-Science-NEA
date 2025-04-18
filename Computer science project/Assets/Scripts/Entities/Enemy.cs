@@ -16,6 +16,8 @@ public class Enemy : Entity
     public Node currentNode;
     public List<Node> path = new List<Node>();
 
+    private Vector3 currentDirection;
+
 
     void Update()
     {
@@ -37,17 +39,10 @@ public class Enemy : Entity
     {
         if (IsFreeze != true)
         {
-            Vector3 direction = (playerTransform.position - transform.position).normalized; // Use playerTransform
-            transform.position += direction * moveSpeed * Time.deltaTime;
+            currentDirection = (playerTransform.position - transform.position).normalized;
+            transform.position += currentDirection * moveSpeed * Time.deltaTime;
 
-            if (direction.x < 0)
-            {
-                spriteRenderer.flipX = true; // Flip the sprite
-            }
-            else
-            {
-                spriteRenderer.flipX = false; // Reset flip
-            }
+            spriteRenderer.flipX = currentDirection.x < 0;
         }
     }
 
@@ -55,28 +50,30 @@ public class Enemy : Entity
     {
         if (IsFreeze != true)
         {
-            Vector3 direction = (transform.position - playerTransform.position).normalized; // Use playerTransform
-            transform.position += direction * moveSpeed * Time.deltaTime;
-            if (direction.x < 0)
-            {
-                spriteRenderer.flipX = true; // Flip the sprite
-            }
-            else
-            {
-                spriteRenderer.flipX = false; // Reset flip
-            }
+            currentDirection = (transform.position - playerTransform.position).normalized;
+            transform.position += currentDirection * moveSpeed * Time.deltaTime;
+
+            spriteRenderer.flipX = currentDirection.x < 0;
         }
     }
 
-    protected IEnumerator Strafe()
+    private void OnDrawGizmos()
     {
-        if (IsFreeze != true)
+        if (currentDirection != Vector3.zero)
         {
-            Vector3 direction = (playerTransform.position - transform.position).normalized; // Use playerTransform
-            Vector3 strafeDirection = new Vector3(-direction.y, direction.x, 0); // Perpendicular direction
-            transform.position += strafeDirection * moveSpeed * Time.deltaTime;
-            yield return new WaitForSeconds(1f);
+            // Movement direction
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(transform.position, transform.position + currentDirection * 2f);
         }
+
+        // Optional: draw line to player
+        if (playerTransform != null)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawLine(transform.position, playerTransform.position);
+        }
+
+        
     }
 
     public void CreatePath()

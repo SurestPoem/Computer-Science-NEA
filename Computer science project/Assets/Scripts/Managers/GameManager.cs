@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
 
     public enum GameType { Normal, Endless, Tutorial }
     public GameType selectedGameType;  // Hold the player's selected game mode
+    public bool AutoAim = false; // Auto aim toggle
     private void Awake()
     {
         // Ensure only one GameManager exists

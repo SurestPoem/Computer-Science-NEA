@@ -11,30 +11,29 @@ public class OverheatingGun : Gun
     public Color overheatColor;
     public AudioClip overheatSound; // Sound to play when overheating
 
+
     public override void Shoot()
     {
         // If the gun is overheating, don't shoot
         if (isOverheating)
-        {
             return;
-        }
 
-        // Call the base Shoot method only if the cooldown is complete
-        if (timeSinceLastShot >= cooldownTime)
+        // Check if cooldown has passed
+        if (Time.time - timeSinceLastShot < cooldownTime)
+            return;
+
+        base.Shoot();  // Actually shoots + handles cooldown timestamp
+
+        shotsFired++;
+
+        if (shotsFired >= shotsBeforeOverheat)
         {
-            base.Shoot();  // Shoot normally
-
-            shotsFired++;
-
-            // If we've fired enough shots to overheat
-            if (shotsFired >= shotsBeforeOverheat)
-            {
-                shotsFired = 0;          
-                isOverheating = true;     
-                StartCoroutine(CooldownOverheat());  
-            }
+            isOverheating = true;
+            shotsFired = 0;
+            StartCoroutine(CooldownOverheat());
         }
     }
+
 
     private IEnumerator CooldownOverheat()
     {

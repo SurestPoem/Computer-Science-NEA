@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beb46f3637394064eab6319e0eabb712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunName: Alien Shotgun
+  gunName: (Test)Alien Shotgun
   damageStat: 6
   cooldownTime: 1
   bulletSpeed: 20
