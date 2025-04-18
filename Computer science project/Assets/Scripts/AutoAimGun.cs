@@ -5,55 +5,82 @@ using UnityEngine;
 public class AutoAimGun : Gun
 {
     [Header("Auto-Aim Settings")]
-    public float autoAimRadius = 10f;  // The radius in which to search for enemies
     public string enemyTag = "Enemy";  // The tag used for enemy objects
+    public float autoAimAssistStrength = 0.5f; // How much to nudge the aim towards the enemy
 
     public override void RotateAndPositionGun(Vector3 aimTargetPosition)
     {
-        // Find all enemies within the specified radius
-        Collider2D[] enemiesInRange = Physics2D.OverlapCircleAll(ownerTransform.position, autoAimRadius);
+        // Find the closest enemy in the general direction of the aim
+        Transform closestEnemy = FindClosestEnemy();
 
+        if (closestEnemy != null)
+        {
+            // Get the direction to the closest enemy
+            Vector3 directionToEnemy = closestEnemy.position - ownerTransform.position;
+            directionToEnemy.Normalize();
+
+            // Apply a small nudge to the player's aim if the enemy is near the crosshair
+            Vector3 direction = Vector3.Lerp(directionToEnemy, (aimTargetPosition - ownerTransform.position).normalized, autoAimAssistStrength);
+            direction.Normalize();
+
+            // Position and rotate the gun based on the nudge direction
+            transform.position = ownerTransform.position + direction * distanceFromPlayer;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+
+            // Flip the gun sprite based on the direction
+            gunSpriteRenderer.flipY = direction.x < 0;
+        }
+        else
+        {
+            // No enemy found, default to the crosshair position
+            base.RotateAndPositionGun(aimTargetPosition);
+        }
+    }
+
+    private Transform FindClosestEnemy()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
         Transform closestEnemy = null;
         float closestDistance = Mathf.Infinity;
 
-        // Loop through each enemy to find the closest one
-        foreach (Collider2D enemyCollider in enemiesInRange)
+        foreach (GameObject enemy in enemies)
         {
-            if (enemyCollider.CompareTag(enemyTag))
-            {
-                float distanceToEnemy = Vector2.Distance(ownerTransform.position, enemyCollider.transform.position);
+            // Calculate the distance from the player
+            float distance = Vector2.Distance(transform.position, enemy.transform.position);
 
-                // If this enemy is closer than the previous one, update the closest one
-                if (distanceToEnemy < closestDistance)
-                {
-                    closestDistance = distanceToEnemy;
-                    closestEnemy = enemyCollider.transform;
-                }
+            // Find the closest enemy
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestEnemy = enemy.transform;
             }
         }
 
-        // If no enemy is found, default to the crosshair position
-        if (closestEnemy != null)
+        return closestEnemy;
+    }
+
+    public override void Shoot()
+    {
+        if (Time.time - timeSinceLastShot < cooldownTime) // Time since last shot
+            return;
+
+        timeSinceLastShot = Time.time; // Record the time of this shot
+        ApplyShootEffect(); // Apply shoot effect
+        AudioManager.instance.PlaySound(shootSound, Random.Range(0.5f, 1.5f));
+
+        // Get shoot direction based on crosshair world position
+        Vector2 shootDirection = (muzzlePoint.position - ownerTransform.position).normalized;
+
+        // Create and initialize the bullet
+        GameObject bullet = Instantiate(bulletPrefab, muzzlePoint.position, Quaternion.identity);
+        Bullet bulletScript = bullet.GetComponent<Bullet>(); // Get the Bullet component
+
+
+
+        if (bulletScript != null)
         {
-            Vector3 targetPos = closestEnemy.position;
-            targetPos.z = 0;
-
-            Vector3 direction = targetPos - ownerTransform.position;
-            direction.Normalize();
-
-            transform.position = ownerTransform.position + direction * distanceFromPlayer;
-
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-
-            gunSpriteRenderer.flipY = direction.x < 0;
-        }
-
-        else
-        {
-            // No enemy found, aim at crosshair
-            base.RotateAndPositionGun(aimTargetPosition);
+            SetBulletStats(bulletScript, shootDirection); // Set the bullet stats
         }
     }
 }

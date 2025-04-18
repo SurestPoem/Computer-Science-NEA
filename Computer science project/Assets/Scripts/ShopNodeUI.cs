@@ -11,6 +11,7 @@ public class ShopNodeUI : MonoBehaviour
     public Sprite nullIconImage;
     public TextMeshProUGUI shopNodeName;
     public TextMeshProUGUI shopNodeStats;
+    public TextMeshProUGUI shopNodeDescription;
     public ShopNode shopNode;
     public ShopManager shopManager;
     public TextMeshProUGUI gunLevelText;
@@ -71,6 +72,7 @@ public class ShopNodeUI : MonoBehaviour
                 "Cooldown: " + shopNode.shopManager.ShopStock[shopNode.gunPointer].gunPrefab.GetComponent<Gun>().cooldownTime + "\n" +
                 "Bullet Speed: " + shopNode.shopManager.ShopStock[shopNode.gunPointer].gunPrefab.GetComponent<Gun>().bulletSpeed;
             shopNodeName.text = (shopNode.shopManager.ShopStock[shopNode.gunPointer].gunPrefab.GetComponent<Gun>().gunName);
+            shopNodeDescription.text = (shopNode.shopManager.ShopStock[shopNode.gunPointer].gunPrefab.GetComponent<Gun>().gunDescription);
             gunLevelText.text = ("Level: " + shopNode.shopManager.ShopStock[shopNode.gunPointer].levelRequired);
         }
         else if (shopNode.currentSellableType == ShopNode.SellableType.Upgrade)
@@ -78,6 +80,7 @@ public class ShopNodeUI : MonoBehaviour
             costText.text = (shopNode.generalCost.ToString() + " Upgrade");
             shopNodeStats.text = ("Amount:" + "\n" + shopNode.shopManager.UpgradeStock[shopNode.upgradePointer].upgradeAmount.ToString());
             shopNodeName.text = shopNode.shopManager.UpgradeStock[shopNode.upgradePointer].upgradeType.ToString();
+            shopNodeDescription.text = "A stat upgrade to your " + "\n" + shopNode.shopManager.UpgradeStock[shopNode.upgradePointer].upgradeType.ToString();
             gunLevelText.text = ("Level:  0");
         }
         else if (shopNode.currentSellableType == ShopNode.SellableType.Null)
@@ -86,6 +89,7 @@ public class ShopNodeUI : MonoBehaviour
             shopNodeStats.text = ("Purchased");
             shopNodeName.text = ("Item purchased");
             gunLevelText.text = ("Item purchased");
+            shopNodeDescription.text = ("Item purchased");
         }
     }
 }

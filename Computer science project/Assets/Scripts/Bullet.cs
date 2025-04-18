@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class Bullet : MonoBehaviour
 {
-    public enum ShooterType { Player, Enemy }
+    public enum ShooterType { Player, Enemy, None} //None is used for bullets that will damage both player and enemy
     public ShooterType shooter = ShooterType.Player;
 
     public float speed;
@@ -29,7 +29,7 @@ public class Bullet : MonoBehaviour
     protected virtual void OnTriggerEnter2D(Collider2D collider)
     {
         // Handle Player collision
-        if (shooter == ShooterType.Player && collider.CompareTag("Enemy") && !hasHit)
+        if ((shooter == ShooterType.Player || shooter == ShooterType.None) && collider.CompareTag("Enemy") && !hasHit)
         {
             var enemy = collider.GetComponent<Enemy>();
             if (enemy != null) // Check if the enemy component exists
@@ -39,7 +39,7 @@ public class Bullet : MonoBehaviour
         }
 
         // Handle Enemy collision
-        if (shooter == ShooterType.Enemy && collider.CompareTag("Player") && !hasHit)
+        if ((shooter == ShooterType.Enemy || shooter == ShooterType.None) && collider.CompareTag("Player") && !hasHit)
         {
             var player = collider.GetComponent<Player>();
             if (player != null) // Check if the player component exists

@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunName: (Test)Alien Shotgun
+  gunDescription: IN DEVELOPMENT
   damageStat: 6
   cooldownTime: 1
   bulletSpeed: 20
@@ -139,8 +140,8 @@ MonoBehaviour:
   scaleAmount: 1.2
   shootSound: {fileID: 8300000, guid: 46effc128a74f13459611d29aab2ee26, type: 3}
   bulletPrefab: {fileID: 5838070477860344463, guid: 2e19f478418f90243867e3dd76b138dc, type: 3}
-  playerTransform: {fileID: 0}
-  crosshairTransform: {fileID: 0}
+  ownerTransform: {fileID: 0}
+  aimTarget: {fileID: 0}
   gunIcon: {fileID: 1901071693, guid: 080b2f62b8ab26e40b6907cb748b5d94, type: 3}
   numberOfPellets: 8
   spreadAngle: 90

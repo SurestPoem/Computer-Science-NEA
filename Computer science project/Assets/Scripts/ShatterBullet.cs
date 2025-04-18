@@ -73,7 +73,7 @@ public class ShatterBullet : Bullet
                     if (bulletPieceScript is ShatterBullet)
                     {
                         ShatterBullet shatterBulletPiece = (ShatterBullet)bulletPieceScript;
-                        shatterBulletPiece.SetNumberOfBullets(numberOfBullets - 1); // Decrease the number of bullets for the piece
+                        shatterBulletPiece.SetNumberOfBullets(3); //For lag issues, min 3
                         shatterBulletPiece.shatterGeneration = shatterGeneration + 1; // Increase the generation of the piece
                     }
                 }
@@ -115,3 +115,5 @@ public class ShatterBullet : Bullet
     }
 }
 */
+
+//Code could be reused into another class idk tho, thunk on that

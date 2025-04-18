@@ -44,12 +44,12 @@ public class ExplosiveBullet : Bullet
         int damagedPerExplosion = 0;
         foreach (Collider2D collider in colliders)
         {
-            if (collider.CompareTag("Enemy") && shooter == ShooterType.Player)
+            if (collider.CompareTag("Enemy") && (shooter == ShooterType.Player || shooter == ShooterType.None))
             {
                 collider.GetComponent<Enemy>().takeDamage(explosionDamage);
                 damagedPerExplosion++;
             }
-            else if (collider.CompareTag("Player") && shooter == ShooterType.Enemy)
+            else if (collider.CompareTag("Player") && (shooter == ShooterType.Enemy || shooter == ShooterType.None))
             {
                 collider.GetComponent<Player>().takeDamage(explosionDamage);
                 damagedPerExplosion++;

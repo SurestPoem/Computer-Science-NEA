@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunName: (Test)Noob Gun
+  gunDescription: IN DEVELOPMENT
   damageStat: 10
   cooldownTime: 0.5
   bulletSpeed: 15
@@ -112,8 +113,8 @@ MonoBehaviour:
   ownerTransform: {fileID: 0}
   aimTarget: {fileID: 0}
   gunIcon: {fileID: -316649135, guid: 080b2f62b8ab26e40b6907cb748b5d94, type: 3}
-  autoAimRadius: 100
   enemyTag: Enemy
+  autoAimAssistStrength: 0.5
 --- !u!82 &5565711319992712400
 AudioSource:
   m_ObjectHideFlags: 0

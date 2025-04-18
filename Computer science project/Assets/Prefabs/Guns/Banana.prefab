@@ -130,14 +130,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunName: An Ordinary Banana
+  gunDescription: A light snack
   damageStat: 100
   cooldownTime: 0.5
   bulletSpeed: 40
   distanceFromPlayer: 0.55
   gunSpriteRenderer: {fileID: 2969873504083480929}
   muzzlePoint: {fileID: 1262958199354753317}
+  scaleAmount: 1.2
   shootSound: {fileID: 8300000, guid: c8b946dc5e9e7b841bb0cc201c23256a, type: 3}
   bulletPrefab: {fileID: 5838070477860344463, guid: b70a5f348273ebc439b33cd082354732, type: 3}
-  playerTransform: {fileID: 0}
-  crosshairTransform: {fileID: 0}
+  ownerTransform: {fileID: 0}
+  aimTarget: {fileID: 0}
   gunIcon: {fileID: 21300000, guid: 7007a8359a4b49d4790f58b50d2f13d1, type: 3}
