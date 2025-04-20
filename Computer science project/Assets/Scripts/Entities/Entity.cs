@@ -20,6 +20,7 @@ public class Entity : MonoBehaviour
     protected float regenTimer = 0f;
     [Header("Misc")]
     public Player player;// Reference to Player class
+    protected Animator animator;
     public bool IsFreeze;
     public bool IsDead;
     public SpriteRenderer spriteRenderer;
@@ -89,5 +90,6 @@ public class Entity : MonoBehaviour
     {
         player = FindObjectOfType<Player>();
         health = maxHealth; //Sets the health as max health
+        animator = GetComponent<Animator>();
     }
 }

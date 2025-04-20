@@ -107,4 +107,10 @@ public class EnemySpawner : MonoBehaviour
         }
         enemiesPerSpawn = Mathf.RoundToInt(enemiesPerSpawn * GameManager.Instance.difficultyMultiplier);
     }
+
+    private void CheckSpawnArea()
+    {
+        //Checks if the area around the spawn point meets minSpawnArea
+      
+    }
 }

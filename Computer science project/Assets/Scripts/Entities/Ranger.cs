@@ -21,7 +21,7 @@ public class Ranger : Enemy
     public float spreadAngle = 45f; // degrees
     public float baseSpreadAngle = 45f; // degrees
 
-    void Update()
+    protected override void Update()
     {
         base.Update();
         AttemptShoot();

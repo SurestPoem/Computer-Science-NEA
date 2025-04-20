@@ -51,9 +51,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   maxHealth: 0
-  baseMaxHealth: 10
+  baseMaxHealth: 30
   moveSpeed: 0
-  baseMoveSpeed: 1.5
+  baseMoveSpeed: 1
   healAmount: 0
   damageAmount: 0
   regenRate: 0
@@ -75,6 +75,11 @@ MonoBehaviour:
   deadBodyPrefab: {fileID: 9178326787673341792, guid: efea2ff82c7f39a44b11d7d3d7682c78, type: 3}
   currentNode: {fileID: 0}
   path: []
+  splitAmount: 3
+  SplitSlime: {fileID: 7131957743748288424}
+  splitRadius: 1
+  maxSplitGeneration: 1
+  currentSplitGeneration: 0
 --- !u!95 &4845883913908984215
 Animator:
   serializedVersion: 5

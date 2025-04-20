@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Charger : Enemy
 {
-    void Update()
+    protected override void Update()
     {
         base.Update();
         if (Time.time > lastDamageTime + damageCooldown)

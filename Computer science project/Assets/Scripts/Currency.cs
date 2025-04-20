@@ -10,7 +10,7 @@ public class Currency : Dropable
     public int xpValue;       // The XP value associated with this currency type
     public int currencyValue; // The actual currency value associated with this type
 
-    void Start()
+    protected override void Start()
     {
         base.Start();
         RandomizeValues();

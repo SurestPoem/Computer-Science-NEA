@@ -11,7 +11,7 @@ public class Dropable : MonoBehaviour
     private static float pickupDistanceThreshold = 0.5f; // Distance at which the item "reaches" the player
 
     // Start is called before the first frame update
-    protected void Start()
+    protected virtual void Start()
     {
         // Find player by tag
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;

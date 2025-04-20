@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Ghost : Enemy
 {
-    void Update()
+    protected override void Update()
     {
         base.Update();
         ChasePlayer();

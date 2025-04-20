@@ -19,10 +19,7 @@ public class Enemy : Entity
     private Vector3 currentDirection;
 
 
-    void Update()
-    {
-        base.Update();
-    }
+    
 
     public void DealCollideDamage(Player player)
     {

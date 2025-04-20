@@ -8,7 +8,6 @@ public class Player : Entity
     
     public Rigidbody2D rb2d;
     private Vector2 moveInput;
-    private Animator animator;
     private PlayerControls controls;
     public CrosshairController crosshair;
     public LevelManager levelManager;
@@ -28,7 +27,7 @@ public class Player : Entity
 
 
     // Update is called once per frame
-    protected void Update()
+    protected override void Update()
     {
         base.Update();
         PlayerMovement();
@@ -299,7 +298,6 @@ public class Player : Entity
     {
         levelManager = FindObjectOfType<LevelManager>();
         base.Initialise();
-        animator = GetComponent<Animator>();
         controls = new PlayerControls();
         controls.Player.Enable(); // Enable the controls
         crosshair = FindObjectOfType<CrosshairController>();

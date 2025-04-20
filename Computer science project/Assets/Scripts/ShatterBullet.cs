@@ -14,10 +14,9 @@ public class ShatterBullet : Bullet
     public int shatterGeneration;
     public int maxShatterGeneration = 3; // Maximum generation of shattering
 
-    IEnumerator Start()
+    protected override void Start()
     {
-        yield return new WaitForSeconds(armingDelay); // Arming delay
-        isReadyToShatter = true;
+        StartCoroutine(ArmDelay());
     }
     protected override void HitEnemy(Enemy enemy)
     {
@@ -59,7 +58,7 @@ public class ShatterBullet : Bullet
                 float rad = randomAngle * Mathf.Deg2Rad;
                 Vector2 randomizedDir = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad)).normalized;
 
-                Vector2 spawnOffset = randomizedDir * 0.2f; // Offset to prevent overlap
+                Vector2 spawnOffset = randomizedDir * 0.1f; // Offset to prevent overlap
                 Vector2 spawnPosition = (Vector2)transform.position + spawnOffset;
 
                 GameObject bulletPiece = Instantiate(bulletPrefab, spawnPosition, Quaternion.identity);
@@ -89,6 +88,13 @@ public class ShatterBullet : Bullet
         Destroy(gameObject);        
     }
 
+    private IEnumerator ArmDelay()
+    {
+        yield return new WaitForSeconds(armingDelay);
+        isReadyToShatter = true;
+        yield return new WaitForSeconds(bulletLifetime);
+        BreakIntoPieces(360);
+    }
     public void SetNumberOfBullets(int number)
     {
         numberOfBullets = number;
