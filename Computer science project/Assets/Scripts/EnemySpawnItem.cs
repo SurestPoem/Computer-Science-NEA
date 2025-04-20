@@ -9,4 +9,5 @@ public class EnemySpawnItem
     public int spawnAmount;
     public float spawnChance;
     public int minSpawnArea;
+    public bool isEnabled = true;
 }

@@ -12,13 +12,21 @@ public class Enemy : Entity
     protected float lastDamageTime = -1f;
     public List<LootItem> lootTable = new List<LootItem>();
     public GameObject deadBodyPrefab;
+    public float animationSpeed = 1f; // Animation speed multiplier
     [Header("Pathfinding things - ignore")] //Ignore for now A* currently not working
     public Node currentNode;
     public List<Node> path = new List<Node>();
-
     private Vector3 currentDirection;
+    
 
-
+    protected override void Update()
+    {
+        base.Update();
+        if (animator != null)
+        {
+            animator.speed = moveSpeed * animationSpeed; // Adjust animation speed based on movement speed
+        }
+    }
     
 
     public void DealCollideDamage(Player player)

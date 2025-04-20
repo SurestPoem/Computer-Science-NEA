@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4273178142126089019
+--- !u!1 &1934724514967759387
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,7 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2673196801429801097}
+  - component: {fileID: 1670264507268960006}
   m_Layer: 0
   m_Name: MuzzlePoint
   m_TagString: Untagged
@@ -16,22 +16,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2673196801429801097
+--- !u!4 &1670264507268960006
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4273178142126089019}
+  m_GameObject: {fileID: 1934724514967759387}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.253, y: 0.018, z: 0}
+  m_LocalPosition: {x: 0.126, y: 0.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4791104669449913757}
+  m_Father: {fileID: 3614323493974214939}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5382643019497250915
+--- !u!1 &2411999366630212562
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -39,39 +39,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4791104669449913757}
-  - component: {fileID: 6720162663414087205}
-  - component: {fileID: 2230388837874675549}
+  - component: {fileID: 3614323493974214939}
+  - component: {fileID: 1232533324015353829}
+  - component: {fileID: 4120293419030432934}
   m_Layer: 0
-  m_Name: PowerShotGun
+  m_Name: Wildcard
   m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4791104669449913757
+--- !u!4 &3614323493974214939
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5382643019497250915}
+  m_GameObject: {fileID: 2411999366630212562}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.431, y: -0.008, z: -0.01484375}
-  m_LocalScale: {x: 0.3, y: 0.4, z: 0.0625}
+  m_LocalPosition: {x: 0, y: 0, z: -0.01484375}
+  m_LocalScale: {x: 0.7, y: 0.6, z: 0.0625}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2673196801429801097}
+  - {fileID: 1670264507268960006}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &6720162663414087205
+--- !u!212 &1232533324015353829
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5382643019497250915}
+  m_GameObject: {fileID: 2411999366630212562}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -106,7 +106,7 @@ SpriteRenderer:
   m_SortingLayerID: 384795743
   m_SortingLayer: 4
   m_SortingOrder: 2
-  m_Sprite: {fileID: 1901071693, guid: 080b2f62b8ab26e40b6907cb748b5d94, type: 3}
+  m_Sprite: {fileID: 1032797837, guid: 080b2f62b8ab26e40b6907cb748b5d94, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -117,31 +117,39 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2230388837874675549
+--- !u!114 &4120293419030432934
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5382643019497250915}
+  m_GameObject: {fileID: 2411999366630212562}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: beb46f3637394064eab6319e0eabb712, type: 3}
+  m_Script: {fileID: 11500000, guid: 660c72790277e1043bc2d3e914235dc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunName: (Test)Alien Shotgun
-  gunDescription: DEV OP WEAPON NOT FOR USE
-  damageStat: 6
-  cooldownTime: 1
-  bulletSpeed: 20
+  gunName: (Test)WIldcard
+  gunDescription: IN DEVELOPMENT
+  damageStat: 15
+  cooldownTime: 1.5
+  bulletSpeed: 10
   distanceFromPlayer: 0.5
-  gunSpriteRenderer: {fileID: 6720162663414087205}
-  muzzlePoint: {fileID: 2673196801429801097}
+  gunSpriteRenderer: {fileID: 1232533324015353829}
+  muzzlePoint: {fileID: 1670264507268960006}
   scaleAmount: 1.2
-  shootSound: {fileID: 8300000, guid: 46effc128a74f13459611d29aab2ee26, type: 3}
-  bulletPrefab: {fileID: 5838070477860344463, guid: 2e19f478418f90243867e3dd76b138dc, type: 3}
+  shootSound: {fileID: 8300000, guid: c8b946dc5e9e7b841bb0cc201c23256a, type: 3}
+  bulletPrefab: {fileID: 5838070477860344463, guid: b70a5f348273ebc439b33cd082354732, type: 3}
   ownerTransform: {fileID: 0}
   aimTarget: {fileID: 0}
-  gunIcon: {fileID: 1901071693, guid: 080b2f62b8ab26e40b6907cb748b5d94, type: 3}
-  numberOfPellets: 8
-  spreadAngle: 90
+  gunIcon: {fileID: 1032797837, guid: 080b2f62b8ab26e40b6907cb748b5d94, type: 3}
+  bulletPrefabs:
+  - {fileID: 4845006542049968837, guid: b70a5f348273ebc439b33cd082354732, type: 3}
+  - {fileID: 4845006542049968837, guid: de43be828f39c8741a759fd9e60d1331, type: 3}
+  - {fileID: 719863255167351306, guid: c262e1a5bce6a7f4cb2630dde6524fba, type: 3}
+  - {fileID: 9189408515051254550, guid: 2e19f478418f90243867e3dd76b138dc, type: 3}
+  - {fileID: 7890116205798428067, guid: 43a7be39bfa09734dba7a1ad0237e9fe, type: 3}
+  explosiveDamage: 25
+  explosiveRadius: 1
+  shatterNumberOfBullets: 20
+  shatterAngleOfBulletSpread: 90

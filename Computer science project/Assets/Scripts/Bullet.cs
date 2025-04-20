@@ -14,6 +14,7 @@ public class Bullet : MonoBehaviour
     private Gun gun;  // Reference to the Gun
     protected bool hasHit = false;
     public float damage;
+    public SpriteRenderer spriteRenderer;
 
     protected virtual void Start()
     {
@@ -24,6 +25,7 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         transform.Translate(bulletDirection * speed * Time.deltaTime);
+        RotateSprite(); // Rotate the bullet sprite based on its direction
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D collider)
@@ -100,5 +102,18 @@ public class Bullet : MonoBehaviour
     public void SetDamage(float bulletDamage)
     {
         damage = bulletDamage;
+    }
+
+    void RotateSprite()
+    {
+        // If the bulletDirection is not zero, calculate the angle
+        if (bulletDirection != Vector2.zero)
+        {
+            // Get the angle in radians and convert to degrees
+            float angle = Mathf.Atan2(bulletDirection.y, bulletDirection.x) * Mathf.Rad2Deg;
+
+            // Apply the angle to the sprite rotation (using localEulerAngles for sprite-specific rotation)
+            spriteRenderer.transform.localEulerAngles = new Vector3(0, 0, angle);
+        }
     }
 }

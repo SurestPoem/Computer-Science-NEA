@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class ShatterBullet : Bullet
 {
-    public int bounceCount = 3; // Number of bounces before the bullet is destroyed
-    //private int currentBounceCount = 0;
     public GameObject bulletPrefab;
     public int numberOfBullets;
     public float angleOfBulletSpread = 45f; // Angle spread for the bullet pieces
@@ -68,11 +66,13 @@ public class ShatterBullet : Bullet
                     bulletPieceScript.SetSpeed(newSpeed);
                     bulletPieceScript.SetDamage(newDamage);
                     bulletPieceScript.SetDirection(randomizedDir);
-                    bulletPieceScript.SetShooter(shooter);
+                    bulletPieceScript.SetShooter(ShooterType.None);
                     if (bulletPieceScript is ShatterBullet)
                     {
                         ShatterBullet shatterBulletPiece = (ShatterBullet)bulletPieceScript;
                         shatterBulletPiece.SetNumberOfBullets(3); //For lag issues, min 3
+                        shatterBulletPiece.SetAngleOfBulletSpread(angleOfBulletSpread - 5);
+                        shatterBulletPiece.SetBulletPrefab(bulletPrefab);
                         shatterBulletPiece.shatterGeneration = shatterGeneration + 1; // Increase the generation of the piece
                     }
                 }
@@ -98,6 +98,14 @@ public class ShatterBullet : Bullet
     public void SetNumberOfBullets(int number)
     {
         numberOfBullets = number;
+    }
+    public void SetAngleOfBulletSpread(float angle)
+    {
+        angleOfBulletSpread = angle;
+    }
+    public void SetBulletPrefab(GameObject bullet)
+    {
+        bulletPrefab = bullet;
     }
 }
 

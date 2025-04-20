@@ -73,6 +73,7 @@ MonoBehaviour:
   currentGun: {fileID: 0}
   avalibleWeapons:
   - {fileID: 5071798315793013490, guid: 8d1a0c6ba022fb9498a06528b59febdf, type: 3}
+  - {fileID: 2411999366630212562, guid: 0e048b6f77ff2eb4789944a9b9075a6e, type: 3}
   currentGunIndex: 0
 --- !u!212 &3297096859523437917
 SpriteRenderer:

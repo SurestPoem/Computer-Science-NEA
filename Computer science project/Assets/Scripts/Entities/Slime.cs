@@ -15,10 +15,6 @@ public class Slime : Enemy
     {
         base.Update();
         // Scale the animation speed based on movement speed
-        if (animator != null)
-        {
-            animator.speed = moveSpeed; // Set the animation speed to match the movement speed
-        }
         if (Time.time > lastDamageTime + damageCooldown)
         {
             // Enemy chases player after the damage cooldown ends
@@ -36,22 +32,23 @@ public class Slime : Enemy
         Collider[] hitColliders = Physics.OverlapSphere(position, splitRadius);
         foreach (var hitCollider in hitColliders)
         {
-            if (hitCollider.CompareTag("Enemy") || hitCollider.CompareTag("Wall"))
+            /*if (hitCollider.CompareTag("Wall"))
             {
                 return false;
-            }
+            }*/
         }
         return true;
     }
 
     public IEnumerator Split()
     {
+        float newScale = transform.localScale.x / 1.8f;
+        float newMaxHealth = Mathf.RoundToInt(baseMaxHealth / 1.7f);
+        float newMoveSpeed = baseMoveSpeed * 1.5f;
+        float newCollideDamage = Mathf.RoundToInt(baseCollideDamage / 2f);
         for (int i = 0; i < splitAmount; i++)
         {
-            float newScale = transform.localScale.x / 2;
-            float newMaxHealth = Mathf.RoundToInt(maxHealth / 1.7f);
-            float newMoveSpeed = moveSpeed * 1.5f;
-            float newCollideDamage = collideDamage / 1.3f;
+            
             Vector3 spawnPosition = transform.position + Random.insideUnitSphere * splitRadius;
             spawnPosition.z = 0; // Ensure z position is 0 for 2D
 
@@ -64,18 +61,18 @@ public class Slime : Enemy
                 Slime newslimeScript = newslime.GetComponent<Slime>();
                 newslimeScript.spriteRenderer.color = new Color(1, 1, 1, 1);
                 newslimeScript.currentSplitGeneration++;
-                newslimeScript.maxHealth = newMaxHealth;
-                newslimeScript.moveSpeed = newMoveSpeed;
-                newslimeScript.collideDamage = newCollideDamage;
+                newslimeScript.baseMaxHealth = newMaxHealth;
+                newslimeScript.baseMoveSpeed = newMoveSpeed;
+                newslimeScript.baseCollideDamage = newCollideDamage;
 
             }
-            yield return new WaitForSeconds(0.3f); // Small delay between splits
+            yield return new WaitForSeconds(0.1f); // Small delay between splits
         }
     }
 
     public override void Die()
     {
-        if (currentSplitGeneration <= maxSplitGeneration)
+        if (currentSplitGeneration < maxSplitGeneration)
         {
             //StartCoroutine(Split());
         }

@@ -4,17 +4,64 @@ using UnityEngine;
 
 public class Charger : Enemy
 {
+    public float chargeSpeed = 6f;
+    public float chargeDistance = 3f;
+    public float chargeCooldown = 2f;
+    public float retreatTime = 1f;
+
+    private bool isCharging = false;
+    private float lastChargeTime = -Mathf.Infinity;
+
     protected override void Update()
     {
         base.Update();
-        if (Time.time > lastDamageTime + damageCooldown)
+        ChasePlayer();
+        /*float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+        // If currently charging, skip decision logic
+        if (isCharging) return;
+
+        // Can we charge?
+        if (Time.time >= lastChargeTime + chargeCooldown && distanceToPlayer <= chargeDistance)
         {
-            // Enemy chases player after the damage cooldown ends
-            ChasePlayer();
+            StartCoroutine(Charge());
         }
         else
         {
-           
+            // Too far to charge, just chase
+            ChasePlayer();
+        }*/
+    }
+
+    private IEnumerator Charge()
+    {
+        isCharging = true;
+        lastChargeTime = Time.time;
+
+        // Fixed direction at start
+        Vector3 chargeDirection = (playerTransform.position - transform.position).normalized;
+
+        float chargeDuration = chargeDistance / chargeSpeed;
+        float chargeTimer = 0f;
+
+        while (chargeTimer < chargeDuration)
+        {
+            transform.position += chargeDirection * chargeSpeed * Time.deltaTime;
+            chargeTimer += Time.deltaTime;
+
+            // (Optional) You can check for collisions here
+            // CheckCollisionWithPlayer();
+
+            yield return null;
         }
+
+        // Optional retreat after the charge
+        float retreatStartTime = Time.time;
+        while (Time.time < retreatStartTime + retreatTime)
+        {
+            RetreatFromPlayer();
+            yield return null;
+        }
+
+        isCharging = false;
     }
 }
