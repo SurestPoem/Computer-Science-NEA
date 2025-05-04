@@ -19,6 +19,10 @@ public class WalkerGenerator : MonoBehaviour
     public int MapWidth;
     public int MapHeight;
 
+    public int outerWallThickness = 2; // Thickness of the outer wall border
+    public int spawnAreaHeight = 3; // Height of the spawn area
+    public int spawnAreaWidth = 3; // Width of the spawn area
+
     public int MaximumWalkers = 10;
     public int TileCount = default;
     public float FillPercent = 0.4f;
@@ -46,8 +50,8 @@ public class WalkerGenerator : MonoBehaviour
     {
         CheckGrid();
 
-        MapWidth = playableMapWidth + 2;
-        MapHeight = playableMapHeight + 2;
+        MapWidth = playableMapWidth + outerWallThickness;
+        MapHeight = playableMapHeight + outerWallThickness;
 
         MaximumWalkers = Random.Range(1, 6);
         if (GameManager.Instance == null)

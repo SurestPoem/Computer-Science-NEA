@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5243552973214184630}
   - component: {fileID: 5314142531573673887}
   m_Layer: 0
-  m_Name: Bullet_ExplosiveVisual
+  m_Name: BulletVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4486693131609157373}
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 384795743
   m_SortingLayer: 4
   m_SortingOrder: 3
-  m_Sprite: {fileID: -385453634, guid: d3ef9835cac7934479a3cb216e7cb06e, type: 3}
+  m_Sprite: {fileID: -1865582105, guid: f9853fe2dadb62a498375f6138c08bf4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 8938795434031619448}
   - component: {fileID: 5560747009066873619}
   m_Layer: 0
-  m_Name: Bullet_Explosive
+  m_Name: BulletRocket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -113,7 +113,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.326, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 2}
+  m_LocalScale: {x: 1.7, y: 1.7, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5243552973214184630}
@@ -199,6 +199,6 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.26, y: 0.28}
-  m_Direction: 0
+  m_Offset: {x: 0.05602285, y: 0.0012314453}
+  m_Size: {x: 0.19475292, y: 0.12946424}
+  m_Direction: 1

@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 2915771449848912870}
   - component: {fileID: 9003219180387121088}
   m_Layer: 0
-  m_Name: BulletMassiveVisual
+  m_Name: BulletVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

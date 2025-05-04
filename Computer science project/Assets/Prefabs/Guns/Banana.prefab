@@ -25,13 +25,13 @@ Transform:
   m_GameObject: {fileID: 5368549753642310950}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.166, y: -0.019, z: 0}
+  m_LocalPosition: {x: 0.179, y: 0.027, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7826665339786951293}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8281085056928925149
+--- !u!1 &7275990408678985029
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -39,39 +39,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7826665339786951293}
-  - component: {fileID: 2969873504083480929}
-  - component: {fileID: 402667238672798309}
+  - component: {fileID: 5385361149619684085}
+  - component: {fileID: 7926868426161787829}
   m_Layer: 0
-  m_Name: Banana
-  m_TagString: Gun
+  m_Name: GunVisual
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7826665339786951293
+--- !u!4 &5385361149619684085
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8281085056928925149}
+  m_GameObject: {fileID: 7275990408678985029}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -15.550374, y: -0.8115023, z: -0.01484375}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.0625}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1262958199354753317}
-  m_Father: {fileID: 0}
+  m_Children: []
+  m_Father: {fileID: 7826665339786951293}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &2969873504083480929
+--- !u!212 &7926868426161787829
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8281085056928925149}
+  m_GameObject: {fileID: 7275990408678985029}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -117,6 +115,40 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &8281085056928925149
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7826665339786951293}
+  - component: {fileID: 402667238672798309}
+  m_Layer: 0
+  m_Name: Banana
+  m_TagString: Gun
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7826665339786951293
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8281085056928925149}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.0625}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5385361149619684085}
+  - {fileID: 1262958199354753317}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &402667238672798309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,8 +166,9 @@ MonoBehaviour:
   damageStat: 100
   cooldownTime: 0.5
   bulletSpeed: 40
+  bulletLifetime: 2
   distanceFromPlayer: 0.55
-  gunSpriteRenderer: {fileID: 2969873504083480929}
+  gunSpriteRenderer: {fileID: 7926868426161787829}
   muzzlePoint: {fileID: 1262958199354753317}
   scaleAmount: 1.2
   shootSound: {fileID: 8300000, guid: c8b946dc5e9e7b841bb0cc201c23256a, type: 3}

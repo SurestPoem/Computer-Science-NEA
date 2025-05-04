@@ -16,20 +16,6 @@ public class Charger : Enemy
     {
         base.Update();
         ChasePlayer();
-        /*float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
-        // If currently charging, skip decision logic
-        if (isCharging) return;
-
-        // Can we charge?
-        if (Time.time >= lastChargeTime + chargeCooldown && distanceToPlayer <= chargeDistance)
-        {
-            StartCoroutine(Charge());
-        }
-        else
-        {
-            // Too far to charge, just chase
-            ChasePlayer();
-        }*/
     }
 
     private IEnumerator Charge()
@@ -64,4 +50,19 @@ public class Charger : Enemy
 
         isCharging = false;
     }
+
+    /*float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+        // If currently charging, skip decision logic
+        if (isCharging) return;
+
+        // Can we charge?
+        if (Time.time >= lastChargeTime + chargeCooldown && distanceToPlayer <= chargeDistance)
+        {
+            StartCoroutine(Charge());
+        }
+        else
+        {
+            // Too far to charge, just chase
+            ChasePlayer();
+        }*/
 }

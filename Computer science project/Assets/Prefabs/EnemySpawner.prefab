@@ -13,7 +13,7 @@ GameObject:
   m_Layer: 0
   m_Name: EnemySpawner
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -55,12 +55,12 @@ MonoBehaviour:
     spawnAmount: 3
     spawnChance: 50
     minSpawnArea: 0
-    isEnabled: 0
+    isEnabled: 1
   - enemyPrefab: {fileID: 6486128665900377829, guid: f6e84a9cc10e863498a78a0a25496ebc, type: 3}
     spawnAmount: 2
     spawnChance: 40
     minSpawnArea: 0
-    isEnabled: 0
+    isEnabled: 1
   enemyPrefab: {fileID: 7131957743748288424, guid: 65a824c5e249e3d41a7c5babc8802933, type: 3}
   spawnRate: 10
   enemiesPerSpawn: 2

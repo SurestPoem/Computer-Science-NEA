@@ -67,7 +67,6 @@ public class AutoAimGun : Gun
 
         timeSinceLastShot = Time.time; // Record the time of this shot
         ApplyShootEffect(); // Apply shoot effect
-        AudioManager.instance.PlaySound(shootSound, Random.Range(0.5f, 1.5f));
 
         // Get shoot direction based on crosshair world position
         Vector2 shootDirection = (muzzlePoint.position - ownerTransform.position).normalized;

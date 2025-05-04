@@ -14,8 +14,6 @@ public class Shotgun : Gun
             return;
 
         timeSinceLastShot = Time.time; // Record the time of this shot
-
-        AudioManager.instance.PlaySound(shootSound, Random.Range(0.5f, 1.5f));
         ApplyShootEffect(); // Apply shoot effect
         // Get the direction to the crosshair (target)
         Vector2 shootDirection = (aimTarget.position - muzzlePoint.position).normalized;

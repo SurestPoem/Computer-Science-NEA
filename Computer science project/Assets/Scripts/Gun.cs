@@ -11,6 +11,7 @@ public class Gun : MonoBehaviour
     public float damageStat;
     public float cooldownTime = 0.5f;
     public float bulletSpeed = 1f;
+    public float bulletLifetime = 2f; // Lifetime of the bullet in seconds
     [Header("Visual")]
     public float distanceFromPlayer = 1f;
     public SpriteRenderer gunSpriteRenderer;
@@ -56,7 +57,6 @@ public class Gun : MonoBehaviour
 
         timeSinceLastShot = Time.time; // Record the time of this shot
         ApplyShootEffect(); // Apply shoot effect
-        AudioManager.instance.PlaySound(shootSound, Random.Range(0.5f, 1.5f));
 
         // Get shoot direction based on crosshair world position
         Vector2 shootDirection = (aimTarget.position - muzzlePoint.position).normalized;
@@ -80,6 +80,7 @@ public class Gun : MonoBehaviour
         bulletScript.SetDirection(shootDirection);
         bulletScript.SetShooter(Bullet.ShooterType.Player);
         bulletScript.SetGun(this);
+        bulletScript.SetBulletLifetime(bulletLifetime); 
     }
 
     private IEnumerator StretchGunSprite()
@@ -90,7 +91,7 @@ public class Gun : MonoBehaviour
         gunSpriteRenderer.transform.localScale = new Vector3(originalScale.x * scaleAmount, originalScale.y / scaleAmount, originalScale.z);
 
         // Wait for the duration of the stretch effect
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.1f);
 
         // Reset the scale back to the original scale after the effect
         gunSpriteRenderer.transform.localScale = originalScale;
@@ -100,5 +101,6 @@ public class Gun : MonoBehaviour
     {
         // Stretch the sprite for recoil effect
         StartCoroutine(StretchGunSprite());
+        AudioManager.instance.PlaySound(shootSound, Random.Range(0.5f, 1.5f));
     }
 }

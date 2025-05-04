@@ -104,6 +104,11 @@ public class Bullet : MonoBehaviour
         damage = bulletDamage;
     }
 
+    public void SetBulletLifetime(float lifetime)
+    {
+        bulletLifetime = lifetime;
+    }
+
     void RotateSprite()
     {
         // If the bulletDirection is not zero, calculate the angle

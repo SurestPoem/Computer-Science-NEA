@@ -99,18 +99,9 @@ public class EnemySpawner : MonoBehaviour
         {
             if (randomValue < enemy.spawnChance)
             {
-                if (!enemy.isEnabled)
-                {
-                    Debug.Log("Enemy is disabled, skipping.");
-                    PickEnemyType();
-                }
-                else
-                {
-                    enemyPrefab = enemy.enemyPrefab;
-                    enemiesPerSpawn = enemy.spawnAmount;
-                    return;
-                }
-                    
+                enemyPrefab = enemy.enemyPrefab;
+                enemiesPerSpawn = enemy.spawnAmount;
+                return; // Exit the loop once a valid enemy is found                    
             }
             randomValue -= enemy.spawnChance;
         }

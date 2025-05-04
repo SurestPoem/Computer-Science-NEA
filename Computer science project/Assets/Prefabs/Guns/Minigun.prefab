@@ -31,7 +31,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6633616751412114665}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3311915046366774433
+--- !u!1 &2398737536345447438
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -39,39 +39,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6633616751412114665}
-  - component: {fileID: 7232611164201428526}
-  - component: {fileID: -1305483096113488682}
+  - component: {fileID: 4838673064288809854}
+  - component: {fileID: 877279884414771343}
   m_Layer: 0
-  m_Name: Minigun
-  m_TagString: Gun
+  m_Name: GunVisual
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6633616751412114665
+--- !u!4 &4838673064288809854
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3311915046366774433}
+  m_GameObject: {fileID: 2398737536345447438}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.23083338, y: 0.044166666, z: -0.011875}
-  m_LocalScale: {x: 0.25, y: 0.7, z: 0.25}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3364638320702808324}
-  m_Father: {fileID: 0}
+  m_Children: []
+  m_Father: {fileID: 6633616751412114665}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &7232611164201428526
+--- !u!212 &877279884414771343
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3311915046366774433}
+  m_GameObject: {fileID: 2398737536345447438}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -106,7 +104,7 @@ SpriteRenderer:
   m_SortingLayerID: 384795743
   m_SortingLayer: 4
   m_SortingOrder: 2
-  m_Sprite: {fileID: 1373837445, guid: d3ef9835cac7934479a3cb216e7cb06e, type: 3}
+  m_Sprite: {fileID: 735684866, guid: d3ef9835cac7934479a3cb216e7cb06e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -117,6 +115,40 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &3311915046366774433
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6633616751412114665}
+  - component: {fileID: -1305483096113488682}
+  m_Layer: 0
+  m_Name: Minigun
+  m_TagString: Gun
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6633616751412114665
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3311915046366774433}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.2, y: 0.7, z: 0.25}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4838673064288809854}
+  - {fileID: 3364638320702808324}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-1305483096113488682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,15 +166,16 @@ MonoBehaviour:
   damageStat: 4
   cooldownTime: 0.1
   bulletSpeed: 30
+  bulletLifetime: 2
   distanceFromPlayer: 0.6
-  gunSpriteRenderer: {fileID: 7232611164201428526}
+  gunSpriteRenderer: {fileID: 877279884414771343}
   muzzlePoint: {fileID: 3364638320702808324}
   scaleAmount: 0.7
   shootSound: {fileID: 8300000, guid: 17e9780e43a6784418cca24315ad1bb3, type: 3}
   bulletPrefab: {fileID: 5838070477860344463, guid: b70a5f348273ebc439b33cd082354732, type: 3}
   ownerTransform: {fileID: 0}
   aimTarget: {fileID: 0}
-  gunIcon: {fileID: 1373837445, guid: d3ef9835cac7934479a3cb216e7cb06e, type: 3}
+  gunIcon: {fileID: 735684866, guid: d3ef9835cac7934479a3cb216e7cb06e, type: 3}
   overheatCooldown: 3
   shotsBeforeOverheat: 50
   overheatColor: {r: 1, g: 0, b: 0.08333349, a: 0.48235294}
