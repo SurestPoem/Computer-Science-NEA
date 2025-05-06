@@ -91,7 +91,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 5838070477860344463, guid: de43be828f39c8741a759fd9e60d1331, type: 3}
   ownerTransform: {fileID: 0}
   aimTarget: {fileID: 0}
-  gunIcon: {fileID: 127982951, guid: 080b2f62b8ab26e40b6907cb748b5d94, type: 3}
+  gunIcon: {fileID: 127982951, guid: 933a735337df46f42967a2034b3fa5aa, type: 3}
   numberOfPellets: 10
   spreadAngle: 30
 --- !u!1 &8732103689199761914
@@ -167,12 +167,12 @@ SpriteRenderer:
   m_SortingLayerID: 384795743
   m_SortingLayer: 4
   m_SortingOrder: 2
-  m_Sprite: {fileID: 127982951, guid: 080b2f62b8ab26e40b6907cb748b5d94, type: 3}
+  m_Sprite: {fileID: 127982951, guid: 933a735337df46f42967a2034b3fa5aa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.35, y: 0.12}
+  m_Size: {x: 0.5, y: 0.18}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

@@ -351,7 +351,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   costText: {fileID: 7548537328214998577}
   gunShopImage: {fileID: 6597606609626035467}
-  nullIconImage: {fileID: 21300000, guid: 8c6cdf1a1eb85cb4db39eaed461237d9, type: 3}
+  nullIconImage: {fileID: 21300000, guid: dc9504a1317ccb040a03f15ce771ca5a, type: 3}
   shopNodeName: {fileID: 8021454798545591894}
   shopNodeStats: {fileID: 2767568122701394056}
   shopNodeDescription: {fileID: 3319547236759672408}
@@ -607,7 +607,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 225, y: 0}
   m_SizeDelta: {x: 250, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &95425349432667729

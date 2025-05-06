@@ -30,6 +30,7 @@ public class Bullet : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D collider)
     {
+        if (hasHit) return; // Prevent further processing if already hit
         // Handle Player collision
         if ((shooter == ShooterType.Player || shooter == ShooterType.None) && collider.CompareTag("Enemy") && !hasHit)
         {

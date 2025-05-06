@@ -31,8 +31,8 @@ Transform:
   m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7426106229176864688}
   - {fileID: 490935388688258558}
+  - {fileID: 7426106229176864688}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-5984531433352422839
@@ -61,7 +61,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 5838070477860344463, guid: b70a5f348273ebc439b33cd082354732, type: 3}
   ownerTransform: {fileID: 0}
   aimTarget: {fileID: 0}
-  gunIcon: {fileID: -316649135, guid: 080b2f62b8ab26e40b6907cb748b5d94, type: 3}
+  gunIcon: {fileID: -316649135, guid: 933a735337df46f42967a2034b3fa5aa, type: 3}
   enemyTag: Enemy
   autoAimAssistStrength: 0.5
 --- !u!82 &5565711319992712400
@@ -233,12 +233,12 @@ SpriteRenderer:
   m_SortingLayerID: 384795743
   m_SortingLayer: 4
   m_SortingOrder: 2
-  m_Sprite: {fileID: -316649135, guid: 080b2f62b8ab26e40b6907cb748b5d94, type: 3}
+  m_Sprite: {fileID: -316649135, guid: 933a735337df46f42967a2034b3fa5aa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.4, y: 0.2}
+  m_Size: {x: 0.35, y: 0.13}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

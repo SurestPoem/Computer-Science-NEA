@@ -105,6 +105,7 @@ MonoBehaviour:
   - itemPrefab: {fileID: 4238488023573314709, guid: fc07a09c765b74e4180fd86b444da90c, type: 3}
     dropChance: 4.9
   deadBodyPrefab: {fileID: 439165326045580202, guid: d82454da945fcf349aedc86e800ce9d6, type: 3}
+  animationSpeed: 1
   currentNode: {fileID: 0}
   path: []
   bulletPrefab: {fileID: 3610556043354662966, guid: 43a7be39bfa09734dba7a1ad0237e9fe, type: 3}
@@ -131,7 +132,7 @@ Animator:
   m_GameObject: {fileID: 6486128665900377829}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3873d3c512980814f9039dd19113fe68, type: 2}
+  m_Controller: {fileID: 9100000, guid: f8d19f6d3f84d874c9e079c552459083, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -183,7 +184,7 @@ SpriteRenderer:
   m_SortingLayerID: -1526697435
   m_SortingLayer: 3
   m_SortingOrder: 2
-  m_Sprite: {fileID: 452372283, guid: 99111a69111baa8439203406518c0fe6, type: 3}
+  m_Sprite: {fileID: 452372283, guid: 659e8164b2a50a44e9a8e04adbba4acd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -11,7 +11,7 @@ public class Gun : MonoBehaviour
     public float damageStat;
     public float cooldownTime = 0.5f;
     public float bulletSpeed = 1f;
-    public float bulletLifetime = 2f; // Lifetime of the bullet in seconds
+    public float bulletLifetime = 10f; // Lifetime of the bullet in seconds
     [Header("Visual")]
     public float distanceFromPlayer = 1f;
     public SpriteRenderer gunSpriteRenderer;
@@ -26,7 +26,6 @@ public class Gun : MonoBehaviour
 
     public Transform ownerTransform;
     public Transform aimTarget;
-    public Sprite gunIcon;
 
     void Start()
     {

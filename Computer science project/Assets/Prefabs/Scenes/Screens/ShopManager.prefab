@@ -126,19 +126,25 @@ MonoBehaviour:
   - gunPrefab: {fileID: 8071540375318704547, guid: 875e5cf7d5eede346965290084d1c32a, type: 3}
     gunCost: 300
     levelRequired: 20
+  - gunPrefab: {fileID: 1713014761418437074, guid: 2a8c09058d576bc468d451b92b30c8bd, type: 3}
+    gunCost: 315
+    levelRequired: 18
+  - gunPrefab: {fileID: 2411999366630212562, guid: 0e048b6f77ff2eb4789944a9b9075a6e, type: 3}
+    gunCost: 550
+    levelRequired: 30
   UpgradeStock:
   - upgradeType: 0
     upgradeAmount: 1
     upgradeCost: 37
-    upgradeImage: {fileID: 21300000, guid: 8243ecfe56ef58d46b1db1ce9ebfbd85, type: 3}
+    upgradeImage: {fileID: 21300000, guid: 0825f89ebaf77b54497f984589aba64d, type: 3}
   - upgradeType: 1
     upgradeAmount: 1
     upgradeCost: 47
-    upgradeImage: {fileID: 21300000, guid: 610acdb7c9a1f7a4c95d00edcb3f14d8, type: 3}
+    upgradeImage: {fileID: 21300000, guid: 21692cec7d4726949aa3815259d4ddc9, type: 3}
   - upgradeType: 2
     upgradeAmount: 1
     upgradeCost: 71
-    upgradeImage: {fileID: 21300000, guid: ff0d4a4edd756f34cab66ea566fc9216, type: 3}
+    upgradeImage: {fileID: 21300000, guid: 66ab1aaa227393b4b9fff4c19e91409d, type: 3}
 --- !u!114 &7615381191203353861
 MonoBehaviour:
   m_ObjectHideFlags: 0

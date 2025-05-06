@@ -79,8 +79,13 @@ MonoBehaviour:
   - itemPrefab: {fileID: 5093429702563864004, guid: 70ba677663d281144966b9e9382cbeaa, type: 3}
     dropChance: 25
   deadBodyPrefab: {fileID: 2938666789275465980, guid: 52902021547e4ac44bc88590e5ce0ec0, type: 3}
+  animationSpeed: 1
   currentNode: {fileID: 0}
   path: []
+  chargeSpeed: 6
+  chargeDistance: 3
+  chargeCooldown: 2
+  retreatTime: 1
 --- !u!95 &6948329416515531148
 Animator:
   serializedVersion: 5
@@ -143,7 +148,7 @@ SpriteRenderer:
   m_SortingLayerID: -1526697435
   m_SortingLayer: 3
   m_SortingOrder: 2
-  m_Sprite: {fileID: 512139545, guid: 491ca3535a26a4b48a893498ad8e012e, type: 3}
+  m_Sprite: {fileID: 512139545, guid: 1b83c8f324e100343aa811239523c806, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

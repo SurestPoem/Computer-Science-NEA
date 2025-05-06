@@ -92,8 +92,11 @@ public class UIManager : MonoBehaviour
         {
             return;
         }
+        Sprite gunSprite = player.currentGun.transform.Find("GunVisual").GetComponent<SpriteRenderer>().sprite; // Find the GunVisual child
 
-        gunIconImage.sprite = player.currentGun.gunIcon;
+
+        // Assign the sprite from the SpriteRenderer to the UI image
+        gunIconImage.sprite = gunSprite;
     }
 
     public void GoalText()

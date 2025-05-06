@@ -49,7 +49,11 @@ public class ShopNodeUI : MonoBehaviour
     {
         if (shopNode.currentSellableType == ShopNode.SellableType.Gun)
         {
-            gunShopImage.sprite = shopNode.shopManager.ShopStock[shopNode.gunPointer].gunPrefab.GetComponent<Gun>().gunIcon;
+            Sprite gunSprite = shopNode.shopManager.ShopStock[shopNode.gunPointer].gunPrefab.transform.Find("GunVisual").GetComponent<SpriteRenderer>().sprite; // Find the GunVisual child
+
+
+            // Assign the sprite from the SpriteRenderer to the UI image
+            gunShopImage.sprite = gunSprite;
         }
         else if (shopNode.currentSellableType == ShopNode.SellableType.Upgrade)
         {
