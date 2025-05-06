@@ -58,7 +58,8 @@ MonoBehaviour:
   regenRate: 0
   player: {fileID: 0}
   IsFreeze: 0
-  spriteRenderer: {fileID: 0}
+  IsDead: 0
+  spriteRenderer: {fileID: 2244072306592529510}
   chaseDistance: 0
   collideDamage: 0
   baseCollideDamage: 2
@@ -77,8 +78,13 @@ MonoBehaviour:
   - itemPrefab: {fileID: 5093429702563864004, guid: 70ba677663d281144966b9e9382cbeaa, type: 3}
     dropChance: 16.6
   deadBodyPrefab: {fileID: 1620135634515618181}
+  animationSpeed: 1
   currentNode: {fileID: 0}
   path: []
+  chargeSpeed: 6
+  chargeDistance: 3
+  chargeCooldown: 2
+  retreatTime: 1
 --- !u!95 &8340492282843029916
 Animator:
   serializedVersion: 5
@@ -141,12 +147,12 @@ SpriteRenderer:
   m_SortingLayerID: -1526697435
   m_SortingLayer: 3
   m_SortingOrder: 2
-  m_Sprite: {fileID: 191332567, guid: e7361fb0306bb1c4db429f8f6c6e2899, type: 3}
+  m_Sprite: {fileID: 191332567, guid: c5902958a483513448b3cb2c00cfa9c4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.2, y: 0.2}
+  m_Size: {x: 0.72, y: 0.72}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

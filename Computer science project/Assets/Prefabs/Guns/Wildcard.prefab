@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1934724514967759387}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.126, y: 0.02, z: 0}
+  m_LocalPosition: {x: 0.05, y: 0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -57,8 +57,8 @@ Transform:
   m_GameObject: {fileID: 2411999366630212562}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.01484375}
-  m_LocalScale: {x: 0.7, y: 0.6, z: 0.0625}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.6, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4206851576471926629}
@@ -77,13 +77,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 660c72790277e1043bc2d3e914235dc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunName: (Test)WIldcard
-  gunDescription: IN DEVELOPMENT
+  gunName: WIldcard
+  gunDescription: Shoots a random bullet each time
   damageStat: 15
   cooldownTime: 1.5
   bulletSpeed: 10
-  bulletLifetime: 2
-  distanceFromPlayer: 0.5
+  bulletLifetime: 10
+  distanceFromPlayer: 0.55
   gunSpriteRenderer: {fileID: 4218881490748468511}
   muzzlePoint: {fileID: 1670264507268960006}
   scaleAmount: 1.2
@@ -101,6 +101,7 @@ MonoBehaviour:
   - {fileID: 4845006542049968837, guid: 5b7397464de2a8d42b135006983d4f1f, type: 3}
   - {fileID: 9140933552253011786, guid: 71d927adedf47aa4185b0ee49be4aef5, type: 3}
   - {fileID: 9189408515051254550, guid: 4fbc32fb53efe1442909b82089b09535, type: 3}
+  - {fileID: 6312864699078739014, guid: d5f46962f37be504e99da3fbec96f2cc, type: 3}
   minExplosiveDamage: 1
   maxExplosiveDamage: 50
   minExplosiveRadius: 0.1
@@ -186,12 +187,12 @@ SpriteRenderer:
   m_SortingLayerID: 384795743
   m_SortingLayer: 4
   m_SortingOrder: 2
-  m_Sprite: {fileID: 1032797837, guid: 080b2f62b8ab26e40b6907cb748b5d94, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 97c1e8ce4ceaca9429775e30333dbebe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.35, y: 0.12}
+  m_Size: {x: 0.21, y: 0.16}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

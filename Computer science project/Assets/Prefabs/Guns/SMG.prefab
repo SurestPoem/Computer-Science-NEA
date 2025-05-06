@@ -51,7 +51,7 @@ MonoBehaviour:
   damageStat: 5
   cooldownTime: 0.2
   bulletSpeed: 35
-  bulletLifetime: 2
+  bulletLifetime: 10
   distanceFromPlayer: 0.65
   gunSpriteRenderer: {fileID: 1408049439987196421}
   muzzlePoint: {fileID: 3388511552435612540}
@@ -138,7 +138,7 @@ SpriteRenderer:
   m_SortingLayerID: 384795743
   m_SortingLayer: 4
   m_SortingOrder: 2
-  m_Sprite: {fileID: -886396736, guid: d3ef9835cac7934479a3cb216e7cb06e, type: 3}
+  m_Sprite: {fileID: -886396736, guid: c88a77fc0068f794c9a1dc4ceca541e7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
