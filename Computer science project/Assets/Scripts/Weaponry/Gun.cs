@@ -1,14 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Gun : MonoBehaviour
 {
     [Header("Gun stats")]
     public string gunName;
     public string gunDescription;
-    public float damageStat;
+    public int damageStat;
     public float cooldownTime = 0.5f;
     public float bulletSpeed = 1f;
     public float bulletLifetime = 10f; // Lifetime of the bullet in seconds
@@ -20,6 +19,7 @@ public class Gun : MonoBehaviour
     public float scaleAmount = 1.2f;
     [Header("Audio")]
     public AudioClip shootSound;
+    public AudioSource audioSource;
     [Header("Misc")]
     public GameObject bulletPrefab;
     protected float timeSinceLastShot = -Mathf.Infinity;
@@ -27,8 +27,16 @@ public class Gun : MonoBehaviour
     public Transform ownerTransform;
     public Transform aimTarget;
 
+    public enum GunShooterType
+    {
+        Player,
+        Enemy
+    }
+    public GunShooterType gunShooterType;
+
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         originalScale = gunSpriteRenderer.transform.localScale;
     }
 
@@ -72,14 +80,18 @@ public class Gun : MonoBehaviour
         }
     }
 
-    public virtual void SetBulletStats(Bullet bulletScript, Vector2 shootDirection) // Set the bullet stats in the bullet script
+    public virtual void SetBulletStats(Bullet bulletScript, Vector2 shootDirection)
     {
         bulletScript.SetSpeed(bulletSpeed);
         bulletScript.SetDamage(damageStat);
         bulletScript.SetDirection(shootDirection);
-        bulletScript.SetShooter(Bullet.ShooterType.Player);
+        bulletScript.SetShooter(
+            gunShooterType == GunShooterType.Player
+            ? Bullet.ShooterType.Player
+            : Bullet.ShooterType.Enemy
+        );
         bulletScript.SetGun(this);
-        bulletScript.SetBulletLifetime(bulletLifetime); 
+        bulletScript.SetBulletLifetime(bulletLifetime);
     }
 
     private IEnumerator StretchGunSprite()
@@ -98,8 +110,13 @@ public class Gun : MonoBehaviour
 
     public virtual void ApplyShootEffect()
     {
-        // Stretch the sprite for recoil effect
         StartCoroutine(StretchGunSprite());
-        AudioManager.instance.PlaySound(shootSound, Random.Range(0.5f, 1.5f));
+
+        float baseVolume = Random.Range(0.5f, 1.5f);
+        float volumeMultiplier = gunShooterType == GunShooterType.Enemy ? 0.1f : 0.5f;
+        float finalVolume = baseVolume * volumeMultiplier;
+
+        audioSource.pitch = Random.Range(0.8f, 1.2f); // Slight pitch variation
+        audioSource.PlayOneShot(shootSound, finalVolume);
     }
 }

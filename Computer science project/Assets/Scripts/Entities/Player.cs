@@ -63,13 +63,6 @@ public class Player : Entity
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        // Draw a blue line in the direction the player is moving
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine(transform.position, transform.position + new Vector3(moveInput.normalized.x, moveInput.normalized.y, 0f) * 2f);
-    }
-
 
     private void HandleWeaponSwitching()
     {
@@ -166,6 +159,7 @@ public class Player : Entity
             if (crosshair != null)
             {
                 currentGun.aimTarget = crosshair.transform;
+                currentGun.gunShooterType = Gun.GunShooterType.Player; // Set the gun shooter type to Player
             }
             else
             {
@@ -317,7 +311,12 @@ public class Player : Entity
         }
     }
 
-
+    private void OnDrawGizmos()
+    {
+        // Draw a blue line in the direction the player is moving
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(transform.position, transform.position + new Vector3(moveInput.normalized.x, moveInput.normalized.y, 0f) * 2f);
+    }
 }
 
 

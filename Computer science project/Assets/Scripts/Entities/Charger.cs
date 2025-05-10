@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Charger : Enemy
 {
-    public float chargeSpeed = 6f;
+    public float chargeSpeed = 4f;
     public float chargeDistance = 3f;
     public float chargeCooldown = 2f;
-    public float retreatTime = 1f;
+    public float retreatTime = 4f;
 
     private bool isCharging = false;
     private float lastChargeTime = -Mathf.Infinity;
@@ -15,7 +15,21 @@ public class Charger : Enemy
     protected override void Update()
     {
         base.Update();
-        ChasePlayer();
+        float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+        // If currently charging, skip decision logic
+        if (isCharging) return;
+
+        // Can we charge?
+        if (Time.time >= lastChargeTime + chargeCooldown && distanceToPlayer <= chargeDistance)
+        {
+            StartCoroutine(Charge());
+        }
+        else
+        {
+            // Too far to charge, just chase
+            ChasePlayer();
+        }
+
     }
 
     private IEnumerator Charge()
@@ -23,6 +37,7 @@ public class Charger : Enemy
         isCharging = true;
         lastChargeTime = Time.time;
 
+        moveSpeed /= 2f;
         // Fixed direction at start
         Vector3 chargeDirection = (playerTransform.position - transform.position).normalized;
 

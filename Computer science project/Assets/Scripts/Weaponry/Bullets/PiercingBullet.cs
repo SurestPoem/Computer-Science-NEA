@@ -5,8 +5,7 @@ using UnityEngine;
 public class PiercingBullet : Bullet
 {
     public int pierceCount = 3;
-    private int currentPierceCount;
-
+    private int currentPierceCount = 0;
 
     protected override void HitEnemy(Enemy enemy)
     {
@@ -32,5 +31,10 @@ public class PiercingBullet : Bullet
         {
             base.HitPlayer(player);
         }
+    }
+
+    public void SetPierceCount(int count)
+    {
+        pierceCount = count;
     }
 }

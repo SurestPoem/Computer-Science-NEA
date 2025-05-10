@@ -62,6 +62,16 @@ public class Enemy : Entity
         }
     }
 
+    protected void StrafePlayer()
+    {
+        if (IsFreeze != true)
+        {
+            Vector3 strafeDirection = new Vector3(-currentDirection.y, currentDirection.x, 0); // Perpendicular direction
+            transform.position += strafeDirection * moveSpeed * Time.deltaTime;
+            spriteRenderer.flipX = strafeDirection.x < 0;
+        }
+    }
+
     private void OnDrawGizmos()
     {
         if (currentDirection != Vector3.zero)
@@ -140,6 +150,11 @@ public class Enemy : Entity
 
     public void DropItems()
     {
+        if (lootTable.Count == 0)
+        {
+            Debug.LogWarning("Loot table is empty. No items to drop.");
+            return;
+        }
         // Loop to drop 3 items
         for (int i = 0; i < 3; i++)
             {

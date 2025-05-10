@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 2
   m_Sprite: {fileID: 2069330850, guid: c88a77fc0068f794c9a1dc4ceca541e7, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.06607044, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -124,10 +124,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5896705420921614790}
-  - component: {fileID: 2226538371648453569}
-  - component: {fileID: -2948829111280663711}
+  - component: {fileID: 2812890091696986180}
+  - component: {fileID: 8237694155031286693}
   m_Layer: 0
-  m_Name: Pistol
+  m_Name: BounceGun
   m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -150,7 +150,7 @@ Transform:
   - {fileID: 5786874010135297279}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2226538371648453569
+--- !u!114 &2812890091696986180
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -159,25 +159,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 8071540375318704547}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3de16d2c29effb9429a72d1f12a1c596, type: 3}
+  m_Script: {fileID: 11500000, guid: c9e50049bc16180409ae2d8f84469001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunName: Pistol
-  gunDescription: 
-  damageStat: 12
-  cooldownTime: 0.7
-  bulletSpeed: 30
-  bulletLifetime: 2
+  gunName: Richochet Gun
+  gunDescription: Test
+  damageStat: 29
+  cooldownTime: 1
+  bulletSpeed: 10
+  bulletLifetime: 10
   distanceFromPlayer: 0.4
   gunSpriteRenderer: {fileID: 13602247540578327}
   muzzlePoint: {fileID: 5613838489799395795}
   scaleAmount: 1.2
-  shootSound: {fileID: 8300000, guid: 3c7fc91265998c3408405636de89aa32, type: 3}
-  audioSource: {fileID: -2948829111280663711}
-  bulletPrefab: {fileID: 5838070477860344463, guid: b70a5f348273ebc439b33cd082354732, type: 3}
+  shootSound: {fileID: 8300000, guid: f58b5eebae848c444aa4d90b89962a6e, type: 3}
+  audioSource: {fileID: 8237694155031286693}
+  bulletPrefab: {fileID: 5838070477860344463, guid: 71d927adedf47aa4185b0ee49be4aef5, type: 3}
   ownerTransform: {fileID: 0}
   aimTarget: {fileID: 0}
---- !u!82 &-2948829111280663711
+  bouncesOffEntities: 1
+  bounceCount: 10
+  bounceDelay: 0.1
+--- !u!82 &8237694155031286693
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

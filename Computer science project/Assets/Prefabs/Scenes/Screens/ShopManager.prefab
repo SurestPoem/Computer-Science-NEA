@@ -127,8 +127,8 @@ MonoBehaviour:
     gunCost: 300
     levelRequired: 20
   - gunPrefab: {fileID: 1713014761418437074, guid: 2a8c09058d576bc468d451b92b30c8bd, type: 3}
-    gunCost: 315
-    levelRequired: 18
+    gunCost: 325
+    levelRequired: 23
   - gunPrefab: {fileID: 2411999366630212562, guid: 0e048b6f77ff2eb4789944a9b9075a6e, type: 3}
     gunCost: 550
     levelRequired: 30

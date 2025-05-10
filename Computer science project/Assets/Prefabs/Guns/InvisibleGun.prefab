@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 2
   m_Sprite: {fileID: 2069330850, guid: c88a77fc0068f794c9a1dc4ceca541e7, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 2226538371648453569}
   - component: {fileID: -2948829111280663711}
   m_Layer: 0
-  m_Name: Pistol
+  m_Name: InvisibleGun
   m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -177,6 +177,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 5838070477860344463, guid: b70a5f348273ebc439b33cd082354732, type: 3}
   ownerTransform: {fileID: 0}
   aimTarget: {fileID: 0}
+  gunShooterType: 0
 --- !u!82 &-2948829111280663711
 AudioSource:
   m_ObjectHideFlags: 0

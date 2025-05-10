@@ -58,10 +58,10 @@ MonoBehaviour:
   muzzlePoint: {fileID: 490935388688258558}
   scaleAmount: 1.2
   shootSound: {fileID: 8300000, guid: c8b946dc5e9e7b841bb0cc201c23256a, type: 3}
+  audioSource: {fileID: 5565711319992712400}
   bulletPrefab: {fileID: 5838070477860344463, guid: b70a5f348273ebc439b33cd082354732, type: 3}
   ownerTransform: {fileID: 0}
   aimTarget: {fileID: 0}
-  gunIcon: {fileID: 21300000, guid: 551bca5380d1a9048be8744626fab1ad, type: 3}
 --- !u!82 &5565711319992712400
 AudioSource:
   m_ObjectHideFlags: 0

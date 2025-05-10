@@ -24,6 +24,7 @@ public class Entity : MonoBehaviour
     public bool IsFreeze;
     public bool IsDead;
     public SpriteRenderer spriteRenderer;
+    private Color baseColour;
 
 
     // Start is called before the first frame update
@@ -78,12 +79,13 @@ public class Entity : MonoBehaviour
 
     protected IEnumerator DamageVisual()
     {
+        spriteRenderer.color = baseColour; // Reset to base color
         //Adds light transparent red to the sprite to show damage
         spriteRenderer.color = new Color(0.8f, 0.1f, 0.1f, 1);
 
         yield return new WaitForSeconds(0.25f);
 
-        spriteRenderer.color = Color.white;
+        spriteRenderer.color = baseColour;
     }
 
     protected virtual void Initialise()
@@ -91,5 +93,6 @@ public class Entity : MonoBehaviour
         player = FindObjectOfType<Player>();
         health = maxHealth; //Sets the health as max health
         animator = GetComponent<Animator>();
+        baseColour = spriteRenderer.color; // Store the base color of the sprite
     }
 }

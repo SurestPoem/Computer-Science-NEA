@@ -11,6 +11,7 @@ public class ShatterBullet : Bullet
     public float armingDelay = 0.05f; // Delay before the bullet can shatter
     public int shatterGeneration;
     public int maxShatterGeneration = 3; // Maximum generation of shattering
+    public AudioClip shatterSound; // Sound to play when shattering
 
     protected override void Start()
     {
@@ -47,6 +48,10 @@ public class ShatterBullet : Bullet
 
         if (numberOfBullets > 0 && shatterGeneration <= maxShatterGeneration)
         {
+            if (shatterSound != null)
+            {
+                AudioManager.instance.PlaySound(shatterSound, Random.Range(0.5f, 1.5f));
+            }
             for (int i = 0; i < numberOfBullets; i++)
             {
                 Vector2 oppositeDir = -bulletDirection.normalized;

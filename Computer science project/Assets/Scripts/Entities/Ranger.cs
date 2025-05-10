@@ -10,12 +10,12 @@ public class Ranger : Enemy
     public float minAttackRange = 3f; // Minimum range before backing away
     public float maxAttackRange = 6f; // Maximum range before moving closer
     private float lastShotTime = -1f;
-    public float shootCooldown = 2f;
+    public float shootCooldown;
     public float baseShootCooldown;
-    public float bulletSpeed = 1f;
+    public float bulletSpeed;
     public float baseBulletSpeed;
-    public float rangedDamage;
-    public float baseRangedDamage;
+    public int rangedDamage;
+    public int baseRangedDamage;
     public int numberOfBullets = 1;
     public int baseNumberOfBullets = 1;
     public float spreadAngle = 45f; // degrees
@@ -41,6 +41,11 @@ public class Ranger : Enemy
             // Too far -> Move closer
             ChasePlayer();
         }
+        else if (distanceToPlayer >= minAttackRange && distanceToPlayer <= maxAttackRange)
+        {
+            // In range -> Stay still and shoot
+            StrafePlayer();
+        }
     }
 
     private void AttemptShoot()
@@ -52,7 +57,7 @@ public class Ranger : Enemy
         }
     }
 
-    private void Shoot()
+    protected virtual void Shoot()
     {
         if (bulletPrefab != null && firePoint != null)
         {

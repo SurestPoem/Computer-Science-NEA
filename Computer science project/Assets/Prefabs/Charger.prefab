@@ -85,7 +85,7 @@ MonoBehaviour:
   chargeSpeed: 6
   chargeDistance: 3
   chargeCooldown: 2
-  retreatTime: 1
+  retreatTime: 4
 --- !u!95 &6948329416515531148
 Animator:
   serializedVersion: 5
