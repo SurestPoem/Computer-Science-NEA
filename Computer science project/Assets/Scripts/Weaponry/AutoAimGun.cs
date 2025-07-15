@@ -60,7 +60,7 @@ public class AutoAimGun : Gun
         return closestEnemy;
     }
 
-    public override void Shoot()
+    public override void Shoot(Vector3 aimTargetPosition)
     {
         if (Time.time - timeSinceLastShot < cooldownTime) // Time since last shot
             return;
@@ -69,7 +69,7 @@ public class AutoAimGun : Gun
         ApplyShootEffect(); // Apply shoot effect
 
         // Get shoot direction based on crosshair world position
-        Vector2 shootDirection = (muzzlePoint.position - ownerTransform.position).normalized;
+        Vector2 shootDirection = (aimTargetPosition - muzzlePoint.position).normalized;
 
         // Create and initialize the bullet
         GameObject bullet = Instantiate(bulletPrefab, muzzlePoint.position, Quaternion.identity);

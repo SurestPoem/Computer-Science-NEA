@@ -42,9 +42,9 @@ public class WildCardGun : Gun
         SetBullet();
     }
 
-    public override void Shoot()
+    public override void Shoot(Vector3 aimTargetPostion)
     {
-        base.Shoot();
+        base.Shoot(aimTargetPostion);
         SetBullet();
     }
 

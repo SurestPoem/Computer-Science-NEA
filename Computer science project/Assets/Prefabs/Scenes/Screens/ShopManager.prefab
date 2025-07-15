@@ -145,6 +145,10 @@ MonoBehaviour:
     upgradeAmount: 1
     upgradeCost: 71
     upgradeImage: {fileID: 21300000, guid: 66ab1aaa227393b4b9fff4c19e91409d, type: 3}
+  - upgradeType: 3
+    upgradeAmount: 1
+    upgradeCost: 103
+    upgradeImage: {fileID: 21300000, guid: b61bc35780c611e498aeb873ee0e9ade, type: 3}
 --- !u!114 &7615381191203353861
 MonoBehaviour:
   m_ObjectHideFlags: 0

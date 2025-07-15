@@ -5,27 +5,27 @@ using UnityEngine;
 public class Ranger : Enemy
 {
     [Header("Ranged Attack Settings")]
-    public GameObject bulletPrefab; // Reference to bullet prefab
-    public Transform firePoint; // Where bullets spawn
     public float minAttackRange = 3f; // Minimum range before backing away
     public float maxAttackRange = 6f; // Maximum range before moving closer
     private float lastShotTime = -1f;
     public float shootCooldown;
     public float baseShootCooldown;
-    public float bulletSpeed;
-    public float baseBulletSpeed;
-    public int rangedDamage;
-    public int baseRangedDamage;
-    public int numberOfBullets = 1;
-    public int baseNumberOfBullets = 1;
-    public float spreadAngle = 45f; // degrees
-    public float baseSpreadAngle = 45f; // degrees
+    private Vector3 aimTarget;
+    public enum AimType { Normal, Stormtrooper, Aimbot }
+    public AimType aimType = AimType.Normal;
+    [Header("Gun settings")]
+    public Gun currentGun;
+    public float accuracy = 0.5f; // Accuracy of the gun
+    private Vector3 accuracyOffset;
+    public List<Gun> gunList;
 
     protected override void Update()
     {
+        aimTarget = playerTransform.position + accuracyOffset;
         base.Update();
         AttemptShoot();
         HandleMovement();
+        HandleAiming();
     }
 
     private void HandleMovement()
@@ -43,7 +43,7 @@ public class Ranger : Enemy
         }
         else if (distanceToPlayer >= minAttackRange && distanceToPlayer <= maxAttackRange)
         {
-            // In range -> Stay still and shoot
+            // In range -> Strafe
             StrafePlayer();
         }
     }
@@ -59,64 +59,94 @@ public class Ranger : Enemy
 
     protected virtual void Shoot()
     {
-        if (bulletPrefab != null && firePoint != null)
+
+        currentGun.Shoot(aimTarget);
+        StartCoroutine(RerollAccuracy());
+    }
+
+    private void HandleAiming()
+    {
+        if (currentGun != null)
         {
-            // Calculate how many bullets to fire
-            int bulletsToFire = Mathf.Max(numberOfBullets, baseNumberOfBullets);
-
-            // Get the direction toward the player
-            Vector2 direction = (playerTransform.position - firePoint.position).normalized;
-
-            for (int i = 0; i < bulletsToFire; i++)
-            {
-                // Instantiate the bullet
-                GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-                Bullet bulletScript = bullet.GetComponent<Bullet>();
-
-                if (bulletScript != null)
-                {
-                    bulletScript.SetDamage(rangedDamage);
-                    bulletScript.SetSpeed(bulletSpeed);
-                    bulletScript.SetShooter(Bullet.ShooterType.Enemy);
-
-                    // If this is the first bullet, aim directly at the player
-                    if (i == 0)
-                    {
-                        bulletScript.SetDirection(direction);
-                    }
-                    else
-                    {
-                        // Calculate spread for the other bullets
-                        float angle = Random.Range(-spreadAngle / 2f, spreadAngle / 2f);
-                        Vector2 spreadDirection = RotateDirection(direction, angle);
-                        bulletScript.SetDirection(spreadDirection);
-                    }
-                }
-            }
+            currentGun.RotateAndPositionGun(aimTarget);
         }
     }
 
-    // Utility method to rotate the direction vector by a given angle in degrees
-    private Vector2 RotateDirection(Vector2 originalDirection, float angle)
+    private IEnumerator RerollAccuracy()
     {
-        float radians = angle * Mathf.Deg2Rad; // Convert angle to radians
-        float cos = Mathf.Cos(radians);
-        float sin = Mathf.Sin(radians);
+        yield return new WaitForSeconds(shootCooldown/2);
+        if (aimType == AimType.Normal)
+        {
+            accuracyOffset = new Vector3(Random.Range(-accuracy, accuracy), Random.Range(-accuracy, accuracy), 0);
+        }
+        else if (aimType == AimType.Stormtrooper)
+        {
+            accuracyOffset = new Vector3(Random.Range(-accuracy, accuracy), Random.Range(-accuracy, accuracy), 0);
+            accuracyOffset += new Vector3(Random.Range(-accuracy, accuracy), Random.Range(-accuracy, accuracy), 0);
+        }
+        else if (aimType == AimType.Aimbot)
+        {
+            accuracyOffset = Vector3.zero;
+        }
 
-        // Rotate the direction vector
-        float x = originalDirection.x * cos - originalDirection.y * sin;
-        float y = originalDirection.x * sin + originalDirection.y * cos;
+    }
 
-        return new Vector2(x, y);
+
+    private void SpawnGun()
+    {
+        Gun gunInstance = Instantiate(currentGun, this.transform);
+        currentGun = gunInstance.GetComponent<Gun>();
+        SetGunStats(currentGun);
+        currentGun.ownerTransform = this.transform;
+        currentGun.aimTarget = playerTransform;
+    }
+
+    private void SetGunStats(Gun currentGun)
+    {
+        currentGun.distanceFromPlayer = currentGun.distanceFromPlayer * 0.7f;
+        currentGun.gunShooterType = Gun.GunShooterType.Enemy; // Set the gun shooter type to Enemy
+    }
+    private void SetGun()
+    {
+        if (gunList.Count == 0)
+        {
+            takeDamage(health);
+            return;
+        }
+        if (gunList.Count > 1)
+        {
+            currentGun = gunList[Random.Range(0, gunList.Count)];
+            return;
+        }
+        else if (gunList.Count == 1)
+        {
+            currentGun = gunList[0];
+        }
+    }
+
+    private void SetAimType()
+    {
+        float randomValue = Random.Range(0f, 100f);
+        if (randomValue < 20f)
+        {
+            aimType = AimType.Normal;
+        }
+        else if (randomValue < 99.9f)
+        {
+            aimType = AimType.Stormtrooper;
+        }
+        else
+        {
+            aimType = AimType.Aimbot;
+        }
     }
 
     protected override void Initialise()
     {
+        SetAimType();
+        SetGun();
         base.Initialise();
+        SpawnGun();
         shootCooldown = baseShootCooldown * GameManager.Instance.difficultyMultiplier;
-        bulletSpeed = baseBulletSpeed * GameManager.Instance.difficultyMultiplier;
-        rangedDamage = Mathf.RoundToInt(baseRangedDamage * GameManager.Instance.difficultyMultiplier);
-        numberOfBullets = Mathf.RoundToInt(baseNumberOfBullets * GameManager.Instance.difficultyMultiplier);
-        spreadAngle = baseSpreadAngle * GameManager.Instance.difficultyMultiplier;
     }
 }

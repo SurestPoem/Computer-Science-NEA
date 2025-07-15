@@ -9,7 +9,7 @@ public class FlameThrower : Gun
     public float flameRange = 5f; // Range of the flame effect
 
 
-    public override void Shoot()
+    public override void Shoot(Vector3 aimTargetPostion)
     {
 
     }

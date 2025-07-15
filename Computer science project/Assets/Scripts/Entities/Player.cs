@@ -197,7 +197,7 @@ public class Player : Entity
     {
         if (currentGun != null && controls.Player.Shoot.ReadValue<float>() > 0.5f) // If the shoot button is pressed
         {
-            currentGun.Shoot();
+            currentGun.Shoot(crosshair.transform.position);
         }
     }
 
@@ -217,6 +217,7 @@ public class Player : Entity
         if (statName == "maxHealth")
         {
             maxHealth += value;
+            health += value;
         }
         else if (statName == "moveSpeed")
         {
@@ -226,6 +227,10 @@ public class Player : Entity
         else if (statName == "regenRate")
         {
             regenRate += value;
+        }
+        else if (statName == "armour")
+        {
+            armour += value;
         }
         else
         {

@@ -17,10 +17,12 @@ public class Enemy : Entity
     public Node currentNode;
     public List<Node> path = new List<Node>();
     private Vector3 currentDirection;
-    
+    public float personalSpaceRadius = 0f; // Distance to maintain from other enemies
+
 
     protected override void Update()
     {
+        AvoidOtherEnemies();
         base.Update();
         if (animator != null)
         {
@@ -32,9 +34,8 @@ public class Enemy : Entity
     public void DealCollideDamage(Player player)
     {
         if (Time.time > lastDamageTime + damageCooldown)
-        {
-            damageAmount = collideDamage;
-            player.takeDamage(damageAmount);
+        {            
+            player.takeDamage(collideDamage);
             Debug.Log("Player damaged");
             lastDamageTime = Time.time;
         }
@@ -66,11 +67,42 @@ public class Enemy : Entity
     {
         if (IsFreeze != true)
         {
-            Vector3 strafeDirection = new Vector3(-currentDirection.y, currentDirection.x, 0); // Perpendicular direction
+            Vector3 strafeDirection = (playerTransform.position - transform.position).normalized;
+            strafeDirection = new Vector3(-strafeDirection.y, strafeDirection.x, 0); // Perpendicular direction
             transform.position += strafeDirection * moveSpeed * Time.deltaTime;
             spriteRenderer.flipX = strafeDirection.x < 0;
         }
     }
+
+    protected void AvoidOtherEnemies()
+    {
+        if (personalSpaceRadius <= 0) { return; } // No need to avoid if radius is 0 or less
+        Vector3 separationForce = Vector3.zero;
+        int count = 0;
+
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, personalSpaceRadius);
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.CompareTag("Enemy") && collider.gameObject != gameObject)
+            {
+                Vector3 directionAway = (transform.position - collider.transform.position);
+                float distance = directionAway.magnitude;
+
+                if (distance > 0.01f)
+                {
+                    separationForce += directionAway.normalized / distance; // Stronger repulsion if closer
+                    count++;
+                }
+            }
+        }
+
+        if (count > 0)
+        {
+            separationForce /= count;
+            transform.position += separationForce.normalized * moveSpeed * Time.deltaTime * 0.5f; // Dampened force
+        }
+    }
+
 
     private void OnDrawGizmos()
     {
@@ -152,7 +184,6 @@ public class Enemy : Entity
     {
         if (lootTable.Count == 0)
         {
-            Debug.LogWarning("Loot table is empty. No items to drop.");
             return;
         }
         // Loop to drop 3 items

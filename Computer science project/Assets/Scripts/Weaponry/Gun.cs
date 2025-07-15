@@ -17,6 +17,9 @@ public class Gun : MonoBehaviour
     public Transform muzzlePoint;
     private Vector3 originalScale;
     public float scaleAmount = 1.2f;
+    private Vector3 originalSpritePosition;
+    public float kickbackAmount = 0.1f; // Amount of kickback to apply
+    private Vector3 originalRotation;
     [Header("Audio")]
     public AudioClip shootSound;
     public AudioSource audioSource;
@@ -37,7 +40,9 @@ public class Gun : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        originalSpritePosition = gunSpriteRenderer.transform.localPosition; // Store the original position of the sprite
         originalScale = gunSpriteRenderer.transform.localScale;
+        originalRotation = gunSpriteRenderer.transform.localRotation.eulerAngles; // Store the original rotation of the sprite
     }
 
     public virtual void RotateAndPositionGun(Vector3 aimTargetPosition)
@@ -57,7 +62,7 @@ public class Gun : MonoBehaviour
     }
 
 
-    public virtual void Shoot()
+    public virtual void Shoot(Vector3 aimTargetPostion)
     {
         if (Time.time - timeSinceLastShot < cooldownTime) // Time since last shot
             return;
@@ -66,7 +71,7 @@ public class Gun : MonoBehaviour
         ApplyShootEffect(); // Apply shoot effect
 
         // Get shoot direction based on crosshair world position
-        Vector2 shootDirection = (aimTarget.position - muzzlePoint.position).normalized;
+        Vector2 shootDirection = (aimTargetPostion - muzzlePoint.position).normalized;
 
         // Create and initialize the bullet
         GameObject bullet = Instantiate(bulletPrefab, muzzlePoint.position, Quaternion.identity);
@@ -108,15 +113,36 @@ public class Gun : MonoBehaviour
         gunSpriteRenderer.transform.localScale = originalScale;
     }
 
-    public virtual void ApplyShootEffect()
+    private IEnumerator GunKickbackEffect()
     {
-        StartCoroutine(StretchGunSprite());
 
+        gunSpriteRenderer.transform.localPosition = originalSpritePosition; // Reset position back to original
+
+        gunSpriteRenderer.transform.localPosition += new Vector3(-kickbackAmount, 0, 0); // Apply kickback effect
+
+        yield return new WaitForSeconds(0.1f); // Wait for the duration of the kickback effect
+
+        gunSpriteRenderer.transform.localPosition = originalSpritePosition; // Reset position back to original
+    }
+
+    private void ShootSound()
+    {
+        if (shootSound == null)
+        {
+            return;
+        }
         float baseVolume = Random.Range(0.5f, 1.5f);
         float volumeMultiplier = gunShooterType == GunShooterType.Enemy ? 0.1f : 0.5f;
         float finalVolume = baseVolume * volumeMultiplier;
 
         audioSource.pitch = Random.Range(0.8f, 1.2f); // Slight pitch variation
         audioSource.PlayOneShot(shootSound, finalVolume);
+    }
+
+    public virtual void ApplyShootEffect()
+    {
+        StartCoroutine(StretchGunSprite());
+        ShootSound();
+        StartCoroutine(GunKickbackEffect());
     }
 }

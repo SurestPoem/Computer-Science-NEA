@@ -12,7 +12,7 @@ public class OverheatingGun : Gun
     public AudioClip overheatSound; // Sound to play when overheating
 
 
-    public override void Shoot()
+    public override void Shoot(Vector3 aimTargetPostion)
     {
         // If the gun is overheating, don't shoot
         if (isOverheating)
@@ -22,14 +22,13 @@ public class OverheatingGun : Gun
         if (Time.time - timeSinceLastShot < cooldownTime)
             return;
 
-        base.Shoot();  // Actually shoots + handles cooldown timestamp
+        base.Shoot(aimTargetPostion);  // Actually shoots + handles cooldown timestamp
 
         shotsFired++;
 
         if (shotsFired >= shotsBeforeOverheat)
         {
             isOverheating = true;
-            shotsFired = 0;
             StartCoroutine(CooldownOverheat());
         }
     }
@@ -47,6 +46,7 @@ public class OverheatingGun : Gun
         // Reset overheating and cooldown logic
         gunSpriteRenderer.color = Color.white; // Reset color
         isOverheating = false;  // Reset the overheating state
+        shotsFired = 0;
         timeSinceLastShot = 0f; // Reset the shot cooldown to allow firing again
         Debug.Log("Overheating finished, can shoot again.");
     }

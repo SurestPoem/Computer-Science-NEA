@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 2226538371648453569}
   - component: {fileID: -2948829111280663711}
   m_Layer: 0
-  m_Name: Pistol
+  m_Name: EnemyPistol
   m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -164,9 +164,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunName: Pistol
   gunDescription: 
-  damageStat: 12
-  cooldownTime: 0.7
-  bulletSpeed: 30
+  damageStat: 5
+  cooldownTime: 2
+  bulletSpeed: 5
   bulletLifetime: 10
   distanceFromPlayer: 0.4
   gunSpriteRenderer: {fileID: 13602247540578327}
@@ -191,7 +191,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
-  m_Pitch: 1.1980388
+  m_Pitch: 1.1165687
   Loop: 0
   Mute: 0
   Spatialize: 0

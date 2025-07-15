@@ -11,13 +11,13 @@ public class Entity : MonoBehaviour
     [Header("Movement speed settings")]
     public float moveSpeed;
     public float baseMoveSpeed;
-    [HideInInspector]
-    public float healAmount;
-    [HideInInspector]
-    public float damageAmount;
     [Header("Regen-rate settings")]
     public float regenRate = 0f;
     protected float regenTimer = 0f;
+    protected float regenAccumulator = 0f;
+    [Header("Armour Settings")]
+    public float armour = 0f; // Armour value to reduce damage taken
+
     [Header("Misc")]
     public Player player;// Reference to Player class
     protected Animator animator;
@@ -35,14 +35,29 @@ public class Entity : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (!IsDead)
+        if (regenRate > 0f && health < maxHealth)
         {
-            if (health <= 0)
+            regenAccumulator += regenRate * Time.deltaTime; // regenRate = HP per second
+            if (regenAccumulator >= 1f)
             {
-                Die();
-                Debug.Log(name + " health at 0");
+                int healAmount = Mathf.FloorToInt(regenAccumulator);
+                Heal(healAmount);
+                regenAccumulator -= healAmount; // remove healed amount
             }
-        }        
+        }
+    }
+
+    protected void FixedUpdate()
+    {
+        if (regenRate > 0f && !IsDead)
+        {
+            regenTimer += Time.fixedDeltaTime;
+            if (regenTimer >= 1f / regenRate)
+            {
+                Heal(1f); // Heal 1 health point every second
+                regenTimer = 0f; // Reset the timer
+            }
+        }
     }
 
 
@@ -54,25 +69,23 @@ public class Entity : MonoBehaviour
 
     public void takeDamage(float damageAmount)
     {
-        if (!IsDead)
-        {
-            health -= damageAmount;
-            health = Mathf.Clamp(health, 0f, maxHealth); // Ensure health doesn't go below 0
-            StartCoroutine(DamageVisual());
-            Debug.Log(name + " took damage: " + damageAmount + ", Remaining health: " + health);  // Debugging line
+        float damageAfterArmour = damageAmount * (1 - armour / 100f);
+        if (IsDead) { return; } // Prevent damage if already dead
+        health -= damageAfterArmour;
+        health = Mathf.Clamp(health, 0f, maxHealth); // Ensure health doesn't go below 0
+        StartCoroutine(DamageVisual());
+        Debug.Log(name + " took damage: " + damageAmount + ", Remaining health: " + health);  // Debugging line
 
-            if (health <= 0f)
-            {
-                Die();
-            }
-        }
-        
+        if (health <= 0f)
+        {
+            Die();
+        }        
     }
 
     public virtual void Die()
     {
-        Destroy(gameObject); // Destroy the enemy
         IsDead = true;
+        Destroy(gameObject); // Destroy the enemy
         Debug.Log(name + "Dead");
         player.IncreaseKills();
     }

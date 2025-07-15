@@ -1,36 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &381207632801662583
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6522820975939105723}
-  m_Layer: 0
-  m_Name: FirePoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6522820975939105723
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 381207632801662583}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1394996055697194772}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6486128665900377829
 GameObject:
   m_ObjectHideFlags: 0
@@ -65,8 +34,7 @@ Transform:
   m_LocalPosition: {x: -5.07, y: 1.8095, z: -1.8954325}
   m_LocalScale: {x: 0.6, y: 0.6, z: 2}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6522820975939105723}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1077452818155468336
@@ -104,24 +72,19 @@ MonoBehaviour:
     dropChance: 44.4
   - itemPrefab: {fileID: 4238488023573314709, guid: fc07a09c765b74e4180fd86b444da90c, type: 3}
     dropChance: 4.9
-  deadBodyPrefab: {fileID: 439165326045580202, guid: d82454da945fcf349aedc86e800ce9d6, type: 3}
+  deadBodyPrefab: {fileID: 439165326045580202, guid: 5191f6c5c400c0840a295c6a61c85db4, type: 3}
   animationSpeed: 1
   currentNode: {fileID: 0}
   path: []
-  bulletPrefab: {fileID: 3610556043354662966, guid: 43a7be39bfa09734dba7a1ad0237e9fe, type: 3}
-  firePoint: {fileID: 6522820975939105723}
+  personalSpaceRadius: 1
   minAttackRange: 3.5
   maxAttackRange: 4
   shootCooldown: 0
   baseShootCooldown: 3.2
-  bulletSpeed: 0
-  baseBulletSpeed: 4.5
-  rangedDamage: 0
-  baseRangedDamage: 18
-  numberOfBullets: 0
-  baseNumberOfBullets: 1
-  spreadAngle: 0
-  baseSpreadAngle: 1
+  currentGun: {fileID: 0}
+  accuracy: 0.5
+  gunList:
+  - {fileID: 2226538371648453569, guid: 0e99b311e3c3bbd44b4626770d3fdeb2, type: 3}
 --- !u!95 &6948329416515531148
 Animator:
   serializedVersion: 5

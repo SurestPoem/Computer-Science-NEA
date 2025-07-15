@@ -110,7 +110,6 @@ public class EnemySpawner : MonoBehaviour
 
     private void CheckSpawnArea()
     {
-        //Checks if the area around the spawn point meets minSpawnArea
-      
+              
     }
 }

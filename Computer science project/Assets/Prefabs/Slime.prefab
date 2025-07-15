@@ -76,11 +76,13 @@ MonoBehaviour:
   animationSpeed: 1
   currentNode: {fileID: 0}
   path: []
-  splitAmount: 3
-  SplitSlime: {fileID: 7131957743748288424}
+  personalSpaceRadius: 0
+  splitAmount: 0
+  SplitSlime: {fileID: 0}
   splitRadius: 1
-  maxSplitGeneration: 2
+  maxSplitGeneration: 0
   currentSplitGeneration: 0
+  hasSplit: 0
 --- !u!95 &4845883913908984215
 Animator:
   serializedVersion: 5

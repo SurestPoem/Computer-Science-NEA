@@ -8,7 +8,7 @@ public class Shotgun : Gun
     public int numberOfPellets = 5;           // Number of pellets fired
     public float spreadAngle = 15f;           // Spread angle in degrees
 
-    public override void Shoot()
+    public override void Shoot(Vector3 aimTargetPostion)
     {
         if (Time.time - timeSinceLastShot < cooldownTime) // Time since last shot
             return;
@@ -16,7 +16,7 @@ public class Shotgun : Gun
         timeSinceLastShot = Time.time; // Record the time of this shot
         ApplyShootEffect(); // Apply shoot effect
         // Get the direction to the crosshair (target)
-        Vector2 shootDirection = (aimTarget.position - muzzlePoint.position).normalized;
+        Vector2 shootDirection = (aimTargetPostion - muzzlePoint.position).normalized;
 
         // Create multiple bullets with spread
         for (int i = 0; i < numberOfPellets; i++)

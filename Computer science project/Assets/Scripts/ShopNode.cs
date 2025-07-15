@@ -14,7 +14,7 @@ public class ShopNode : MonoBehaviour
     public int upgradePointer = 0;
     public ShopManager shopManager;
 
-    void Start()
+    void Awake()
     {
         player = FindObjectOfType<Player>();
         PickSellableType();
@@ -54,6 +54,9 @@ public class ShopNode : MonoBehaviour
                     break;
                 case ShopUpgradeItem.UpgradeType.RegenRate:
                     player.IncreaseStats("regenRate", shopManager.UpgradeStock[upgradePointer].upgradeAmount);
+                    break;
+                case ShopUpgradeItem.UpgradeType.Armour:
+                    player.IncreaseStats("armour", shopManager.UpgradeStock[upgradePointer].upgradeAmount);
                     break;
                 default:
                     Debug.LogError("Unknown upgrade type.");
@@ -121,7 +124,7 @@ public class ShopNode : MonoBehaviour
 
         if (currentSellableType == SellableType.Gun)
         {
-            gunPointer = (Random.Range(0, shopManager.ShopStock.Count));
+            SetGun();
         }
         else if (currentSellableType == SellableType.Upgrade)
         {
@@ -142,5 +145,10 @@ public class ShopNode : MonoBehaviour
         {
             generalCost = shopManager.ShopStock[gunPointer].gunCost;
         }
+    }
+
+    private void SetGun()
+    {
+        gunPointer = (Random.Range(0, shopManager.ShopStock.Count));
     }
 }

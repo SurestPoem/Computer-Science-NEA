@@ -9,6 +9,7 @@ public class Slime : Enemy
     public float splitRadius = 1.0f;
     public int maxSplitGeneration = 2;
     public int currentSplitGeneration = 0;
+    public bool hasSplit = false;
 
     // Update is called once per frame
     protected override void Update()
@@ -30,52 +31,40 @@ public class Slime : Enemy
     public bool IsPositionClear(Vector3 position)
     {
         Collider[] hitColliders = Physics.OverlapSphere(position, splitRadius);
-        foreach (var hitCollider in hitColliders)
+        /*foreach (var hitCollider in hitColliders)
         {
-            /*if (hitCollider.CompareTag("Wall"))
+            if (hitCollider.CompareTag("Wall"))
             {
                 return false;
-            }*/
-        }
+            }
+        }*/
         return true;
     }
 
-    public IEnumerator Split()
+    public void Split()
     {
-        float newScale = transform.localScale.x / 1.8f;
-        float newMaxHealth = Mathf.RoundToInt(baseMaxHealth / 1.7f);
-        float newMoveSpeed = baseMoveSpeed * 1.5f;
-        float newCollideDamage = Mathf.RoundToInt(baseCollideDamage / 2f);
+        if (SplitSlime == null) { return; } // Ensure SplitSlime is assigned
+        if (currentSplitGeneration >= maxSplitGeneration || hasSplit) { return; } // Prevent further splitting
+        if (splitAmount <= 0) { return; } // Ensure splitAmount is valid
+
         for (int i = 0; i < splitAmount; i++)
         {
-            
             Vector3 spawnPosition = transform.position + Random.insideUnitSphere * splitRadius;
             spawnPosition.z = 0; // Ensure z position is 0 for 2D
-
-            // Ensure position is clear before spawning new slime
-            if (IsPositionClear(spawnPosition))
-            {
-                GameObject newslime = Instantiate(SplitSlime, spawnPosition, Quaternion.identity);
-                newslime.transform.localScale = new Vector3(newScale, newScale, 0);
+            GameObject newslime = Instantiate(SplitSlime, spawnPosition, Quaternion.identity);
                 
-                Slime newslimeScript = newslime.GetComponent<Slime>();
-                newslimeScript.spriteRenderer.color = new Color(1, 1, 1, 1);
-                newslimeScript.currentSplitGeneration++;
-                newslimeScript.baseMaxHealth = newMaxHealth;
-                newslimeScript.baseMoveSpeed = newMoveSpeed;
-                newslimeScript.baseCollideDamage = newCollideDamage;
+            Slime newslimeScript = newslime.GetComponent<Slime>();
+            newslimeScript.spriteRenderer.color = new Color(1, 1, 1, 1);
+            newslimeScript.currentSplitGeneration = currentSplitGeneration + 1;
+            newslimeScript.maxSplitGeneration = maxSplitGeneration;
 
-            }
-            yield return new WaitForSeconds(0.1f); // Small delay between splits
         }
+        hasSplit = true;
     }
 
     public override void Die()
     {
-        if (currentSplitGeneration < maxSplitGeneration)
-        {
-            //StartCoroutine(Split());
-        }
+        Split();
         base.Die();
     }
 }

@@ -37,7 +37,6 @@ public class Charger : Enemy
         isCharging = true;
         lastChargeTime = Time.time;
 
-        moveSpeed /= 2f;
         // Fixed direction at start
         Vector3 chargeDirection = (playerTransform.position - transform.position).normalized;
 

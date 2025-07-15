@@ -46,7 +46,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6486128665900377829}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1390013f4b93cf04a91989468479a0f9, type: 3}
+  m_Script: {fileID: 11500000, guid: df6015c087d88054d80d0a61311ed4f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
@@ -63,34 +63,27 @@ MonoBehaviour:
   spriteRenderer: {fileID: 6260687641150642613}
   chaseDistance: 0
   collideDamage: 0
-  baseCollideDamage: 0
-  damageCooldown: 1
+  baseCollideDamage: 1
+  damageCooldown: 3
   lootTable:
   - itemPrefab: {fileID: 4470593630696399813, guid: 543c5295256608942aca2edd59898c95, type: 3}
-    dropChance: 55
-  - itemPrefab: {fileID: 5093429702563864004, guid: 70ba677663d281144966b9e9382cbeaa, type: 3}
-    dropChance: 70
+    dropChance: 68.8
+  - itemPrefab: {fileID: 4238488023573314709, guid: fc07a09c765b74e4180fd86b444da90c, type: 3}
+    dropChance: 33.8
   deadBodyPrefab: {fileID: 2938666789275465980, guid: 98e5d9caaa6e4dc458f77320051afbbc, type: 3}
   animationSpeed: 1
   currentNode: {fileID: 0}
   path: []
-  bulletPrefab: {fileID: 0}
-  firePoint: {fileID: 0}
-  minAttackRange: 2
-  maxAttackRange: 3
-  shootCooldown: 2
-  baseShootCooldown: 4
-  bulletSpeed: 1
-  baseBulletSpeed: 4
-  rangedDamage: 0
-  baseRangedDamage: 5
-  numberOfBullets: 1
-  baseNumberOfBullets: 1
-  spreadAngle: 45
-  baseSpreadAngle: 45
-  gun: {fileID: 8071540375318704547, guid: 16f4d56aefd2e5247a6cf7f4ccde82ed, type: 3}
+  personalSpaceRadius: 0.5
+  minAttackRange: 3
+  maxAttackRange: 3.5
+  shootCooldown: 0
+  baseShootCooldown: 2
+  aimType: 2
   currentGun: {fileID: 0}
-  accuracy: 1.5
+  accuracy: 2
+  gunList:
+  - {fileID: 2226538371648453569, guid: 16f4d56aefd2e5247a6cf7f4ccde82ed, type: 3}
 --- !u!95 &6948329416515531148
 Animator:
   serializedVersion: 5
